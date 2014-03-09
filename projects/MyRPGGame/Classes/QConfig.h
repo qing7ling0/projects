@@ -26,3 +26,17 @@ static cocos2d::Scene* createScene() \
 }
 
 extern Display D_display;
+
+
+typedef enum DirectionFlag 
+{
+	none,
+    left,
+    right,
+	up,
+	down,
+	leftDown,
+	leftUp,
+	rightDown,
+	rightUp
+};

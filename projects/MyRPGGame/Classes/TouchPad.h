@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cocos2d.h"
+#include "RPGHead.h"
 
 USING_NS_CC;
 
@@ -34,10 +34,19 @@ public:
 
     CREATE_FUNC(TouchPad);
 
+	void setTouchOverCall(const std::function<void(Object*)> &func)
+	{
+		_TouchOverCall = func;
+	}
+
 private:
 	void updateThroughPoint(const Point &point);
 	bool checkTouch(const Location &location, const Point &touchPoint);
 	void addLocation(const Location &location, const Point &touchPoint);
+	DirectionFlag getDirection(const Location &fromLocation, const Location &toLocation);
+
+public:
+	std::vector<DirectionFlag> _directionLists;
 
 private:
 	int _state;
@@ -50,5 +59,8 @@ private:
 	Location _currentTouchIndex;
 
 	LayerRGBA *_padLayer;
+
+	std::function<void(Object*)> _TouchOverCall;
 };
+
 

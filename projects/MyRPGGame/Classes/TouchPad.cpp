@@ -11,6 +11,7 @@ TouchPad::TouchPad(void):_state(kPadStateUngrabbed)
 	, _endPoint(Point::ZERO)
 	, _startPoint(Point::ZERO)
 	, _currentTouchIndex(Location(0,0))
+	, _TouchOverCall(nullptr)
 {
 }
 
@@ -24,6 +25,7 @@ bool TouchPad::init()
 	if (LayerRGBA::init())
 	{
 		_touchPoints.reserve(9);
+		_directionLists.reserve(9);
 
 		_padLayer = LayerRGBA::create();
 		_padLayer->setAnchorPoint(Point(0.5f, 0.5f));
@@ -86,6 +88,7 @@ bool TouchPad::onTouchBegan(Touch* touch, Event* event)
 
 	_padLayer->setPosition(Point(_startPoint.x, _startPoint.y));
 
+	_directionLists.clear();
 	_touchPoints.clear();
 	_currentTouchIndex = Location(-1, -1);
 	addLocation(Location(1,1), touchPoint);
@@ -111,6 +114,9 @@ void TouchPad::onTouchEnded(Touch* touch, Event* event)
 		_padLayer->removeChildByTag(10000+i);
 	}
     _state = kPadStateUngrabbed;
+
+
+	_TouchOverCall(this);
 }
 
 void TouchPad::updateThroughPoint(const Point &touchPoint)
@@ -148,7 +154,7 @@ bool TouchPad::checkTouch(const Location &location, const Point &touchPoint)
 
 void TouchPad::addLocation(const Location &location, const Point &touchPoint)
 {
-    CCLOG("addLocation x = %d, y = %d,   curx=%d, cury=%d", location.x, location.y, _currentTouchIndex.x, _currentTouchIndex.y);
+    //CCLOG("addLocation x = %d, y = %d,   curx=%d, cury=%d", location.x, location.y, _currentTouchIndex.x, _currentTouchIndex.y);
 	if (_currentTouchIndex.x > -1 && _currentTouchIndex.y>-1)
 	{
 		auto batchNode = SpriteBatchNode::create("images/pad_line_01.png");
@@ -173,8 +179,38 @@ void TouchPad::addLocation(const Location &location, const Point &touchPoint)
 	}
 
 	_touchPoints.push_back(location);
+	int size = _touchPoints.size();
+	if (size > 1)
+	{
+		DirectionFlag dir = getDirection(_touchPoints[size-2], _touchPoints[size-1]);
+		if (dir != DirectionFlag::none) _directionLists.push_back(dir);
+	}
 	_currentTouchIndex.x = location.x;
 	_currentTouchIndex.y = location.y;
 
 	_padLayer->getChildByTag(location.x*6+location.y*2+1)->setVisible(true);
+}
+
+DirectionFlag TouchPad::getDirection(const Location &fromLocation, const Location &toLocation)
+{
+	if (fromLocation.x==toLocation.x && fromLocation.y==toLocation.y)
+	{
+		return DirectionFlag::none;
+	}
+	
+	int sx = fromLocation.x - toLocation.x;
+	int sy = fromLocation.y - toLocation.y;
+
+	if (sx==0)
+	{
+		return sy<0?DirectionFlag::up:DirectionFlag::down;
+	}
+	else if (sx < 0)
+	{
+		return sy<0?DirectionFlag::leftUp:DirectionFlag::leftDown;
+	}
+	else if (sx > 0)
+	{
+		return sy<0?DirectionFlag::rightUp:DirectionFlag::rightDown;
+	}
 }
