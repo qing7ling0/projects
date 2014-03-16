@@ -1,14 +1,10 @@
 #pragma once
 #include "RPGHead.h"
 #include "TouchPad.h"
+#include "HeroRole.h"
+#include "TouchControl.h"
 
 USING_NS_CC;
-
-class RoleAction : public Object
-{
-public:
-	DirectionFlag actionFlag;
-};
 
 class BattleScene : public Layer
 {
@@ -27,6 +23,6 @@ private:
 
 private:
 	Armature *_hero;
-	Vector<RoleAction*> _actions;
+	Vector<TouchAction*> _actions;
 	void touchPadCallback(Object *touchPad);
 };

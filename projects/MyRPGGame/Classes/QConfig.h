@@ -25,6 +25,8 @@ static cocos2d::Scene* createScene() \
     return scene; \
 }
 
+#define NEW_ROLE_SCRIPT(__TYPE__) new __TYPE__(); 
+
 extern Display D_display;
 
 

@@ -2,8 +2,6 @@
 
 #include "RPGHead.h"
 
-USING_NS_CC;
-
 typedef enum tagPadState 
 {
     kPadStateGrabbed,

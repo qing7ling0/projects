@@ -136,6 +136,10 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BattleScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\HeroRole.cpp" />
+    <ClCompile Include="..\Classes\RobotScript.cpp" />
+    <ClCompile Include="..\Classes\Role.cpp" />
+    <ClCompile Include="..\Classes\RoleScript.cpp" />
     <ClCompile Include="..\Classes\TouchPad.cpp" />
     <ClCompile Include="..\Classes\QConfig.cpp" />
     <ClCompile Include="..\Classes\SGLauncher.cpp" />
@@ -146,7 +150,13 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BattleScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\HeroRole.h" />
+    <ClInclude Include="..\Classes\RobotScript.h" />
+    <ClInclude Include="..\Classes\Role.h" />
+    <ClInclude Include="..\Classes\RoleScript.h" />
+    <ClInclude Include="..\Classes\RoleType.h" />
     <ClInclude Include="..\Classes\RPGHead.h" />
+    <ClInclude Include="..\Classes\TouchControl.h" />
     <ClInclude Include="..\Classes\TouchPad.h" />
     <ClInclude Include="..\Classes\QConfig.h" />
     <ClInclude Include="..\Classes\SGLauncher.h" />

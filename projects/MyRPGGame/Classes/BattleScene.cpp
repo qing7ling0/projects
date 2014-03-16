@@ -17,35 +17,13 @@ bool BattleScene::init(void)
 			"animi/robot.plist",
 			"animi/robot.xml");
 
+		
+
 		auto map = TMXTiledMap::create("map/town.tmx");
 		addChild(map, 0, 1);
 
-		Armature *armature = Armature::create("robot");
-		armature->getAnimation()->playWithIndex(0);
-		armature->setPosition(Point(D_display.cx, D_display.cy));
-		armature->setScale(0.6f);
-		armature->getAnimation()->setSpeedScale(0.5f);
-		addChild(armature);
-		_hero = armature;
-		
-		ParticleSystem *p1 = CCParticleSystemQuad::create("Particles/SmallSun.plist");
-		ParticleSystem *p2 = CCParticleSystemQuad::create("Particles/SmallSun.plist");
-
-		Bone *bone  = Bone::create("p1");
-		bone->addDisplay(p1, 0);
-		bone->changeDisplayWithIndex(0, true);
-		bone->setIgnoreMovementBoneData(true);
-		bone->setLocalZOrder(100);
-		bone->setScale(1.2f);
-		armature->addBone(bone, "bady-a3");
-
-		bone  = Bone::create("p2");
-		bone->addDisplay(p2, 0);
-		bone->changeDisplayWithIndex(0, true);
-		bone->setIgnoreMovementBoneData(true);
-		bone->setLocalZOrder(100);
-		bone->setScale(1.2f);
-		armature->addBone(bone, "bady-a30");
+		HeroRole *_role = HeroRole::create(RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot));
+		addChild(_role->getNode());
 
 		TouchPad *_pad = TouchPad::create();
 		_pad->setTouchOverCall(CC_CALLBACK_1(BattleScene::touchPadCallback, this));
@@ -69,7 +47,7 @@ void BattleScene::update(float dt)
 	if (_actions.size() > 0)
 	{
 		float _per = _hero->getAnimation()->getCurrentPercent();
-		RoleAction *ac = _actions.at(0);
+		TouchAction *ac = _actions.at(0);
 		if (ac&&_per>=1)
 		{
 			_hero->getAnimation()->playWithIndex(getHeroAnimiIndexByActionFlag(ac->actionFlag));
@@ -109,10 +87,10 @@ void BattleScene::touchPadCallback(Object *touchPad)
 	for ( std::vector<DirectionFlag>::iterator iter = pad->_directionLists.begin() ; iter != pad->_directionLists.end() ; iter++ )
 	{
 		//CCLOG("direction = %d", *iter);
-		auto ac = new RoleAction();
+		auto ac = new TouchAction();
 		ac->actionFlag = *iter;
 		ac->autorelease();
 
-		_actions.pushBack(ac);
+		//_actions.pushBack(ac);
 	};
 }

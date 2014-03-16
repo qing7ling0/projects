@@ -10,6 +10,12 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\role">
+      <UniqueIdentifier>{d548b286-84c9-4919-b0a4-cdb54959de94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\role\script">
+      <UniqueIdentifier>{2ec474d9-b978-47d2-a7d1-6ed586221912}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -33,6 +39,18 @@
     </ClCompile>
     <ClCompile Include="..\Classes\BattleScene.cpp">
       <Filter>Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Role.cpp">
+      <Filter>Classes\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroRole.cpp">
+      <Filter>Classes\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RoleScript.cpp">
+      <Filter>Classes\role\script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RobotScript.cpp">
+      <Filter>Classes\role\script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -59,6 +77,24 @@
       <Filter>Classes</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleScene.h">
+      <Filter>Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Role.h">
+      <Filter>Classes\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RoleType.h">
+      <Filter>Classes\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroRole.h">
+      <Filter>Classes\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RoleScript.h">
+      <Filter>Classes\role\script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RobotScript.h">
+      <Filter>Classes\role\script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TouchControl.h">
       <Filter>Classes</Filter>
     </ClInclude>
   </ItemGroup>
