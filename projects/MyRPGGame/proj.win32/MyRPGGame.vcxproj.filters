@@ -10,11 +10,20 @@
     <Filter Include="resource">
       <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle">
+      <UniqueIdentifier>{daf89bf0-fd2a-417d-a66b-faea6138d8cc}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Classes\role">
       <UniqueIdentifier>{d548b286-84c9-4919-b0a4-cdb54959de94}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\role\script">
+    <Filter Include="Classes\battle\role">
+      <UniqueIdentifier>{c8a18294-0648-4c6b-b887-c99d9f0bb4c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\role\script">
       <UniqueIdentifier>{2ec474d9-b978-47d2-a7d1-6ed586221912}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\launcher">
+      <UniqueIdentifier>{e0908432-724c-416f-ba0d-aea69b4bc9f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -24,22 +33,7 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Classes</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SGLauncher.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\QConfig.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\VirtualKeyboard.cpp" />
-    <ClCompile Include="..\Classes\TouchPad.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BattleScene.cpp">
-      <Filter>Classes</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Role.cpp">
       <Filter>Classes\role</Filter>
     </ClCompile>
@@ -47,10 +41,28 @@
       <Filter>Classes\role</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\RoleScript.cpp">
-      <Filter>Classes\role\script</Filter>
+      <Filter>Classes\battle\role\script</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\RobotScript.cpp">
-      <Filter>Classes\role\script</Filter>
+      <Filter>Classes\battle\role\script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\QConfig.cpp">
+      <Filter>Classes\launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SGLauncher.cpp">
+      <Filter>Classes\launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HelloWorldScene.cpp">
+      <Filter>Classes\launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Heros.cpp">
+      <Filter>Classes\battle\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TouchPad.cpp">
+      <Filter>Classes\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleController.cpp">
+      <Filter>Classes\battle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,25 +72,7 @@
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Classes</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\HelloWorldScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SGLauncher.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\QConfig.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\VirtualKeyboard.h" />
-    <ClInclude Include="..\Classes\TouchPad.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\RPGHead.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BattleScene.h">
-      <Filter>Classes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Role.h">
       <Filter>Classes\role</Filter>
     </ClInclude>
@@ -89,13 +83,34 @@
       <Filter>Classes\role</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RoleScript.h">
-      <Filter>Classes\role\script</Filter>
+      <Filter>Classes\battle\role\script</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RobotScript.h">
-      <Filter>Classes\role\script</Filter>
+      <Filter>Classes\battle\role\script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\QConfig.h">
+      <Filter>Classes\launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RPGHead.h">
+      <Filter>Classes\launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SGLauncher.h">
+      <Filter>Classes\launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HelloWorldScene.h">
+      <Filter>Classes\launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Heros.h">
+      <Filter>Classes\battle\role</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TouchControl.h">
-      <Filter>Classes</Filter>
+      <Filter>Classes\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TouchPad.h">
+      <Filter>Classes\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleController.h">
+      <Filter>Classes\battle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

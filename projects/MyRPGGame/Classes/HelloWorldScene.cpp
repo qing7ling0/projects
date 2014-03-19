@@ -1,5 +1,5 @@
 #include "HelloWorldScene.h"
-#include "BattleScene.h"
+#include "BattleController.h"
 
 USING_NS_CC;
 
@@ -59,7 +59,7 @@ bool HelloWorld::init()
 
 void HelloWorld::menuBattleCallback(Object* pSender)
 {
-	auto *sc = BattleScene::createScene();
+	auto *sc = BattleController::createScene();
     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, sc));
 }
 
