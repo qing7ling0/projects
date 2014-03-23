@@ -2,6 +2,8 @@
 #include "RPGHead.h"
 #include "Role.h"
 
+class HeroControl;
+
 class HeroRole : public Role
 {
 public:
@@ -26,6 +28,10 @@ public:
 
 	virtual void run();
 
+	virtual void update(float dt);
+
+	virtual HeroControl* getHeroControl() { return _heroControl; }
+
 	static HeroRole* create(RoleData data)
 	{
 		HeroRole *role = new HeroRole();
@@ -47,5 +53,6 @@ protected:
 private:
 	bool b_enemy;
 	bool b_self;
+	HeroControl *_heroControl;
 };
 

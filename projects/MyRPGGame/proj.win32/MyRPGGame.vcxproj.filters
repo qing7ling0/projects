@@ -25,6 +25,9 @@
     <Filter Include="Classes\launcher">
       <UniqueIdentifier>{e0908432-724c-416f-ba0d-aea69b4bc9f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle\role\command">
+      <UniqueIdentifier>{1d1757b1-94bb-4506-86b8-d809c864d338}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +66,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\BattleController.cpp">
       <Filter>Classes\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Command.cpp">
+      <Filter>Classes\battle\role\command</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroControl.cpp">
+      <Filter>Classes\battle\role\command</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RoleHelper.cpp">
+      <Filter>Classes\battle\role</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +123,15 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BattleController.h">
       <Filter>Classes\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Command.h">
+      <Filter>Classes\battle\role\command</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroControl.h">
+      <Filter>Classes\battle\role\command</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RoleHelper.h">
+      <Filter>Classes\battle\role</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

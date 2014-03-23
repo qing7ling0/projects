@@ -10,14 +10,17 @@ RobotScript::~RobotScript(void)
 }
 
 
-void RobotScript::init(Role *role)
+void RobotScript::init(HeroRole *role)
 {
-	this->_role = role;
-	if (_role) _role->retain();
+	this->_hero = role;
+	if (_hero) _hero->retain();
 }
 
 Node* RobotScript::createRoleNode()
 {
+		ArmatureDataManager::getInstance()->addArmatureFileInfo("animi/robot.png",
+			"animi/robot.plist",
+			"animi/robot.xml");
 	Armature *armature = Armature::create("robot");
 	armature->getAnimation()->playWithIndex(0);
 	armature->setPosition(Point(D_display.cx, D_display.cy));
@@ -52,5 +55,24 @@ void RobotScript::doScript(float dt)
 
 void RobotScript::doTouchActions(std::vector<DirectionFlag> directionFlags)
 {
+	CommandType _command = parseRoleAction(directionFlags);
+	_hero->getHeroControl()->doMove(10, 0, RoleDirect::roleNone);
+}
 
+CommandType RobotScript::parseRoleAction(std::vector<DirectionFlag> directionFlags)
+{
+	if (directionFlags.size() > 0)
+	{
+		switch(directionFlags[0])
+		{
+		case DirectionFlag::left:
+			return CommandType::attackCommand;
+		case DirectionFlag::right:
+			return CommandType::defenseCommand;
+		case DirectionFlag::down:
+			return CommandType::moveCommand;
+		}
+	}
+
+	return CommandType::noneCommand;
 }

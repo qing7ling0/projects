@@ -1,18 +1,27 @@
 #pragma once
 
 //
-// 角色方向
+// 角色移动方向
 //
 typedef enum RoleDirect
 {
+	roleNone,
 	roleLeft,
-	roleRight
+	roleRight,
+	roleUp,
+	roleDown,
+	roleUpLeft,
+	roleUpRight,
+	roleDownLeft,
+	roleDownRight,
 };
+
+
 
 //
 // 角色动作类型
 //
-typedef enum RoleAction
+typedef enum RoleActionBase
 {
 	// 攻击
 	actionAttack,
@@ -25,7 +34,28 @@ typedef enum RoleAction
 	// 跑
 	actionRun,
 	// 防御
-	actionDefense
+	actionDefense,
+	// 跳
+	actionJump
+};
+
+//
+// 角色命令
+//
+typedef enum CommandType
+{
+	// 无
+	noneCommand,
+	// 攻击
+	attackCommand,
+	// 待机
+	waitCommand,
+	// 移动
+	moveCommand,
+	// 跑
+	runCommand,
+	// 防御
+	defenseCommand
 };
 
 

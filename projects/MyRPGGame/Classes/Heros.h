@@ -1,8 +1,9 @@
 #pragma once
 #include "RPGHead.h"
-#include "HeroRole.h"
-#include "BattleController.h"
 
+class RoleScript;
+class HeroRole;
+class BattleController;
 
 class Heros : public Object
 {

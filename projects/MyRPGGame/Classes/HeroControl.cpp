@@ -1,0 +1,76 @@
+#include "HeroControl.h"
+
+
+HeroControl::HeroControl(void) 
+	: _hero(nullptr)
+	, _speed (Point::ZERO)
+	, _fastMove (false)
+	, _roleDirect (RoleDirect::roleNone)
+{
+}
+
+
+HeroControl::~HeroControl(void)
+{
+	CC_SAFE_RELEASE(_hero);
+}
+
+void HeroControl::init(HeroRole *role)
+{
+	_hero = role;
+	CC_SAFE_RETAIN(_hero);
+}
+
+void HeroControl::doMove(float speedx, float speedy, RoleDirect direct, bool fast)
+{
+	if (_hero)
+	{
+		_speed.x = speedx;
+		_speed.y = speedy;
+		_fastMove = fast;
+
+		if (direct != RoleDirect::roleNone)
+		{
+			switch(direct)
+			{
+			case RoleDirect::roleDown:
+				break;
+			case RoleDirect::roleUp:
+				break;
+			case RoleDirect::roleLeft:
+				break;
+			case RoleDirect::roleRight:
+				break;
+			case RoleDirect::roleDownLeft:
+				break;
+			case RoleDirect::roleDownRight:
+				break;
+			case RoleDirect::roleUpLeft:
+				break;
+			case RoleDirect::roleUpRight:
+				break;
+			}
+		}
+		_roleDirect = direct;
+	}
+}
+
+void HeroControl::update(float dt)
+{
+	if (_speed.x != 0  || _speed.y != 0)
+	{
+		Point position = Point(_hero->getPositon());
+		position.x += dt * _speed.x;
+		position.y += dt * _speed.y;
+		_hero->setPosition(position);
+	}
+
+}
+
+void HeroControl::stop()
+{
+	_fastMove = false;
+	_speed.x = 0;
+	_speed.y = 0;
+	_roleDirect = RoleDirect::roleNone;
+}

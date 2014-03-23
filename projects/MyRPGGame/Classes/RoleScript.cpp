@@ -3,14 +3,14 @@
 
 
 RoleScript::RoleScript(void):
-	_role(nullptr)
+	_hero(nullptr)
 {
 }
 
 
 RoleScript::~RoleScript(void)
 {
-	CC_SAFE_RELEASE(_role);
+	CC_SAFE_RELEASE(_hero);
 }
 
 RoleScript* RoleScript::createScript(ScriptType scriptType)
@@ -29,6 +29,8 @@ RoleScript* RoleScript::createScript(ScriptType scriptType)
 	return script;
 }
 
-RoleAction parseRoleAction(std::vector<DirectionFlag> directionFlags)
+CommandType RoleScript::parseRoleAction(std::vector<DirectionFlag> directionFlags)
 {
+
+	return CommandType::noneCommand;
 }

@@ -1,4 +1,7 @@
 #include "Heros.h"
+#include "HeroRole.h"
+#include "BattleController.h"
+#include "RoleScript.h"
 
 static Heros *_heros = nullptr;
 
@@ -28,6 +31,10 @@ Heros* Heros::create()
 
 void Heros::update(float dt)
 {
+	for(HeroRole *role : _heros)
+	{
+		role->update(dt);
+	}
 }
 
 void Heros::initHeros(RoleData *datas, int size)
@@ -44,11 +51,11 @@ void Heros::initHeros(RoleData *datas, int size)
 	}
 }
 
-void Heros::doTouchActions(std::vector<DirectionFlag> directionFlags)
+void Heros::doTouchActions(const std::vector<DirectionFlag> directionFlags)
 {
 	for(HeroRole* hero : _heros)
 	{
 		if (hero && hero->isSelf())
-			hero->doTouchActions(directionFlags);
+			hero->getRoleScript()->doTouchActions(directionFlags);
 	}
 }

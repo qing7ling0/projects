@@ -2,6 +2,7 @@
 #include "RPGHead.h"
 
 class RoleScript;
+class Command;
 
 class Role : public Object
 {
@@ -16,6 +17,8 @@ public:
 
 	virtual RoleDirect getDirect() { return _direct; }
 
+	virtual RoleScript* getRoleScript() { return _script; }
+
 	virtual void doTouchActions(std::vector<DirectionFlag> directionFlags);
 
 	virtual void attack();
@@ -27,11 +30,21 @@ public:
 	virtual void run();
 
 	virtual void update(float dt);
+	
+	virtual void setPosition(const float px, const float py);
+	virtual void setPosition(const Point &point);
+	
+	virtual Point getPositon() const { return _position; }
+	virtual float getPositonX() const { return _position.x; }
+	virtual float getPositonY() const { return _position.y; }
 
 protected:
 	Node *_node;
+	RoleScript *_script;
+	Command *_command;
+
 	RoleDirect _direct;
 	RoleData _data;
-	RoleScript *_script;
+	Point _position;
 };
 

@@ -12,22 +12,21 @@ Scene* BattleController::createScene()
     
     auto layer = BattleController::create();
 
-	_instance = layer;
-
     scene->addChild(layer);
 
     return scene;
 }
 
-BattleController::BattleController(void):
-	_heros(nullptr),
-	_touchPad(nullptr)
+BattleController::BattleController(void)
+	: _heros (nullptr)
+	, _touchPad (nullptr)
 {
 }
 
 
 BattleController::~BattleController(void)
 {
+	_instance = nullptr;
 }
 
 BattleController* BattleController::getInstance()
@@ -39,18 +38,19 @@ bool BattleController::init(void)
 {
 	if (Layer::init())
 	{
-		ArmatureDataManager::getInstance()->addArmatureFileInfo("animi/robot.png",
-			"animi/robot.plist",
-			"animi/robot.xml");
+		_instance = this;
 
 		auto map = TMXTiledMap::create("map/town.tmx");
 		addChild(map, 0, 1);
 
+		RoleData *datas = new RoleData[1];
+		datas[0] = RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot);
+
 		_heros = Heros::create();
+		_heros->initHeros(datas, 1);
 
-		HeroRole *_role = HeroRole::create(RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot));
-		addChild(_role->getNode());
-
+		//HeroRole *hero = HeroRole::create(RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot));
+		//this->addChild(hero->getNode());
 
 
 		_touchPad = TouchPad::create();
@@ -68,6 +68,7 @@ bool BattleController::init(void)
 
 void BattleController::update(float dt)
 {
+	_heros->update(dt);
 }
 
 int BattleController::getHeroAnimiIndexByActionFlag(DirectionFlag flag)
@@ -108,6 +109,8 @@ void BattleController::touchPadCallback(Object *touchPad)
 
 		//_actions.pushBack(ac);
 	};
+
+	_heros->doTouchActions(pad->_directionLists);
 }
 
 void BattleController::cleanup()

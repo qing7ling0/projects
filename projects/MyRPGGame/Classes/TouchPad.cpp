@@ -213,4 +213,6 @@ DirectionFlag TouchPad::getDirection(const Location &fromLocation, const Locatio
 	{
 		return sy<0?DirectionFlag::rightUp:DirectionFlag::rightDown;
 	}
+
+	return DirectionFlag::none;
 }
