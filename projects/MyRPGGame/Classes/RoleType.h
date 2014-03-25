@@ -39,6 +39,7 @@ typedef enum RoleActionBase
 	actionJump
 };
 
+
 //
 // 角色命令
 //
@@ -52,6 +53,8 @@ typedef enum CommandType
 	waitCommand,
 	// 移动
 	moveCommand,
+	// 向后移动
+	moveBackCommand,
 	// 跑
 	runCommand,
 	// 防御

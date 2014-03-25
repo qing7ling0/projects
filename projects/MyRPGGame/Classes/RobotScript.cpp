@@ -1,5 +1,13 @@
 #include "RobotScript.h"
 
+unsigned short roleAnimiActions[7][2] = {
+	{RoleActionBase::actionAttack, 1}, {RoleActionBase::actionDefense, 1},
+	{RoleActionBase::actionHurt, 1}, {RoleActionBase::actionJump, 1},
+	{RoleActionBase::actionMove, 1}, {RoleActionBase::actionRun, 1},
+	{RoleActionBase::actionWait, 1}
+	};
+
+
 RobotScript::RobotScript(void)
 {
 }
@@ -18,12 +26,11 @@ void RobotScript::init(HeroRole *role)
 
 Node* RobotScript::createRoleNode()
 {
-		ArmatureDataManager::getInstance()->addArmatureFileInfo("animi/robot.png",
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("animi/robot.png",
 			"animi/robot.plist",
 			"animi/robot.xml");
 	Armature *armature = Armature::create("robot");
 	armature->getAnimation()->playWithIndex(0);
-	armature->setPosition(Point(D_display.cx, D_display.cy));
 	armature->setScale(0.6f);
 	armature->getAnimation()->setSpeedScale(0.5f);
 		
@@ -46,7 +53,14 @@ Node* RobotScript::createRoleNode()
 	bone->setScale(1.2f);
 	armature->addBone(bone, "bady-a30");
 
-	return armature;
+	RoleAnimi *_animi = new RoleAnimi();
+	_animi->autorelease();
+	_animi->setArmature(armature);
+	_hero->setRoleAnimi(_animi);
+
+	LayerRGBA *layer = LayerRGBA::create();
+	layer->addChild(armature);
+	return layer;
 }
 
 void RobotScript::doScript(float dt)
@@ -56,7 +70,19 @@ void RobotScript::doScript(float dt)
 void RobotScript::doTouchActions(std::vector<DirectionFlag> directionFlags)
 {
 	CommandType _command = parseRoleAction(directionFlags);
-	_hero->getHeroControl()->doMove(10, 0, RoleDirect::roleNone);
+
+	if (_command == CommandType::attackCommand)
+	{
+		float speedx = getMoveSpeed();
+		if (_hero->isDirectLeft()) speedx = -speedx;
+			_hero->getHeroControl()->doMove(speedx, 0, RoleDirect::roleLeft);
+	}
+	else if (_command == CommandType::moveBackCommand)
+	{
+		float speedx = getMoveSpeed();
+		if (!_hero->isDirectLeft()) speedx = -speedx;
+			_hero->getHeroControl()->doMove(speedx, 0, RoleDirect::roleLeft);
+	}
 }
 
 CommandType RobotScript::parseRoleAction(std::vector<DirectionFlag> directionFlags)
@@ -66,13 +92,35 @@ CommandType RobotScript::parseRoleAction(std::vector<DirectionFlag> directionFla
 		switch(directionFlags[0])
 		{
 		case DirectionFlag::left:
-			return CommandType::attackCommand;
+			if (_hero->isDirectLeft())
+				return CommandType::attackCommand;
+			else
+				return CommandType::moveBackCommand;
 		case DirectionFlag::right:
-			return CommandType::defenseCommand;
+			if (!_hero->isDirectLeft())
+				return CommandType::attackCommand;
+			else
+				return CommandType::moveBackCommand;
 		case DirectionFlag::down:
-			return CommandType::moveCommand;
+			if (_hero->isDirectLeft())
+				return CommandType::attackCommand;
+			else
+				return CommandType::moveBackCommand;
 		}
 	}
 
 	return CommandType::noneCommand;
+}
+
+int RobotScript::getRoleAnimiFlag(RoleActionBase action)
+{
+	for(int i=0; i<7; i++)
+	{
+		if (roleAnimiActions[i][0] == action)
+		{
+			return roleAnimiActions[i][1];
+		}
+	}
+
+	return -1;
 }

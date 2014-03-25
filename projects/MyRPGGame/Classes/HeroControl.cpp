@@ -1,4 +1,5 @@
 #include "HeroControl.h"
+#include "RoleScript.h"
 
 
 HeroControl::HeroControl(void) 
@@ -31,17 +32,21 @@ void HeroControl::doMove(float speedx, float speedy, RoleDirect direct, bool fas
 
 		if (direct != RoleDirect::roleNone)
 		{
+			int animiFlag = -1;
 			switch(direct)
 			{
 			case RoleDirect::roleDown:
+				//animiFlag 
 				break;
 			case RoleDirect::roleUp:
 				break;
 			case RoleDirect::roleLeft:
+				animiFlag = _hero->getRoleScript()->getRoleAnimiFlag(RoleActionBase::actionMove);
 				break;
 			case RoleDirect::roleRight:
 				break;
 			case RoleDirect::roleDownLeft:
+				animiFlag = _hero->getRoleScript()->getRoleAnimiFlag(RoleActionBase::actionMove);
 				break;
 			case RoleDirect::roleDownRight:
 				break;
@@ -49,6 +54,11 @@ void HeroControl::doMove(float speedx, float speedy, RoleDirect direct, bool fas
 				break;
 			case RoleDirect::roleUpRight:
 				break;
+			}
+
+			if (animiFlag > -1)
+			{
+				_hero->getRoleAnimi()->setAnimiFlag(animiFlag);
 			}
 		}
 		_roleDirect = direct;

@@ -28,6 +28,9 @@
     <Filter Include="Classes\battle\role\command">
       <UniqueIdentifier>{1d1757b1-94bb-4506-86b8-d809c864d338}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle\role\animi">
+      <UniqueIdentifier>{5875e7d0-e4fa-4f64-b30b-1be54b7c2375}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -75,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\RoleHelper.cpp">
       <Filter>Classes\battle\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RoleAnimi.cpp">
+      <Filter>Classes\battle\role\animi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,6 +138,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\RoleHelper.h">
       <Filter>Classes\battle\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RoleAnimi.h">
+      <Filter>Classes\battle\role\animi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

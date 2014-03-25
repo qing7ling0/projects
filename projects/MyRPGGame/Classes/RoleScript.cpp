@@ -2,8 +2,8 @@
 #include "RobotScript.h"
 
 
-RoleScript::RoleScript(void):
-	_hero(nullptr)
+RoleScript::RoleScript(void)
+	: _hero(nullptr)
 {
 }
 
@@ -33,4 +33,9 @@ CommandType RoleScript::parseRoleAction(std::vector<DirectionFlag> directionFlag
 {
 
 	return CommandType::noneCommand;
+}
+
+int RoleScript::getRoleAnimiFlag(RoleActionBase action)
+{
+	return -1;
 }

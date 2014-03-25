@@ -182,7 +182,7 @@ void TouchPad::addLocation(const Location &location, const Point &touchPoint)
 	int size = _touchPoints.size();
 	if (size > 1)
 	{
-		DirectionFlag dir = getDirection(_touchPoints[size-2], _touchPoints[size-1]);
+		DirectionFlag dir = getDirection(_currentTouchIndex, location);
 		if (dir != DirectionFlag::none) _directionLists.push_back(dir);
 	}
 	_currentTouchIndex.x = location.x;
@@ -204,6 +204,10 @@ DirectionFlag TouchPad::getDirection(const Location &fromLocation, const Locatio
 	if (sx==0)
 	{
 		return sy<0?DirectionFlag::up:DirectionFlag::down;
+	}
+	else if (sy == 0)
+	{
+		return sx<0?DirectionFlag::right:DirectionFlag::left;
 	}
 	else if (sx < 0)
 	{
