@@ -1,11 +1,13 @@
 #include "HeroRole.h"
 #include "RoleScript.h"
 #include "HeroControl.h"
+#include "MapControl.h"
 
 HeroRole::HeroRole(void) 
 	: b_enemy(false)
 	, b_self(false)
 	, _heroControl (nullptr)
+	, _camera(nullptr)
 {
 }
 
@@ -23,12 +25,14 @@ bool HeroRole::init(RoleData data)
 		if (_script) _script->retain();
 		_script->init(this);
 		_node = _script->createRoleNode();
-		_position.x = data.px;
-		_position.y = data.py;
-		_node->setPosition(_position);
 
 		_heroControl = new HeroControl();
 		_heroControl->init(this);
+
+		_camera = new HeroCamera();
+		_camera->init(Size(D_display.w, D_display.h), MapControl::getInstance()->getMapSize());
+		_camera->setHero(this);
+		_camera->setCamera(data.px, data.py);
 
 		return true;
 	}
@@ -59,5 +63,28 @@ void HeroRole::update(float dt)
 	{
 		_script->update(dt);
 		_heroControl->update(dt);
+	}
+}
+
+
+void HeroRole::setCamera(const float x, const float y)
+{
+	_position.x = x;
+	_position.y = y;
+}
+
+void HeroRole::setPosition(const float px, const float py)
+{
+	if (_camera)
+	{
+		_camera->setCamera(px, py);
+	}
+}
+
+void HeroRole::setPosition(const Point &point)
+{
+	if (_camera)
+	{
+		_camera->setCamera(point);
 	}
 }

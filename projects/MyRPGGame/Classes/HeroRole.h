@@ -1,6 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 #include "Role.h"
+#include "HeroCamera.h"
 
 class HeroControl;
 
@@ -19,6 +20,12 @@ public:
 	virtual bool isEnemy() { return b_enemy; }
 
 	virtual void setEnemy(const bool enemy) { this->b_self = enemy; }
+
+	virtual void setCamera(const float x, const float y);
+	
+	virtual void setPosition(const float px, const float py);
+
+	virtual void setPosition(const Point &point);
 
 	virtual void attack();
 
@@ -53,6 +60,7 @@ protected:
 private:
 	bool b_enemy;
 	bool b_self;
+	HeroCamera *_camera;
 	HeroControl *_heroControl;
 };
 

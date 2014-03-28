@@ -40,9 +40,6 @@ bool BattleController::init(void)
 	{
 		_instance = this;
 
-		auto map = TMXTiledMap::create("map/town.tmx");
-		addChild(map, 0, 1);
-
 		RoleData *datas = new RoleData[1];
 		datas[0] = RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot);
 
