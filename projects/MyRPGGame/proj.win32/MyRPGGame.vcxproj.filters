@@ -31,11 +31,11 @@
     <Filter Include="Classes\battle\role\animi">
       <UniqueIdentifier>{5875e7d0-e4fa-4f64-b30b-1be54b7c2375}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\battle\camera">
-      <UniqueIdentifier>{106525c3-3f6b-4dd9-8d89-953c269996dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\battle\map">
       <UniqueIdentifier>{23682571-8bd8-44b0-b140-3f8da63f3f73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\follow">
+      <UniqueIdentifier>{3b60df1c-57ca-4ff5-a3d2-67de8821ce9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -85,17 +85,17 @@
     <ClCompile Include="..\Classes\RoleAnimi.cpp">
       <Filter>Classes\battle\role\animi</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RPGCamera.cpp">
-      <Filter>Classes\battle\camera</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\HeroCamera.cpp">
-      <Filter>Classes\battle\camera</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MapControl.cpp">
       <Filter>Classes\battle\map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\HeroRole.cpp">
       <Filter>Classes\battle\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FollowRole.cpp">
+      <Filter>Classes\battle\follow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\FollowRoles.cpp">
+      <Filter>Classes\battle\follow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -154,17 +154,17 @@
     <ClInclude Include="..\Classes\RoleAnimi.h">
       <Filter>Classes\battle\role\animi</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RPGCamera.h">
-      <Filter>Classes\battle\camera</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\HeroCamera.h">
-      <Filter>Classes\battle\camera</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MapControl.h">
       <Filter>Classes\battle\map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\HeroRole.h">
       <Filter>Classes\battle\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FollowRole.h">
+      <Filter>Classes\battle\follow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\FollowRoles.h">
+      <Filter>Classes\battle\follow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

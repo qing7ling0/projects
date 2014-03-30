@@ -2,7 +2,8 @@
 #include "TouchPad.h"
 #include "HeroRole.h"
 #include "Heros.h"
-
+#include "MapControl.h"
+#include "FollowRoles.h"
 
 static BattleController* _instance = nullptr;
 
@@ -43,6 +44,8 @@ bool BattleController::init(void)
 		RoleData *datas = new RoleData[1];
 		datas[0] = RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot);
 
+		MapControl::getInstance();
+
 		_heros = Heros::create();
 		_heros->initHeros(datas, 1);
 
@@ -66,6 +69,10 @@ bool BattleController::init(void)
 void BattleController::update(float dt)
 {
 	_heros->update(dt);
+
+	MapControl::getInstance()->update(dt);
+
+	FollowRoles::getInstance()->update(dt);
 }
 
 int BattleController::getHeroAnimiIndexByActionFlag(DirectionFlag flag)

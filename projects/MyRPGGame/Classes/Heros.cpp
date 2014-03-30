@@ -2,6 +2,8 @@
 #include "HeroRole.h"
 #include "BattleController.h"
 #include "RoleScript.h"
+#include "FollowRoles.h"
+#include "MapControl.h"
 
 static Heros *_heros = nullptr;
 
@@ -42,6 +44,8 @@ void Heros::initHeros(RoleData *datas, int size)
 	for(int i=0; i<size; i++)
 	{
 		HeroRole *_role = HeroRole::create(datas[i]);
+
+		FollowRoles::getInstance()->add(FollowRole::create(_role, MapControl::getInstance()));
 
 		if (datas[i].roleId == 1) _role->setSelf(true);
 		else _role->setEnemy(true);

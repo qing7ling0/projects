@@ -136,6 +136,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BattleController.cpp" />
     <ClCompile Include="..\Classes\Command.cpp" />
+    <ClCompile Include="..\Classes\FollowRole.cpp" />
+    <ClCompile Include="..\Classes\FollowRoles.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\HeroRole.cpp" />
     <ClCompile Include="..\Classes\Heros.cpp" />
@@ -144,10 +146,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\RobotScript.cpp" />
     <ClCompile Include="..\Classes\Role.cpp" />
     <ClCompile Include="..\Classes\RoleAnimi.cpp" />
-    <ClCompile Include="..\Classes\HeroCamera.cpp" />
     <ClCompile Include="..\Classes\RoleHelper.cpp" />
     <ClCompile Include="..\Classes\RoleScript.cpp" />
-    <ClCompile Include="..\Classes\RPGCamera.cpp" />
     <ClCompile Include="..\Classes\TouchPad.cpp" />
     <ClCompile Include="..\Classes\QConfig.cpp" />
     <ClCompile Include="..\Classes\SGLauncher.cpp" />
@@ -158,6 +158,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\BattleController.h" />
     <ClInclude Include="..\Classes\Command.h" />
+    <ClInclude Include="..\Classes\FollowRole.h" />
+    <ClInclude Include="..\Classes\FollowRoles.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\HeroRole.h" />
     <ClInclude Include="..\Classes\Heros.h" />
@@ -166,11 +168,9 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\RobotScript.h" />
     <ClInclude Include="..\Classes\Role.h" />
     <ClInclude Include="..\Classes\RoleAnimi.h" />
-    <ClInclude Include="..\Classes\HeroCamera.h" />
     <ClInclude Include="..\Classes\RoleHelper.h" />
     <ClInclude Include="..\Classes\RoleScript.h" />
     <ClInclude Include="..\Classes\RoleType.h" />
-    <ClInclude Include="..\Classes\RPGCamera.h" />
     <ClInclude Include="..\Classes\RPGHead.h" />
     <ClInclude Include="..\Classes\TouchControl.h" />
     <ClInclude Include="..\Classes\TouchPad.h" />

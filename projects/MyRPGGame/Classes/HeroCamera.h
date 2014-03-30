@@ -1,9 +1,9 @@
 #pragma once
-#include "RPGCamera.h"
+#include "MapCamera.h"
 
 class HeroRole;
 
-class HeroCamera : public RPGCamera
+class HeroCamera : public MapCamera
 {
 public:
 	HeroCamera(void);

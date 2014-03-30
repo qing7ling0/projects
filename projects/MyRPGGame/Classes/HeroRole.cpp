@@ -2,12 +2,17 @@
 #include "RoleScript.h"
 #include "HeroControl.h"
 #include "MapControl.h"
+#include "RoleAnimi.h"
 
 HeroRole::HeroRole(void) 
 	: b_enemy(false)
 	, b_self(false)
 	, _heroControl (nullptr)
-	, _camera(nullptr)
+	, _direct(RoleDirect::roleLeft)
+	, _script(nullptr)
+	, _roleAnimi(nullptr)
+	, _data()
+	, _isDirectLeft (false)
 {
 }
 
@@ -15,12 +20,16 @@ HeroRole::HeroRole(void)
 HeroRole::~HeroRole(void)
 {
 	CC_SAFE_RELEASE(_heroControl);
+	CC_SAFE_RELEASE(_script);
+	CC_SAFE_RELEASE(_roleAnimi);
 }
 
 bool HeroRole::init(RoleData data)
 {
-	if (Role::init(data))
+	if (Role::init())
 	{
+		this->_data = data;
+
 		_script = RoleScript::createScript(data.scriptType);
 		if (_script) _script->retain();
 		_script->init(this);
@@ -28,11 +37,6 @@ bool HeroRole::init(RoleData data)
 
 		_heroControl = new HeroControl();
 		_heroControl->init(this);
-
-		_camera = new HeroCamera();
-		_camera->init(Size(D_display.w, D_display.h), MapControl::getInstance()->getMapSize());
-		_camera->setHero(this);
-		_camera->setCamera(data.px, data.py);
 
 		return true;
 	}
@@ -66,25 +70,24 @@ void HeroRole::update(float dt)
 	}
 }
 
-
-void HeroRole::setCamera(const float x, const float y)
+void HeroRole::setRoleAnimi(RoleAnimi *animi)
 {
-	_position.x = x;
-	_position.y = y;
+	_roleAnimi = animi;
+	setDirectLeft(_isDirectLeft);
+	CC_SAFE_RETAIN(_roleAnimi);
 }
 
-void HeroRole::setPosition(const float px, const float py)
+void HeroRole::setDirectLeft(bool left)
 {
-	if (_camera)
+	_isDirectLeft = left;
+	if (_roleAnimi && _roleAnimi->getArmature())
 	{
-		_camera->setCamera(px, py);
+		float scalex = _roleAnimi->getArmature()->getScaleX();
+		_roleAnimi->getArmature()->setScaleX(abs(scalex) * (left?1:-1));
 	}
 }
 
-void HeroRole::setPosition(const Point &point)
+void HeroRole::doTouchActions(std::vector<DirectionFlag> directionFlags)
 {
-	if (_camera)
-	{
-		_camera->setCamera(point);
-	}
+	
 }

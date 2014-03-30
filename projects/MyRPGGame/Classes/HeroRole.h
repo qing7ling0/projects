@@ -1,7 +1,6 @@
 #pragma once
 #include "RPGHead.h"
 #include "Role.h"
-#include "HeroCamera.h"
 
 class HeroControl;
 
@@ -20,8 +19,6 @@ public:
 	virtual bool isEnemy() { return b_enemy; }
 
 	virtual void setEnemy(const bool enemy) { this->b_self = enemy; }
-
-	virtual void setCamera(const float x, const float y);
 	
 	virtual void setPosition(const float px, const float py);
 
@@ -37,7 +34,21 @@ public:
 
 	virtual void update(float dt);
 
+	virtual RoleDirect getDirect() { return _direct; }
+
+	virtual RoleScript* getRoleScript() { return _script; }
+
+	virtual void doTouchActions(std::vector<DirectionFlag> directionFlags);
+
 	virtual HeroControl* getHeroControl() { return _heroControl; }
+
+	virtual bool isDirectLeft() { return _isDirectLeft; }
+
+	virtual void setDirectLeft(bool left);
+
+	virtual RoleAnimi *getRoleAnimi() { return _roleAnimi; }
+
+	virtual void setRoleAnimi(RoleAnimi *animi);
 
 	static HeroRole* create(RoleData data)
 	{
@@ -59,8 +70,21 @@ protected:
 
 private:
 	bool b_enemy;
+
 	bool b_self;
-	HeroCamera *_camera;
+
 	HeroControl *_heroControl;
+
+	RoleScript *_script;
+
+	RoleAnimi *_roleAnimi;
+
+	/** 角色现在移动方向 */
+	RoleDirect _direct;
+
+	RoleData _data;
+
+	/** 角色的朝向, 是否是朝左 */
+	bool _isDirectLeft;
 };
 
