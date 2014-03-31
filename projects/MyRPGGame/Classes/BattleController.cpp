@@ -28,6 +28,7 @@ BattleController::BattleController(void)
 BattleController::~BattleController(void)
 {
 	_instance = nullptr;
+	CC_SAFE_RELEASE(_heros);
 }
 
 BattleController* BattleController::getInstance()
@@ -48,6 +49,7 @@ bool BattleController::init(void)
 
 		_heros = Heros::create();
 		_heros->initHeros(datas, 1);
+		CC_SAFE_RETAIN(_heros);
 
 		//HeroRole *hero = HeroRole::create(RoleData(1, D_display.cx-200, D_display.cy-100, ScriptType::scriptRobot));
 		//this->addChild(hero->getNode());
@@ -65,7 +67,7 @@ bool BattleController::init(void)
 	return false;
 }
 
-
+static int dick = 0;
 void BattleController::update(float dt)
 {
 	_heros->update(dt);
@@ -73,6 +75,11 @@ void BattleController::update(float dt)
 	MapControl::getInstance()->update(dt);
 
 	FollowRoles::getInstance()->update(dt);
+	dick ++;
+	if (dick > 100 && dick < 200)
+	{
+		MapControl::getInstance()->cameraTo(Point(10000, 10), 2);
+	}
 }
 
 int BattleController::getHeroAnimiIndexByActionFlag(DirectionFlag flag)

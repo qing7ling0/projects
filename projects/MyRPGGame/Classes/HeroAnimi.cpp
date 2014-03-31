@@ -1,20 +1,20 @@
-#include "RoleAnimi.h"
+#include "HeroAnimi.h"
 
 
-RoleAnimi::RoleAnimi(void)
+HeroAnimi::HeroAnimi(void)
 	: _armature(nullptr)
 	, _animiFlag(-1)
 {
 }
 
 
-RoleAnimi::~RoleAnimi(void)
+HeroAnimi::~HeroAnimi(void)
 {
 	CC_SAFE_RELEASE(_armature);
 	_animiFlag = -1;
 }
 
-void RoleAnimi::setArmature(Armature *armature)
+void HeroAnimi::setArmature(Armature *armature)
 {
 	if (_armature)
 	{
@@ -25,7 +25,7 @@ void RoleAnimi::setArmature(Armature *armature)
 	CC_SAFE_RETAIN(_armature);
 }
 
-void RoleAnimi::setAnimiFlag(int flag, bool doForce)
+void HeroAnimi::setAnimiFlag(int flag, bool doForce)
 {
 	if (flag < 0) return;
 

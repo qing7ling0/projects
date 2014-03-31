@@ -4,7 +4,7 @@
 #include "HeroRole.h"
 #include "TouchControl.h"
 #include "HeroControl.h"
-#include "RoleAnimi.h"
+#include "HeroAnimi.h"
 
 class RoleScript : public Object
 {

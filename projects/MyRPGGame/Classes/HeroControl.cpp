@@ -69,7 +69,7 @@ void HeroControl::update(float dt)
 {
 	if (_speed.x != 0  || _speed.y != 0)
 	{
-		Point position = Point(_hero->getPositon());
+		Point position = Point(_hero->getPosition());
 		position.x += dt * _speed.x;
 		position.y += dt * _speed.y;
 		_hero->setPosition(position);

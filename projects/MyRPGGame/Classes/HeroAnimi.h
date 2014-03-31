@@ -1,11 +1,11 @@
 #pragma once
 #include "RPGHead.h"
 
-class RoleAnimi : public Object
+class HeroAnimi : public Object
 {
 public:
-	RoleAnimi(void);
-	~RoleAnimi(void);
+	HeroAnimi(void);
+	~HeroAnimi(void);
 
 	virtual void setArmature(Armature *armature);
 

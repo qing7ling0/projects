@@ -2,7 +2,7 @@
 #include "RoleScript.h"
 #include "HeroControl.h"
 #include "MapControl.h"
-#include "RoleAnimi.h"
+#include "HeroAnimi.h"
 
 HeroRole::HeroRole(void) 
 	: b_enemy(false)
@@ -70,7 +70,7 @@ void HeroRole::update(float dt)
 	}
 }
 
-void HeroRole::setRoleAnimi(RoleAnimi *animi)
+void HeroRole::setRoleAnimi(HeroAnimi *animi)
 {
 	_roleAnimi = animi;
 	setDirectLeft(_isDirectLeft);

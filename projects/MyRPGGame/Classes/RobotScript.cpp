@@ -53,12 +53,12 @@ Node* RobotScript::createRoleNode()
 	bone->setScale(1.2f);
 	armature->addBone(bone, "bady-a30");
 
-	RoleAnimi *_animi = new RoleAnimi();
+	HeroAnimi *_animi = new HeroAnimi();
 	_animi->autorelease();
 	_animi->setArmature(armature);
 	_hero->setRoleAnimi(_animi);
 
-	LayerRGBA *layer = LayerRGBA::create();
+	__LayerRGBA *layer = __LayerRGBA::create();
 	layer->addChild(armature);
 	return layer;
 }

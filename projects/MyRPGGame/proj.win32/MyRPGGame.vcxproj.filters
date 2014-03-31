@@ -82,9 +82,6 @@
     <ClCompile Include="..\Classes\RoleHelper.cpp">
       <Filter>Classes\battle\role</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RoleAnimi.cpp">
-      <Filter>Classes\battle\role\animi</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MapControl.cpp">
       <Filter>Classes\battle\map</Filter>
     </ClCompile>
@@ -96,6 +93,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\FollowRoles.cpp">
       <Filter>Classes\battle\follow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\HeroAnimi.cpp">
+      <Filter>Classes\battle\role\animi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +151,6 @@
     <ClInclude Include="..\Classes\RoleHelper.h">
       <Filter>Classes\battle\role</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RoleAnimi.h">
-      <Filter>Classes\battle\role\animi</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MapControl.h">
       <Filter>Classes\battle\map</Filter>
     </ClInclude>
@@ -165,6 +162,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\FollowRoles.h">
       <Filter>Classes\battle\follow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\HeroAnimi.h">
+      <Filter>Classes\battle\role\animi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

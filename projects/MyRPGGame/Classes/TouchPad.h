@@ -16,7 +16,7 @@ struct Location
 };
 
 // ´¥Ãþ°æ
-class TouchPad : public cocos2d::LayerRGBA
+class TouchPad : public cocos2d::__LayerRGBA
 {
 public:
 	TouchPad(void);
@@ -56,7 +56,7 @@ private:
 
 	Location _currentTouchIndex;
 
-	LayerRGBA *_padLayer;
+	__LayerRGBA *_padLayer;
 
 	std::function<void(Object*)> _TouchOverCall;
 };

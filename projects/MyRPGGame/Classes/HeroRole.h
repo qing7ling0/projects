@@ -3,6 +3,8 @@
 #include "Role.h"
 
 class HeroControl;
+class HeroAnimi;
+class RoleScript;
 
 class HeroRole : public Role
 {
@@ -19,10 +21,6 @@ public:
 	virtual bool isEnemy() { return b_enemy; }
 
 	virtual void setEnemy(const bool enemy) { this->b_self = enemy; }
-	
-	virtual void setPosition(const float px, const float py);
-
-	virtual void setPosition(const Point &point);
 
 	virtual void attack();
 
@@ -46,9 +44,9 @@ public:
 
 	virtual void setDirectLeft(bool left);
 
-	virtual RoleAnimi *getRoleAnimi() { return _roleAnimi; }
+	virtual HeroAnimi *getRoleAnimi() { return _roleAnimi; }
 
-	virtual void setRoleAnimi(RoleAnimi *animi);
+	virtual void setRoleAnimi(HeroAnimi *animi);
 
 	static HeroRole* create(RoleData data)
 	{
@@ -77,7 +75,7 @@ private:
 
 	RoleScript *_script;
 
-	RoleAnimi *_roleAnimi;
+	HeroAnimi *_roleAnimi;
 
 	/** 角色现在移动方向 */
 	RoleDirect _direct;

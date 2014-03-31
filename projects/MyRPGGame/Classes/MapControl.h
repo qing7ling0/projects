@@ -31,13 +31,14 @@ public:
 
 	Point getRoleCenterPoint() const;
 
-	bool cameraTo(const Point point, float delayTime=0.5f, bool force=false);
-
-	void cameraToRole();
+	bool cameraTo(const Point point, float delayTime=0.5f, bool force=false, CameraType type=CameraType::camera_none);
 	
 	void cameraOver();
-
-	bool cameraMoving();
+	
+	
+	// 纠正镜头偏移,不能出界
+	// 并转化成Map的实际偏移量
+	virtual Point correctCamera(const Point off);
 
 	void setCameraType(CameraType type);
 

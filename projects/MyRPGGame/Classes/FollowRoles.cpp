@@ -5,6 +5,7 @@ static FollowRoles* _instance;
 FollowRoles::FollowRoles(void)
 {
 	_instance = this;
+	CC_SAFE_RETAIN(_instance);
 }
 
 
