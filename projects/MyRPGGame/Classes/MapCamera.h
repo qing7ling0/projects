@@ -32,7 +32,7 @@ public:
 	* 检测镜头有没有出界
 	* return true 出界；return false 没有出界
 	*/
-	virtual bool checkBound(const Point off);
+	virtual bool checkBound(Point off);
 
 	/**
 	* 设置镜头观察点

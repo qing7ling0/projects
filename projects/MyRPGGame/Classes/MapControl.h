@@ -35,20 +35,24 @@ public:
 	
 	void cameraOver();
 	
-	
-	// 纠正镜头偏移,不能出界
-	// 并转化成Map的实际偏移量
+	/**
+	* 检测角色有没有
+	* 如果出界了会纠正off成正确的偏移
+	* return true 出界；return false 没有出界
+	*/
+	virtual bool checkBound(Role *role);
+
+	/**
+	* 纠正镜头偏移,不能出界
+	* 并转化成Map的实际偏移量
+	*/
 	virtual Point correctCamera(const Point off);
 
 	void setCameraType(CameraType type);
 
 	static MapControl* getInstance();
 
-	Size getMapSize();
-
 private:
-
-	Size _size;
 	
 	Point _off;
 

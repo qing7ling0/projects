@@ -18,10 +18,6 @@ public:
 
 	virtual void setSelf(const bool self) { this->b_self = self; }
 
-	virtual bool isEnemy() { return b_enemy; }
-
-	virtual void setEnemy(const bool enemy) { this->b_self = enemy; }
-
 	virtual void attack();
 
 	virtual void hurt();
@@ -48,6 +44,16 @@ public:
 
 	virtual void setRoleAnimi(HeroAnimi *animi);
 
+	virtual RoleData getRoleData() { return _data; }
+
+	virtual void face(const Point &position);
+
+	virtual void faceRole(Role* role);
+
+	virtual HeroRole* getEnemy() { return _enemy; }
+
+	virtual void setEnemy(HeroRole* enemy);
+
 	static HeroRole* create(RoleData data)
 	{
 		HeroRole *role = new HeroRole();
@@ -67,8 +73,6 @@ public:
 protected:
 
 private:
-	bool b_enemy;
-
 	bool b_self;
 
 	HeroControl *_heroControl;
@@ -84,5 +88,7 @@ private:
 
 	/** 角色的朝向, 是否是朝左 */
 	bool _isDirectLeft;
+
+	HeroRole *_enemy;
 };
 

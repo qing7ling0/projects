@@ -1,5 +1,6 @@
 #include "HeroControl.h"
 #include "RoleScript.h"
+#include "MapControl.h"
 
 
 HeroControl::HeroControl(void) 
@@ -73,8 +74,8 @@ void HeroControl::update(float dt)
 		position.x += dt * _speed.x;
 		position.y += dt * _speed.y;
 		_hero->setPosition(position);
+		MapControl::getInstance()->checkBound(_hero);
 	}
-
 }
 
 void HeroControl::stop()

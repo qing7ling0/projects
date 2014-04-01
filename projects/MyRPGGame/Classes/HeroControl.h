@@ -32,6 +32,7 @@ protected:
 	/** 是否超速移动 */
 	bool _fastMove;
 
+	/** 移动方向 */
 	RoleDirect _roleDirect;
 
 };

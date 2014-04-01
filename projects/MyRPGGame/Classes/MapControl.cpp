@@ -6,8 +6,7 @@
 static MapControl *_instance = nullptr;
 
 MapControl::MapControl(void)
-	: _size (Size::ZERO)
-	, _cameraType (CameraType::camera_none)
+	: _cameraType (CameraType::camera_none)
 	, _cameraMoving (false)
 {
 }
@@ -44,11 +43,6 @@ bool MapControl::init()
 	}
 
 	return false;
-}
-
-Size MapControl::getMapSize()
-{
-	return _size;
 }
 
 bool MapControl::cameraTo(const Point point, float delayTime, bool force, CameraType type)
@@ -88,12 +82,55 @@ bool MapControl::cameraTo(const Point point, float delayTime, bool force, Camera
 }
 
 /**
+* 检测镜头有没有出界
+* 如果出界了会纠正off成正确的偏移
+* return true 出界；return false 没有出界
+*/
+bool MapControl::checkBound(Role *role)
+{
+	if (!role) return false;
+
+	Rect roleR = role->getBounds();
+	Point correctOff = Point(roleR.getMinX(), roleR.getMinY());
+	float hw = roleR.size.width/2.0f;
+	float hh = roleR.size.height/2.0f;
+
+	bool bounds = false;
+
+	if (correctOff.x < 0)
+	{
+		correctOff.x = hw;
+		bounds = true;
+	}
+	else if (roleR.getMaxX() > _size.width)
+	{
+		correctOff.x = _size.width - hw;
+		bounds = true;
+	}
+	if (correctOff.y < 150)
+	{
+		correctOff.y = hh+150;
+		bounds = true;
+	}
+	else if (roleR.getMaxY() > _size.height)
+	{
+		correctOff.y = _size.height - hh;
+		bounds = true;
+	}
+
+	if (bounds) role->setPosition(correctOff);
+
+	return bounds;
+}
+
+/**
 * 纠正镜头偏移,不能出界
 * 并转化成Map的实际偏移量
 **/
 Point MapControl::correctCamera(const Point off)
 {
 	Point offTo = Point(off);
+	offTo.x -= (D_display.w/2.0f);
 
 	if (offTo.x < 0)
 		offTo.x = 0;
@@ -143,6 +180,12 @@ void MapControl::update(float dt)
 		else
 		{
 			//setPosition(roleCenter);
+
+			Point mapOff = _node->getPosition();
+			Point screenOff = mapOff-roleCenter;
+			if (screenOff.x < D_display.w/3)
+			{
+			}
 			roleCenter = correctCamera(roleCenter);
 			_node->setPosition(roleCenter);
 		}
@@ -172,9 +215,10 @@ Point MapControl::getRoleCenterPoint() const
 				leftp = Point(role->getPX(), role->getPY());
 				rightp = Point(leftp);
 			}
+			_index ++;
 		}
 
-		return (rightp + leftp) / 2;
+		return Point(leftp+rightp)/2;
 	}
 
 	return Point::ZERO;
