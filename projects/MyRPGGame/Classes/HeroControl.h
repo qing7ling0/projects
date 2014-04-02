@@ -1,7 +1,6 @@
 #pragma once
 #include "RPGHead.h"
 #include "HeroRole.h"
-#include "RoleHelper.h"
 
 class HeroControl : public Object
 {
@@ -19,6 +18,8 @@ public:
 	*/
 	virtual void doMove(float speedx, float speedy, RoleDirect direct, bool fast=false);
 
+	virtual void move(float speedx, float speedy, float accx, float accy, bool fast=false);
+
 	virtual void update(float dt);
 
 	virtual void stop();
@@ -29,11 +30,15 @@ protected:
 	/** 移动速度 */
 	Point _speed;
 
+	/** 加速度 */
+	Point _acc;
+
 	/** 是否超速移动 */
 	bool _fastMove;
 
 	/** 移动方向 */
 	RoleDirect _roleDirect;
 
+	RoleActionBase _roleActionFlag;
 };
 

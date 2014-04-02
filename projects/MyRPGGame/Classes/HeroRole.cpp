@@ -13,6 +13,7 @@ HeroRole::HeroRole(void)
 	, _data()
 	, _isDirectLeft (false)
 	, _enemy (nullptr)
+	, _flag (RoleFlag::flagStand)
 {
 }
 
@@ -112,4 +113,9 @@ void HeroRole::setEnemy(HeroRole* enemy)
 {
 	_enemy = enemy;
 	CC_SAFE_RETAIN(_enemy);
+}
+
+void HeroRole::setFlag(RoleFlag flag)
+{
+	_flag = flag;
 }

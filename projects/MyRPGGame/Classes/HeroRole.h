@@ -54,6 +54,10 @@ public:
 
 	virtual void setEnemy(HeroRole* enemy);
 
+	virtual void setFlag(RoleFlag flag);
+
+	virtual RoleFlag getFlag() { return _flag; }
+
 	static HeroRole* create(RoleData data)
 	{
 		HeroRole *role = new HeroRole();
@@ -90,5 +94,8 @@ private:
 	bool _isDirectLeft;
 
 	HeroRole *_enemy;
+
+	/** 角色状态：下蹲、上跳、下落、站立 */
+	RoleFlag _flag;
 };
 
