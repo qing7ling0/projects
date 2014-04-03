@@ -33,7 +33,7 @@ Heros* Heros::create()
 
 void Heros::update(float dt)
 {
-	for(HeroRole *role : _heros)
+	for(auto &role : _heros)
 	{
 		role->update(dt);
 	}
@@ -48,11 +48,17 @@ void Heros::initHeros(RoleData *datas, int size)
 		FollowRoles::getInstance()->add(FollowRole::create(_role, MapControl::getInstance()));
 
 		if (datas[i].roleId == 1) _role->setSelf(true);
-		else _role->setEnemy(true);
 
 		_heros.pushBack(_role);
 		BattleController::getInstance()->addChild(_role->getNode());
+
+		if (i == 1)
+		{
+			_role->setEnemy(_heros.at(0));
+			_heros.at(0)->setEnemy(_role);
+		}
 	}
+
 }
 
 void Heros::doTouchActions(const std::vector<DirectionFlag> directionFlags)

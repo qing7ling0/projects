@@ -16,6 +16,20 @@ typedef enum RoleDirect
 	roleDownRight,
 };
 
+//
+// 角色动作标志
+//
+typedef enum RoleFlag
+{
+	// 站立
+	flagStand,
+	// 下落
+	flagDrop,
+	// 上跳
+	flagJump,
+	// 下蹲
+	flagSquat,
+};
 
 
 //
@@ -23,20 +37,18 @@ typedef enum RoleDirect
 //
 typedef enum RoleActionBase
 {
+	// 无
+	actionNone,
 	// 攻击
 	actionAttack,
 	// 被攻击
 	actionHurt,
-	// 待机
-	actionWait,
 	// 移动
 	actionMove,
 	// 跑
 	actionRun,
 	// 防御
-	actionDefense,
-	// 跳
-	actionJump
+	actionDefense
 };
 
 

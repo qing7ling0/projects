@@ -1,12 +1,15 @@
 #include "HeroControl.h"
 #include "RoleScript.h"
+#include "MapControl.h"
 
 
 HeroControl::HeroControl(void) 
 	: _hero(nullptr)
 	, _speed (Point::ZERO)
+	, _acc (Point::ZERO)
 	, _fastMove (false)
 	, _roleDirect (RoleDirect::roleNone)
+	, _roleActionFlag (RoleActionBase::actionWait)
 {
 }
 
@@ -65,16 +68,40 @@ void HeroControl::doMove(float speedx, float speedy, RoleDirect direct, bool fas
 	}
 }
 
+void HeroControl::move(float speedx, float speedy, float accx, float accy, bool fast)
+{
+	if (_hero)
+	{
+		_speed.x = speedx;
+		_speed.y = speedy;
+		_acc.x = accx;
+		_acc.y = accy;
+		_fastMove = fast;
+		if (_fastMove)
+		{
+			_acc = _acc*2;
+			_speed = _speed*2;
+		}
+	}
+}
+
 void HeroControl::update(float dt)
 {
-	if (_speed.x != 0  || _speed.y != 0)
+	if (_speed.x != 0  || _speed.y != 0 || _acc.x != 0 || _acc.y != 0)
 	{
-		Point position = Point(_hero->getPositon());
+		Point position = Point(_hero->getPosition());
 		position.x += dt * _speed.x;
 		position.y += dt * _speed.y;
 		_hero->setPosition(position);
-	}
+		MapControl::getInstance()->checkBound(_hero);
 
+		if (_speed.y>0 && (_speed.y + _acc.y)<0)
+		{
+		}
+
+		_speed.x += _acc.x;
+		_speed.y += _acc.y;
+	}
 }
 
 void HeroControl::stop()

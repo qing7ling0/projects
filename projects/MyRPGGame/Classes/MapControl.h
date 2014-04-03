@@ -31,23 +31,28 @@ public:
 
 	Point getRoleCenterPoint() const;
 
-	bool cameraTo(const Point point, float delayTime=0.5f, bool force=false);
-
-	void cameraToRole();
+	bool cameraTo(const Point point, float delayTime=0.5f, bool force=false, CameraType type=CameraType::camera_none);
 	
 	void cameraOver();
+	
+	/**
+	* 检测角色有没有
+	* 如果出界了会纠正off成正确的偏移
+	* return true 出界；return false 没有出界
+	*/
+	virtual bool checkBound(Role *role);
 
-	bool cameraMoving();
+	/**
+	* 纠正镜头偏移,不能出界
+	* 并转化成Map的实际偏移量
+	*/
+	virtual Point correctCamera(const Point off);
 
 	void setCameraType(CameraType type);
 
 	static MapControl* getInstance();
 
-	Size getMapSize();
-
 private:
-
-	Size _size;
 	
 	Point _off;
 

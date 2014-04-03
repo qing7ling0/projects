@@ -3,6 +3,8 @@
 #include "Role.h"
 
 class HeroControl;
+class HeroAnimi;
+class RoleScript;
 
 class HeroRole : public Role
 {
@@ -15,14 +17,6 @@ public:
 	virtual bool isSelf() { return b_self; }
 
 	virtual void setSelf(const bool self) { this->b_self = self; }
-
-	virtual bool isEnemy() { return b_enemy; }
-
-	virtual void setEnemy(const bool enemy) { this->b_self = enemy; }
-	
-	virtual void setPosition(const float px, const float py);
-
-	virtual void setPosition(const Point &point);
 
 	virtual void attack();
 
@@ -46,9 +40,23 @@ public:
 
 	virtual void setDirectLeft(bool left);
 
-	virtual RoleAnimi *getRoleAnimi() { return _roleAnimi; }
+	virtual HeroAnimi *getRoleAnimi() { return _roleAnimi; }
 
-	virtual void setRoleAnimi(RoleAnimi *animi);
+	virtual void setRoleAnimi(HeroAnimi *animi);
+
+	virtual RoleData getRoleData() { return _data; }
+
+	virtual void face(const Point &position);
+
+	virtual void faceRole(Role* role);
+
+	virtual HeroRole* getEnemy() { return _enemy; }
+
+	virtual void setEnemy(HeroRole* enemy);
+
+	virtual void setFlag(RoleFlag flag);
+
+	virtual RoleFlag getFlag() { return _flag; }
 
 	static HeroRole* create(RoleData data)
 	{
@@ -69,15 +77,13 @@ public:
 protected:
 
 private:
-	bool b_enemy;
-
 	bool b_self;
 
 	HeroControl *_heroControl;
 
 	RoleScript *_script;
 
-	RoleAnimi *_roleAnimi;
+	HeroAnimi *_roleAnimi;
 
 	/** 角色现在移动方向 */
 	RoleDirect _direct;
@@ -86,5 +92,10 @@ private:
 
 	/** 角色的朝向, 是否是朝左 */
 	bool _isDirectLeft;
+
+	HeroRole *_enemy;
+
+	/** 角色状态：下蹲、上跳、下落、站立 */
+	RoleFlag _flag;
 };
 

@@ -6,8 +6,8 @@
 static MapControl *_instance = nullptr;
 
 MapControl::MapControl(void)
-	: _size (Size::ZERO)
-	, _cameraType (CameraType::camera_none)
+	: _cameraType (CameraType::camera_none)
+	, _cameraMoving (false)
 {
 }
 
@@ -39,39 +39,27 @@ bool MapControl::init()
 			_size = Size(map->getContentSize());
 			BattleController::getInstance()->addChild(map, -1, 1);
 		}
+		return true;
 	}
+
+	return false;
 }
 
-Size MapControl::getMapSize()
-{
-	return _size;
-}
-
-bool MapControl::cameraTo(const Point point, float delayTime, bool force)
+bool MapControl::cameraTo(const Point point, float delayTime, bool force, CameraType type)
 {
 	if (force || !_cameraMoving)
 	{
+		setCameraType(type);
 		_cameraMoving = true;
 
-		Point offTo = Point(point);
-		offTo.x -= D_display.w/2;
-		if (offTo.x < 0) offTo.x = 0;
-		else if (offTo.x > _size.width) offTo.x = _size.width;
+		Point offTo = correctCamera(point);
 
 		Point curPosition = _node->getPosition();
 	
-		float gapX = curPosition.x - offTo.x;
-		float gapY = curPosition.y - offTo.y;
+		float gapX = offTo.x - curPosition.x;
+		float gapY = offTo.y - curPosition.y;
 		float timex = abs( gapX / D_display.w * MAX_MOVE_TIME );
 		float timey = abs( gapY / D_display.h * MAX_MOVE_TIME );
-
-		Point rolePoint = getRoleCenterPoint();
-
-		auto actionToRole =  Spawn::create(
-			EaseOut::create(MoveBy::create(timex, Point(gapX, 0)), 2),
-			EaseOut::create(MoveBy::create(timey, Point(0, gapY)), 2),
-			NULL
-			);
 
 		auto action1 = Spawn::create(
 			EaseOut::create(MoveBy::create(timex, Point(gapX, 0)), 2),
@@ -81,9 +69,7 @@ bool MapControl::cameraTo(const Point point, float delayTime, bool force)
 		auto action2 = Sequence::create(
 			action1,
 			DelayTime::create(delayTime),
-			action1->reverse(),
-			CallFunc::create( std::bind(&MapControl::cameraOver) ),
-			CallFunc::create( std::bind(&MapControl::setCameraType, CameraType::camera_hero) ),
+			CallFunc::create( std::bind(&MapControl::cameraOver, this) ),
 			NULL
 			);
 
@@ -95,21 +81,79 @@ bool MapControl::cameraTo(const Point point, float delayTime, bool force)
 	return false;
 }
 
-// 当切换到由角色来控制，先把镜头移动到角色上
-void MapControl::cameraToRole()
+/**
+* 检测镜头有没有出界
+* 如果出界了会纠正off成正确的偏移
+* return true 出界；return false 没有出界
+*/
+bool MapControl::checkBound(Role *role)
 {
+	if (!role) return false;
 
+	Rect roleR = role->getBounds();
+	Point correctOff = Point(roleR.getMinX(), roleR.getMinY());
+	float hw = roleR.size.width/2.0f;
+	float hh = roleR.size.height/2.0f;
+
+	bool bounds = false;
+
+	if (correctOff.x < 0)
+	{
+		correctOff.x = hw;
+		bounds = true;
+	}
+	else if (roleR.getMaxX() > _size.width)
+	{
+		correctOff.x = _size.width - hw;
+		bounds = true;
+	}
+	if (correctOff.y < 150)
+	{
+		correctOff.y = hh+150;
+		bounds = true;
+	}
+	else if (roleR.getMaxY() > _size.height)
+	{
+		correctOff.y = _size.height - hh;
+		bounds = true;
+	}
+
+	if (bounds) role->setPosition(correctOff);
+
+	return bounds;
+}
+
+/**
+* 纠正镜头偏移,不能出界
+* 并转化成Map的实际偏移量
+**/
+Point MapControl::correctCamera(const Point off)
+{
+	Point offTo = Point(off);
+	offTo.x -= (D_display.w/2.0f);
+
+	if (offTo.x < 0)
+		offTo.x = 0;
+	else
+	{
+		float maxOffx = _size.width - D_display.w;
+		if (offTo.x > maxOffx) offTo.x = maxOffx;
+	}
+	
+	if (offTo.y < 0)
+		offTo.y = 0;
+	else
+	{
+		float maxOffy = _size.height - D_display.h;
+		if (offTo.y > maxOffy) offTo.y = maxOffy;
+	}
+
+	return -offTo;
 }
 
 void MapControl::setCameraType(CameraType type)
 {
-	// 当切换到由角色来控制，先把镜头移动到角色上
-	if (type != _cameraType && type == CameraType::camera_hero)
-	{
-
-	}
 	_cameraType = type;
-
 }
 
 void MapControl::cameraOver()
@@ -117,52 +161,34 @@ void MapControl::cameraOver()
 	_cameraMoving = false;
 }
 
-bool MapControl::cameraMoving()
-{
-	return _cameraMoving;
-}
-
 void MapControl::update(float dt)
 {
-	if (_cameraType == CameraType::camera_hero)
+	Role::update(dt);
+
+	if (_position != _node->getPosition())
 	{
-		Heros *heros = BattleController::getInstance()->getHeros();
-		if (heros)
+		_position = Point(_node->getPosition());
+	}
+
+	if (!_cameraMoving)
+	{
+		Point roleCenter = getRoleCenterPoint();
+		if (_cameraType != CameraType::camera_hero)
 		{
-			Vector<HeroRole*> _roles = heros->getHeros();
-			Point leftp = Point::ZERO;
-			Point rightp = Point::ZERO;
-
-			int _index = 0;
-			for(auto &role : _roles)
-			{
-				if (_index > 0)
-				{
-					const float x = role->getPX();
-					if (x < leftp.x) leftp.x = x;
-					else if (x > rightp.x) rightp.x = x;
-				}
-				else if (_index == 0)
-				{
-					leftp = Point(role->getPX(), role->getPY);
-					rightp = Point(leftp);
-				}
-			}
-
-			Point offTo = (rightp + leftp) / 2;
-			offTo.x -= D_display.w/2;
-			if (offTo.x < 0) offTo.x = 0;
-			else if (offTo.x > _size.width) offTo.x = _size.width;
-
-			Point curPosition = _node->getPosition();
-			if (offTo != curPosition)
-			{
-
-
-				_node->runAction(EaseOut::create(MoveBy::create(0.5f, offTo), 2));
-			}
+			cameraTo(roleCenter, 0, true, CameraType::camera_hero);
 		}
+		else
+		{
+			//setPosition(roleCenter);
 
+			Point mapOff = _node->getPosition();
+			Point screenOff = mapOff-roleCenter;
+			if (screenOff.x < D_display.w/3)
+			{
+			}
+			roleCenter = correctCamera(roleCenter);
+			_node->setPosition(roleCenter);
+		}
 	}
 }
 
@@ -186,17 +212,13 @@ Point MapControl::getRoleCenterPoint() const
 			}
 			else if (_index == 0)
 			{
-				leftp = Point(role->getPX(), role->getPY);
+				leftp = Point(role->getPX(), role->getPY());
 				rightp = Point(leftp);
 			}
+			_index ++;
 		}
 
-		Point offTo = (rightp + leftp) / 2;
-		offTo.x -= D_display.w/2;
-		if (offTo.x < 0) offTo.x = 0;
-		else if (offTo.x > _size.width) offTo.x = _size.width;
-
-		return offTo;
+		return Point(leftp+rightp)/2;
 	}
 
 	return Point::ZERO;

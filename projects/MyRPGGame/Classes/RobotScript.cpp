@@ -26,13 +26,14 @@ void RobotScript::init(HeroRole *role)
 
 Node* RobotScript::createRoleNode()
 {
-	ArmatureDataManager::getInstance()->addArmatureFileInfo("animi/robot.png",
-			"animi/robot.plist",
-			"animi/robot.xml");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo(
+		"animi/robot.png",
+		"animi/robot.plist",
+		"animi/robot.xml");
 	Armature *armature = Armature::create("robot");
 	armature->getAnimation()->playWithIndex(0);
-	armature->setScale(0.6f);
-	armature->getAnimation()->setSpeedScale(0.5f);
+	armature->setScale(0.5f);
+	armature->getAnimation()->setSpeedScale(0.75f);
 		
 	ParticleSystem *p1 = CCParticleSystemQuad::create("Particles/SmallSun.plist");
 	ParticleSystem *p2 = CCParticleSystemQuad::create("Particles/SmallSun.plist");
@@ -53,13 +54,18 @@ Node* RobotScript::createRoleNode()
 	bone->setScale(1.2f);
 	armature->addBone(bone, "bady-a30");
 
-	RoleAnimi *_animi = new RoleAnimi();
+	HeroAnimi *_animi = new HeroAnimi();
 	_animi->autorelease();
 	_animi->setArmature(armature);
 	_hero->setRoleAnimi(_animi);
 
-	LayerRGBA *layer = LayerRGBA::create();
+	__LayerRGBA *layer = __LayerRGBA::create();
 	layer->addChild(armature);
+	//armature->setColor(Color3B::RED);
+	layer->setCascadeColorEnabled(true);
+
+	if (_hero->getRoleData().roleId == 1) layer->setColor(Color3B::BLUE);
+
 	return layer;
 }
 
