@@ -1,0 +1,487 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.2.0.1",
+      "version": 1.201,
+      "name": "Robot",
+      "bone_data": [
+        {
+          "name": "Layer42",
+          "parent": "",
+          "x": 0.0,
+          "y": 15.0,
+          "z": 4,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": -1.3828277587890625E-05,
+          "arrow_y": -1.1363823432475328E-05,
+          "effectbyskeleton": true,
+          "display_data": [
+            {
+              "name": "robotFolder-lowerbody.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.799999237,
+                  "y": 9.6,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer49",
+          "parent": "Layer42",
+          "x": 0.0,
+          "y": 10.0,
+          "z": 3,
+          "cX": 0.421738,
+          "cY": -32.42005,
+          "kX": -1.58210289,
+          "kY": 1.58210289,
+          "arrow_x": 197.14276123046875,
+          "arrow_y": -7.9374018241651356E-05,
+          "effectbyskeleton": true,
+          "display_data": [
+            {
+              "name": "robotFolder-upperbody.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": -2.61438,
+                  "y": 0.0,
+                  "cX": 0.2641268,
+                  "cY": 2.35658526,
+                  "kX": 1.57254159,
+                  "kY": 0.116029382
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Layer50",
+          "parent": "Layer49",
+          "x": 230.0,
+          "y": 0.032859634608030319,
+          "z": 2,
+          "cX": 1.053009,
+          "cY": -0.0586056933,
+          "kX": 0.0113065243,
+          "kY": -0.0113065243,
+          "arrow_x": 75.552383422851562,
+          "arrow_y": -8.9004592155106366E-05,
+          "effectbyskeleton": true,
+          "display_data": [
+            {
+              "name": "robotFolder-head.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": -2.6945343,
+                  "y": 6.969822,
+                  "cX": 0.800691843,
+                  "cY": 2.169423,
+                  "kX": 1.63770938,
+                  "kY": -2.45763135
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "Robot",
+      "mov_data": [
+        {
+          "name": "stand",
+          "dr": 21,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "Layer42",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            },
+            {
+              "name": "Layer49",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": 0.83333337306976318,
+                  "y": -2.5,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.0349065848,
+                  "kY": 0.0349065848,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            },
+            {
+              "name": "Layer50",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.08726646,
+                  "kY": 0.08726646,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "move",
+          "dr": 21,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "Layer42",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 1.57079637,
+                  "kY": -1.57079637,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            },
+            {
+              "name": "Layer49",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": 0.83333337306976318,
+                  "y": -2.5,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.0349065848,
+                  "kY": 0.0349065848,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "color": {
+                    "a": 255,
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Layer50",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.08726646,
+                  "kY": 0.08726646,
+                  "fi": 20,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "def",
+          "dr": 11,
+          "lp": false,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 0.5,
+          "mov_bone_data": [
+            {
+              "name": "Layer42",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            },
+            {
+              "name": "Layer49",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": -43.1882438659668,
+                  "y": 39.997890472412109,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.00660951436,
+                  "kY": 0.00660951436,
+                  "fi": 10,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            },
+            {
+              "name": "Layer50",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true
+                },
+                {
+                  "dI": 0,
+                  "x": -132.52745056152344,
+                  "y": 2.877680778503418,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.04363323,
+                  "kY": 0.04363323,
+                  "fi": 10,
+                  "twE": 0,
+                  "tweenFrame": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "robotFolder-lowerbody",
+      "width": 44.0,
+      "height": 53.0,
+      "pX": 0.5,
+      "pY": 0.509434,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-leg_upper",
+      "width": 37.0,
+      "height": 91.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-leg_lower",
+      "width": 35.0,
+      "height": 103.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-leg_foot",
+      "width": 41.0,
+      "height": 22.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-head",
+      "width": 49.0,
+      "height": 59.0,
+      "pX": 0.5,
+      "pY": 0.0,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-arm_upper",
+      "width": 38.0,
+      "height": 64.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-arm_lower",
+      "width": 19.0,
+      "height": 69.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-arm_hand",
+      "width": 18.0,
+      "height": 38.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "robotFolder-upperbody",
+      "width": 60.0,
+      "height": 99.0,
+      "pX": 0.5,
+      "pY": 0.0,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [
+    "Robot0.plist"
+  ]
+}

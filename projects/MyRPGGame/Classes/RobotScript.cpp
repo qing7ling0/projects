@@ -1,10 +1,10 @@
 #include "RobotScript.h"
 
 unsigned short roleAnimiActions[7][2] = {
-	{RoleActionBase::actionAttack, 1}, {RoleActionBase::actionDefense, 1},
-	{RoleActionBase::actionHurt, 1}, {RoleActionBase::actionJump, 1},
+	{RoleActionBase::actionAttack, 1}, {RoleActionBase::actionDefense, 2},
+	{RoleActionBase::actionHurt, 1}, {RoleActionBase::actionAttack, 1},
 	{RoleActionBase::actionMove, 1}, {RoleActionBase::actionRun, 1},
-	{RoleActionBase::actionWait, 1}
+	{RoleActionBase::actionAttack, 1}
 	};
 
 
@@ -26,11 +26,8 @@ void RobotScript::init(HeroRole *role)
 
 Node* RobotScript::createRoleNode()
 {
-	ArmatureDataManager::getInstance()->addArmatureFileInfo(
-		"animi/robot.png",
-		"animi/robot.plist",
-		"animi/robot.xml");
-	Armature *armature = Armature::create("robot");
+	ArmatureDataManager::getInstance()->addArmatureFileInfo("Robot.ExportJson");
+	Armature *armature = Armature::create("Robot");
 	armature->getAnimation()->playWithIndex(0);
 	armature->setScale(0.5f);
 	armature->getAnimation()->setSpeedScale(0.75f);
@@ -87,7 +84,7 @@ void RobotScript::doTouchActions(std::vector<DirectionFlag> directionFlags)
 	{
 		float speedx = getMoveSpeed();
 		if (!_hero->isDirectLeft()) speedx = -speedx;
-			_hero->getHeroControl()->doMove(speedx, 0, RoleDirect::roleLeft);
+		_hero->getHeroControl()->doMove(speedx, 0, RoleDirect::roleRight);
 	}
 }
 

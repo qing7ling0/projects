@@ -1,7 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 
-class Event
+class Event : public Object
 {
 public:
 	Event(void);

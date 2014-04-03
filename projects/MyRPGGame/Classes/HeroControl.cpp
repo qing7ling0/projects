@@ -9,7 +9,7 @@ HeroControl::HeroControl(void)
 	, _acc (Point::ZERO)
 	, _fastMove (false)
 	, _roleDirect (RoleDirect::roleNone)
-	, _roleActionFlag (RoleActionBase::actionWait)
+	, _roleActionFlag (RoleActionBase::actionNone)
 {
 }
 
@@ -47,9 +47,9 @@ void HeroControl::doMove(float speedx, float speedy, RoleDirect direct, bool fas
 				animiFlag = _hero->getRoleScript()->getRoleAnimiFlag(RoleActionBase::actionMove);
 				break;
 			case RoleDirect::roleRight:
+				animiFlag = _hero->getRoleScript()->getRoleAnimiFlag(RoleActionBase::actionDefense);
 				break;
 			case RoleDirect::roleDownLeft:
-				animiFlag = _hero->getRoleScript()->getRoleAnimiFlag(RoleActionBase::actionMove);
 				break;
 			case RoleDirect::roleDownRight:
 				break;
