@@ -146,7 +146,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\RobotScript.cpp" />
     <ClCompile Include="..\Classes\Role.cpp" />
     <ClCompile Include="..\Classes\HeroAnimi.cpp" />
-    <ClCompile Include="..\Classes\RoleHelper.cpp" />
+    <ClCompile Include="..\Classes\Event.cpp" />
     <ClCompile Include="..\Classes\RoleScript.cpp" />
     <ClCompile Include="..\Classes\TouchPad.cpp" />
     <ClCompile Include="..\Classes\QConfig.cpp" />
@@ -168,7 +168,7 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\RobotScript.h" />
     <ClInclude Include="..\Classes\Role.h" />
     <ClInclude Include="..\Classes\HeroAnimi.h" />
-    <ClInclude Include="..\Classes\RoleHelper.h" />
+    <ClInclude Include="..\Classes\Event.h" />
     <ClInclude Include="..\Classes\RoleScript.h" />
     <ClInclude Include="..\Classes\RoleType.h" />
     <ClInclude Include="..\Classes\RPGHead.h" />

@@ -37,6 +37,9 @@
     <Filter Include="Classes\battle\follow">
       <UniqueIdentifier>{3b60df1c-57ca-4ff5-a3d2-67de8821ce9e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle\event">
+      <UniqueIdentifier>{477cbf39-53ed-4243-b17d-33336ba55da8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -79,9 +82,6 @@
     <ClCompile Include="..\Classes\HeroControl.cpp">
       <Filter>Classes\battle\role\command</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\RoleHelper.cpp">
-      <Filter>Classes\battle\role</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MapControl.cpp">
       <Filter>Classes\battle\map</Filter>
     </ClCompile>
@@ -96,6 +96,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\HeroAnimi.cpp">
       <Filter>Classes\battle\role\animi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Event.cpp">
+      <Filter>Classes\battle\event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +151,6 @@
     <ClInclude Include="..\Classes\HeroControl.h">
       <Filter>Classes\battle\role\command</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\RoleHelper.h">
-      <Filter>Classes\battle\role</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\MapControl.h">
       <Filter>Classes\battle\map</Filter>
     </ClInclude>
@@ -165,6 +165,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\HeroAnimi.h">
       <Filter>Classes\battle\role\animi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Event.h">
+      <Filter>Classes\battle\event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
