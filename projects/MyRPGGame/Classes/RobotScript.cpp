@@ -26,7 +26,8 @@ void RobotScript::init(HeroRole *role)
 
 Node* RobotScript::createRoleNode()
 {
-	ArmatureDataManager::getInstance()->addArmatureFileInfo(
+
+	/*ArmatureDataManager::getInstance()->addArmatureFileInfo(
 		"niutouguai.png",
 		"niutouguai.plist",
 		"niutouguai.xml");
@@ -52,15 +53,31 @@ Node* RobotScript::createRoleNode()
 	bone->setIgnoreMovementBoneData(true);
 	bone->setLocalZOrder(100);
 	bone->setScale(1.2f);
-	armature->addBone(bone, "bady-a30");
+	armature->addBone(bone, "bady-a30");*/
+	
+	Vector<SpriteFrame*> frames;
+
+	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("animi/benimaru.plist");
+	for(int i=1; i<9; i++)
+	{
+		const char* imgName = String::createWithFormat("benimaru_%02d.png", i)->getCString();
+		frames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName(imgName));
+	}
+
+	auto animi = Animation::createWithSpriteFrames(frames, 1.0f/10);
+	animi->setRestoreOriginalFrame(true);
+	animi->setLoops(true);
 
 	HeroAnimi *_animi = new HeroAnimi();
 	_animi->autorelease();
-	_animi->setArmature(armature);
+	_animi->setAnimation(animi);
 	_hero->setRoleAnimi(_animi);
 
+
+	auto sp = Sprite::create();
+	sp->runAction(CCRepeatForever::create(CCAnimate::create(animi)));
 	__LayerRGBA *layer = __LayerRGBA::create();
-	layer->addChild(armature);
+	layer->addChild(sp);
 	//armature->setColor(Color3B::RED);
 	layer->setCascadeColorEnabled(true);
 

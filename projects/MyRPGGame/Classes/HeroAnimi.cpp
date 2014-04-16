@@ -2,7 +2,7 @@
 
 
 HeroAnimi::HeroAnimi(void)
-	: _armature(nullptr)
+	: _animation(nullptr)
 	, _animiFlag(-1)
 {
 }
@@ -10,19 +10,19 @@ HeroAnimi::HeroAnimi(void)
 
 HeroAnimi::~HeroAnimi(void)
 {
-	CC_SAFE_RELEASE(_armature);
+	CC_SAFE_RELEASE(_animation);
 	_animiFlag = -1;
 }
 
-void HeroAnimi::setArmature(Armature *armature)
+void HeroAnimi::setAnimation(Animation *animation)
 {
-	if (_armature)
+	if (_animation)
 	{
-		_armature->removeFromParentAndCleanup(true);
+		//_animation->removeFromParentAndCleanup(true);
 	}
 
-	_armature = armature;
-	CC_SAFE_RETAIN(_armature);
+	_animation = animation;
+	CC_SAFE_RETAIN(_animation);
 }
 
 void HeroAnimi::setAnimiFlag(int flag, bool doForce)
@@ -31,11 +31,11 @@ void HeroAnimi::setAnimiFlag(int flag, bool doForce)
 
 	if (doForce || _animiFlag != flag)
 	{
-		if (_armature)
+		if (_animation)
 		{
-			ArmatureAnimation *animi = _armature->getAnimation();
+			/*ArmatureAnimation *animi = _armature->getAnimation();
 			if (animi && flag < animi->getMovementCount())
-				animi->playWithIndex(flag);
+				animi->playWithIndex(flag);*/
 		}
 	}
 

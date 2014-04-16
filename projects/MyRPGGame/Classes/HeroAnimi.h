@@ -7,16 +7,16 @@ public:
 	HeroAnimi(void);
 	~HeroAnimi(void);
 
-	virtual void setArmature(Armature *armature);
+	virtual void setAnimation(Animation *animation);
 
-	virtual Armature *getArmature() { return _armature; }
+	virtual Animation *getAnimation() { return _animation; }
 
 	virtual int getAnimiFlag() { return _animiFlag; }
 
 	virtual void setAnimiFlag(int flag, bool doForce = false);
 
 protected:
-	Armature *_armature;
+	Animation *_animation;
 
 	Node *_node;
 

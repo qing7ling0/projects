@@ -87,11 +87,11 @@ void HeroRole::setRoleAnimi(HeroAnimi *animi)
 void HeroRole::setDirectLeft(bool left)
 {
 	_isDirectLeft = left;
-	if (_roleAnimi && _roleAnimi->getArmature())
+	/*if (_roleAnimi && _roleAnimi->getArmature())
 	{
 		float scalex = _roleAnimi->getArmature()->getScaleX();
 		_roleAnimi->getArmature()->setScaleX(abs(scalex) * (left?-1:1));
-	}
+	}*/
 }
 
 void HeroRole::doTouchActions(std::vector<DirectionFlag> directionFlags)

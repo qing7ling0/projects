@@ -22,6 +22,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libCocosStudio", "..\..\..\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libGUI", "..\..\..\cocos2d-x-code\cocos\gui\proj.win32\libGUI.vcxproj", "{7E06E92C-537A-442B-9E4A-4761C84F8A1A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FistfightMasters", "..\..\FistfightMasters\proj.win32\FistfightMasters.vcxproj", "{E6DCD2ED-4CB4-4F53-B060-843698BE3B22}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -60,6 +62,10 @@ Global
 		{7E06E92C-537A-442B-9E4A-4761C84F8A1A}.Debug|Win32.Build.0 = Debug|Win32
 		{7E06E92C-537A-442B-9E4A-4761C84F8A1A}.Release|Win32.ActiveCfg = Release|Win32
 		{7E06E92C-537A-442B-9E4A-4761C84F8A1A}.Release|Win32.Build.0 = Release|Win32
+		{E6DCD2ED-4CB4-4F53-B060-843698BE3B22}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E6DCD2ED-4CB4-4F53-B060-843698BE3B22}.Debug|Win32.Build.0 = Debug|Win32
+		{E6DCD2ED-4CB4-4F53-B060-843698BE3B22}.Release|Win32.ActiveCfg = Release|Win32
+		{E6DCD2ED-4CB4-4F53-B060-843698BE3B22}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
