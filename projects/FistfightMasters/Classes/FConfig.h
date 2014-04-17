@@ -1,9 +1,13 @@
 #pragma once
 
+#include "cocos2d.h"
+
 #define SCREEN_WIDTH			960
 #define SCREEN_HEIGHT			640
 #define FPS_SHOW				true
 #define FPS						60
+
+USING_NS_CC;
 
 struct Display
 {
@@ -13,6 +17,26 @@ struct Display
 	float h;
 	float cx;
 	float cy;
+
+	Point getLeftBottom()
+	{
+		return Point(x, y);
+	}
+
+	Point getCenterPoint()
+	{
+		return Point(cx, cy);
+	}
+
+	float getRightX()
+	{
+		return x + w;
+	}
+
+	float getTopY()
+	{
+		return y+h;
+	}
 };
 
 #define CREATE_SECNE_FUNC(__TYPE__) \
@@ -28,17 +52,3 @@ static cocos2d::Scene* createScene() \
 #define NEW_ROLE_SCRIPT(__TYPE__) new __TYPE__(); 
 
 extern Display D_display;
-
-
-typedef enum DirectionFlag 
-{
-	none,
-    left,
-    right,
-	up,
-	down,
-	leftDown,
-	leftUp,
-	rightDown,
-	rightUp
-};

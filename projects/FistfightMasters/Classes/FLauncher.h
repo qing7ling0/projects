@@ -15,7 +15,7 @@ public:
 
 protected:
 
-	SGLauncher(void);
-	~SGLauncher(void);
+	FLauncher(void);
+	~FLauncher(void);
 };
 

@@ -13,6 +13,12 @@
     <Filter Include="Classes\launcher">
       <UniqueIdentifier>{ae90da2f-e80e-4838-b714-c93675d82b5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\mainmenu">
+      <UniqueIdentifier>{fb739437-e0f5-479f-bca5-0c1f91e8d303}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle">
+      <UniqueIdentifier>{b5bd49b4-443f-46b7-be50-03ff21bae1f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,6 +35,15 @@
     </ClCompile>
     <ClCompile Include="..\Classes\FLauncher.cpp">
       <Filter>Classes\launcher</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainMenu.cpp">
+      <Filter>Classes\mainmenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleController.cpp">
+      <Filter>Classes\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleMap.cpp">
+      <Filter>Classes\battle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +64,18 @@
     </ClInclude>
     <ClInclude Include="..\Classes\FLauncher.h">
       <Filter>Classes\launcher</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainMenu.h">
+      <Filter>Classes\mainmenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleController.h">
+      <Filter>Classes\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleConfig.h">
+      <Filter>Classes\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleMap.h">
+      <Filter>Classes\battle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
