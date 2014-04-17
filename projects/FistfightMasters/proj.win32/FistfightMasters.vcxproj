@@ -136,10 +136,12 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\BattleController.cpp" />
     <ClCompile Include="..\Classes\BattleMap.cpp" />
+    <ClCompile Include="..\Classes\BattleRole.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\FConfig.cpp" />
     <ClCompile Include="..\Classes\FLauncher.cpp" />
     <ClCompile Include="..\Classes\MainMenu.cpp" />
+    <ClCompile Include="..\Classes\Role.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,9 +149,11 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\BattleConfig.h" />
     <ClInclude Include="..\Classes\BattleController.h" />
     <ClInclude Include="..\Classes\BattleMap.h" />
+    <ClInclude Include="..\Classes\BattleRole.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\FConfig.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
+    <ClInclude Include="..\Classes\Role.h" />
     <ClInclude Include="..\Classes\RPGHead.h" />
     <ClInclude Include="..\Classes\FLauncher.h" />
     <ClInclude Include="main.h" />
