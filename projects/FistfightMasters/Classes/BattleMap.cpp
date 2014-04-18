@@ -22,7 +22,7 @@ bool BattleMap::init(void)
 	_battleLayer->setContentSize(battleSize);
 	_battleLayer->setAnchorPoint(Point(0.5f, 0));
 	_battleLayer->ignoreAnchorPointForPosition(false);
-	_battleLayer->setPosition(Point(spBg->getContentSize().width/2, 15));
+	_battleLayer->setPosition(Point(spBg->getContentSize().width/2, 0));
 	spBg->addChild(_battleLayer);
 
 	auto centerLine = LayerColor::create(Color4B(255, 0, 0, 155), 2, battleSize.height);
@@ -39,7 +39,7 @@ bool BattleMap::init(void)
 		for(int j=0; j<5; j++)
 		{
 			auto gridBg = Sprite::createWithTexture(batch->getTexture());
-			Point point = getGameMapGirdPosition(Point(i,j))+Point(MAP_GRID_WIDTH/2, MAP_GRID_HEIGHT/2);
+			Point point = getGameMapGirdPosition(GRID_CONVER_TO_PIXEL(i,j));
 			gridBg->setPosition(point);
 			batch->addChild(gridBg);
 		}

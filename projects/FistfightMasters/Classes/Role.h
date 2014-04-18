@@ -1,7 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 
-class Role
+class Role : public Object
 {
 public:
 	Role(void);

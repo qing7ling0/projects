@@ -22,6 +22,15 @@
     <Filter Include="Classes\battle\role">
       <UniqueIdentifier>{e7fcf1d1-7bd6-4e16-b751-96381849fd4c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle\animi">
+      <UniqueIdentifier>{3e00f0d7-4aaa-4ea0-abf2-9012042cc866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\data">
+      <UniqueIdentifier>{8b2b8e24-1e3b-4059-a2bb-3aebb8c7b4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\skill">
+      <UniqueIdentifier>{d32f3785-e4e9-4993-a3d1-f938cd696e64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -53,6 +62,21 @@
     </ClCompile>
     <ClCompile Include="..\Classes\BattleRole.cpp">
       <Filter>Classes\battle\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AnimiPlayer.cpp">
+      <Filter>Classes\battle\animi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\RoleData.cpp">
+      <Filter>Classes\battle\data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillData.cpp">
+      <Filter>Classes\battle\data</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleRoles.cpp">
+      <Filter>Classes\battle\role</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Skill.cpp">
+      <Filter>Classes\battle\skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -91,6 +115,21 @@
     </ClInclude>
     <ClInclude Include="..\Classes\BattleRole.h">
       <Filter>Classes\battle\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AnimiPlayer.h">
+      <Filter>Classes\battle\animi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\RoleData.h">
+      <Filter>Classes\battle\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillData.h">
+      <Filter>Classes\battle\data</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleRoles.h">
+      <Filter>Classes\battle\role</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Skill.h">
+      <Filter>Classes\battle\skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

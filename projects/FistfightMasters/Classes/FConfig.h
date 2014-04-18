@@ -51,4 +51,13 @@ static cocos2d::Scene* createScene() \
 
 #define NEW_ROLE_SCRIPT(__TYPE__) new __TYPE__(); 
 
+#define EXTERN_CREATE_INSTANCE_FUNC(__TYPE__) static __TYPE__* getInstance();
+
+#define DEFINE_CREATE_INSTANCE_FUNC(__TYPE__) \
+static __TYPE__ *_instance = nullptr; \
+__TYPE__* __TYPE__::getInstance() \
+{ \
+	return _instance; \
+}
+
 extern Display D_display;

@@ -13,6 +13,9 @@ Role::~Role(void)
 
 bool Role::init()
 {
+	_node = Layer::create();
+	CC_SAFE_RETAIN(_node);
+
 	return true;
 }
 
