@@ -25,6 +25,10 @@ public:
 
 	virtual Point getGridIndex() const { return _gridIndex; }
 
+	virtual int getCurrentAnimiActionIndex(void) { return _currentAnimiActionIndex;}
+
+	virtual void setCurrentAnimiActionIndex(int index, bool resume=true);
+
 	static BattleRole* create(RoleData *roleData)
 	{
 		auto role = new BattleRole();
@@ -56,5 +60,9 @@ protected:
 	bool _left;
 
 	Map<int, AnimiPlayer*> _animiPlayers;
+
+	int _currentAnimiActionIndex;
+
+	AnimiPlayer* _currentPlayer;
 };
 

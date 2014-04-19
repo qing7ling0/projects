@@ -11,8 +11,6 @@ public:
 
 	CREATE_FUNC(BattleMap);
 
-	static Point getGameMapGirdPosition(Point grid);
-
 private:
 
 

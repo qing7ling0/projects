@@ -3,6 +3,8 @@
 #include "BattleConfig.h"
 
 class BattleMap;
+class BattleRoles;
+class Monitor;
 
 class BattleController : public Layer
 {
@@ -12,7 +14,19 @@ public:
 
 	bool init(void);
 
+	void onEnter(void);
+
+	void onExit(void);
+
+	void update(float dt);
+
+	void gameStart();
+
 	BattleMap* getMap() { return _map; }
+
+	void setMonitor(Monitor *monitor);
+
+	Monitor* getMonitor() { return _monitor; }
 
 	CREATE_SECNE_FUNC(BattleController);
 
@@ -20,5 +34,9 @@ public:
 
 private:
 	BattleMap *_map;
+
+	BattleRoles *_battleRoles;
+
+	Monitor *_monitor;
 };
 

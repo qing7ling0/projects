@@ -135,6 +135,8 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
   <ItemGroup>
     <ClCompile Include="..\Classes\AnimiPlayer.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\AttackData.cpp" />
+    <ClCompile Include="..\Classes\AttackMonitor.cpp" />
     <ClCompile Include="..\Classes\BattleController.cpp" />
     <ClCompile Include="..\Classes\BattleMap.cpp" />
     <ClCompile Include="..\Classes\BattleRole.cpp" />
@@ -143,15 +145,21 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClCompile Include="..\Classes\FConfig.cpp" />
     <ClCompile Include="..\Classes\FLauncher.cpp" />
     <ClCompile Include="..\Classes\MainMenu.cpp" />
+    <ClCompile Include="..\Classes\Monitor.cpp" />
+    <ClCompile Include="..\Classes\PlayAnimiMonitor.cpp" />
     <ClCompile Include="..\Classes\Role.cpp" />
     <ClCompile Include="..\Classes\RoleData.cpp" />
+    <ClCompile Include="..\Classes\SelfMonitor.cpp" />
     <ClCompile Include="..\Classes\Skill.cpp" />
     <ClCompile Include="..\Classes\SkillData.cpp" />
+    <ClCompile Include="..\Classes\TestData.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AnimiPlayer.h" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\AttackData.h" />
+    <ClInclude Include="..\Classes\AttackMonitor.h" />
     <ClInclude Include="..\Classes\BattleConfig.h" />
     <ClInclude Include="..\Classes\BattleController.h" />
     <ClInclude Include="..\Classes\BattleMap.h" />
@@ -160,12 +168,16 @@ xcopy /Y /Q "$(EngineRoot)external\websockets\prebuilt\win32\*.*" "$(OutDir)"</C
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\FConfig.h" />
     <ClInclude Include="..\Classes\MainMenu.h" />
+    <ClInclude Include="..\Classes\Monitor.h" />
+    <ClInclude Include="..\Classes\PlayAnimiMonitor.h" />
     <ClInclude Include="..\Classes\Role.h" />
     <ClInclude Include="..\Classes\RoleData.h" />
     <ClInclude Include="..\Classes\RPGHead.h" />
     <ClInclude Include="..\Classes\FLauncher.h" />
+    <ClInclude Include="..\Classes\SelfMonitor.h" />
     <ClInclude Include="..\Classes\Skill.h" />
     <ClInclude Include="..\Classes\SkillData.h" />
+    <ClInclude Include="..\Classes\TestData.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

@@ -1,10 +1,10 @@
 #include "SkillData.h"
 
-SkillData::SkillData(void)
+SkillData2::SkillData2(void)
 {
 }
 
 
-SkillData::~SkillData(void)
+SkillData2::~SkillData2(void)
 {
 }

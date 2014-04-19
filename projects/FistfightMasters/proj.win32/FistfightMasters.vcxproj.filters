@@ -31,6 +31,30 @@
     <Filter Include="Classes\battle\skill">
       <UniqueIdentifier>{d32f3785-e4e9-4993-a3d1-f938cd696e64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle\monitor">
+      <UniqueIdentifier>{677de6de-ffee-480f-aa89-00fe007f37f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\monitor\self">
+      <UniqueIdentifier>{59e810f0-c65a-466c-a02d-df66f0673ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\monitor\other">
+      <UniqueIdentifier>{85cebc9e-cee5-4ba2-a478-ac35cb02d464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\monitor\wait">
+      <UniqueIdentifier>{7681da74-f641-46e4-84ea-7c459fce5c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\map">
+      <UniqueIdentifier>{bfddf0a5-e65e-4664-98dc-e5147ff87c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\monitor\play">
+      <UniqueIdentifier>{78931ff8-d6e0-4db7-ae58-dfdc0883fdd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\attack">
+      <UniqueIdentifier>{e3ef0b08-02d5-4cb6-bac0-405715a49bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\server">
+      <UniqueIdentifier>{bcc63e4e-ce65-4a4f-89f6-55052467d850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,9 +78,6 @@
     <ClCompile Include="..\Classes\BattleController.cpp">
       <Filter>Classes\battle</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BattleMap.cpp">
-      <Filter>Classes\battle</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Role.cpp">
       <Filter>Classes\battle\role</Filter>
     </ClCompile>
@@ -77,6 +98,27 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Skill.cpp">
       <Filter>Classes\battle\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TestData.cpp">
+      <Filter>Classes\mainmenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Monitor.cpp">
+      <Filter>Classes\battle\monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleMap.cpp">
+      <Filter>Classes\battle\map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SelfMonitor.cpp">
+      <Filter>Classes\battle\monitor\self</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\PlayAnimiMonitor.cpp">
+      <Filter>Classes\battle\monitor\play</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AttackData.cpp">
+      <Filter>Classes\battle\attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AttackMonitor.cpp">
+      <Filter>Classes\battle\monitor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -107,9 +149,6 @@
     <ClInclude Include="..\Classes\BattleConfig.h">
       <Filter>Classes\battle</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BattleMap.h">
-      <Filter>Classes\battle</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Role.h">
       <Filter>Classes\battle\role</Filter>
     </ClInclude>
@@ -130,6 +169,27 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Skill.h">
       <Filter>Classes\battle\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TestData.h">
+      <Filter>Classes\mainmenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Monitor.h">
+      <Filter>Classes\battle\monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleMap.h">
+      <Filter>Classes\battle\map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SelfMonitor.h">
+      <Filter>Classes\battle\monitor\self</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\PlayAnimiMonitor.h">
+      <Filter>Classes\battle\monitor\play</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AttackData.h">
+      <Filter>Classes\battle\attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AttackMonitor.h">
+      <Filter>Classes\battle\monitor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

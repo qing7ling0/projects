@@ -13,13 +13,18 @@ public:
 
 	void addTestData();
 
-	BattleRole* getRoleByGrid(Point grid);
+	BattleRole* getRoleByGrid(const Point &grid);
+
+	Vector<BattleRole*> getSelfRoles() { return _selfRoles; }
+
+	Vector<BattleRole*> getEnemyRoles() { return _enemyRoles; }
 
 	EXTERN_CREATE_INSTANCE_FUNC(BattleRoles);
 	
 	CREATE_FUNC(BattleRoles);
 
 private:
-	Vector<BattleRole*> _roles;
+	Vector<BattleRole*> _selfRoles;
+	Vector<BattleRole*> _enemyRoles;
 };
 

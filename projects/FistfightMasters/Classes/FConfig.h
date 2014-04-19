@@ -49,6 +49,57 @@ static cocos2d::Scene* createScene() \
     return scene; \
 }
 
+#define F_CREATE_FUNC_ARGS_1(__TYPE__, _VARTYPE_, _VARNAME_) \
+static __TYPE__* create(_VARTYPE_ _VARNAME_) \
+{ \
+    __TYPE__ *pRet = new __TYPE__(); \
+    if (pRet && pRet->init(_VARNAME_)) \
+    { \
+        pRet->autorelease(); \
+        return pRet; \
+    } \
+    else \
+    { \
+        delete pRet; \
+        pRet = NULL; \
+        return NULL; \
+    } \
+}
+
+#define F_CREATE_FUNC_ARGS_2(__TYPE__, _VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_) \
+static __TYPE__* create(_VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_) \
+{ \
+    __TYPE__ *pRet = new __TYPE__(); \
+    if (pRet && pRet->init(_VARNAME1_, _VARNAME2_)) \
+    { \
+        pRet->autorelease(); \
+        return pRet; \
+    } \
+    else \
+    { \
+        delete pRet; \
+        pRet = NULL; \
+        return NULL; \
+    } \
+}
+
+#define F_CREATE_FUNC_ARGS_3(__TYPE__, _VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_, _VARTYPE3_, _VARNAME3_) \
+static __TYPE__* create(_VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_, _VARTYPE3_, _VARNAME3_) \
+{ \
+    __TYPE__ *pRet = new __TYPE__(); \
+    if (pRet && pRet->init(_VARNAME1_, _VARNAME2_, _VARNAME3_)) \
+    { \
+        pRet->autorelease(); \
+        return pRet; \
+    } \
+    else \
+    { \
+        delete pRet; \
+        pRet = NULL; \
+        return NULL; \
+    } \
+}
+
 #define NEW_ROLE_SCRIPT(__TYPE__) new __TYPE__(); 
 
 #define EXTERN_CREATE_INSTANCE_FUNC(__TYPE__) static __TYPE__* getInstance();

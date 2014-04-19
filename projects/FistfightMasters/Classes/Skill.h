@@ -19,7 +19,7 @@ public:
 
 	virtual void getCanAttackRoles();
 
-	virtual Vector<Point> getCanAttackGrids();
+	virtual std::vector<Point> getCanAttackGrids();
 
 protected:
 	/** 技能类型 */

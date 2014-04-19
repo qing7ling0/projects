@@ -40,6 +40,7 @@ enum SkillAttackType
 struct AnimiAction
 {
 	int _actionType;
+	float _duraction;
 	int _actionIndexs[2];
 };
 
@@ -56,7 +57,9 @@ public:
 
 public:
 	char *_animiName;
-	int _animiIndex[2];
+	char *_animiPath;
+	int _animiIndexs[2];
+	SkillType _skillType;
 };
 
 class RoleData : public Object
@@ -74,12 +77,17 @@ public:
 
 public:
 	char *_roleAnimiName;
+	char *_roleAnimiPath;
 
 	Vector<SkillData*> _skillDatas;
 
 	/** 角色的所有动作 */
-	AnimiAction *_roleAnimiActions;
+	std::vector<AnimiAction*> *_roleAnimiActions;
 
 	int _animiCount;
+
+	bool _ememy;
+
+	Point _grid;
 };
 

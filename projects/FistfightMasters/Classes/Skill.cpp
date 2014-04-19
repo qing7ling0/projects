@@ -48,9 +48,9 @@ const int Skill::getDamage() const
 }
 
 
-Vector<Point> Skill::getCanAttackGrids()
+std::vector<Point> Skill::getCanAttackGrids()
 {
-	Vector<Point> grids;
+	std::vector<Point> grids;
 	
 	if (!_srcRole) return grids;
 
@@ -96,7 +96,7 @@ Vector<Point> Skill::getCanAttackGrids()
 			point.x = srcGrid.x - i;
 			point.y = srcGrid.y;
 			bool bounds = CHECK_GRID_BOUNDS(point.x, point.y);
-			if (!bounds) grids.pushBack(Point(point));
+			if (!bounds) grids.push_back(Point(point));
 		}
 	}
 
@@ -107,7 +107,7 @@ void Skill::getCanAttackRoles()
 {
 	_targetRoles.clear();
 
-	Vector<Point> grids = getCanAttackGrids();
+	std::vector<Point> grids = getCanAttackGrids();
 
 	for (Point grid : grids)
     {

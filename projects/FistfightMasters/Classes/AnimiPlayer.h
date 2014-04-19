@@ -7,11 +7,11 @@ public:
 	AnimiPlayer(void);
 	~AnimiPlayer(void);
 
-	virtual bool init(Vector<SpriteFrame*> frames, float delay=0);
+	virtual bool init(Vector<SpriteFrame*> frames, float delay);
 
 	virtual Animation* getAnimation() { return _animi; }
 
-	virtual void start(bool loop=true, bool visible=false);
+	virtual void start(unsigned int loop=0, bool visible=false);
 
 	virtual void resume();
 
@@ -19,10 +19,18 @@ public:
 
 	virtual void stop(bool visible=false);
 
-	static AnimiPlayer* create(Vector<SpriteFrame*> frames, float delay=0);
+	virtual unsigned int getLoops();
+
+	virtual bool isOver() const;
+
+	static AnimiPlayer* create(Vector<SpriteFrame*> frames, float delay=0.05f);
+
+	/** 播放结束后是否是隐藏 */
+	CC_SYNTHESIZE(bool, overVisible, OverVisible);
 
 protected:
 	Animation *_animi;
+
 	Sprite *_animiSprite;
 };
 

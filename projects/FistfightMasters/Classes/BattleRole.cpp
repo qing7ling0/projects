@@ -7,6 +7,8 @@ BattleRole::BattleRole(void)
 	, _roleData(nullptr)
 	, _gridIndex(Point::ZERO)
 	, _left(false)
+	, _currentAnimiActionIndex(0)
+	, _currentPlayer(nullptr)
 {
 }
 
@@ -15,7 +17,7 @@ BattleRole::~BattleRole(void)
 {
 	if(_roleData)
 	{
-		const char* animiPath = String::createWithFormat("animi/%s.plist", _roleData->_roleAnimiName)->getCString();
+		const char* animiPath = String::createWithFormat("%s.plist", _roleData->_roleAnimiName)->getCString();
 		SpriteFrameCache::getInstance()->removeSpriteFrameByName(animiPath);
 	}
 
@@ -31,12 +33,16 @@ void BattleRole::setEnemy(bool enemy)
 
 bool BattleRole::init(RoleData *data)
 {
+	if (!Role::init()) return false;
+
 	_roleData = data;
 	CC_SAFE_RETAIN(_roleData);
 
-	BattleController::getInstance()->addChild(_node);
+	BattleController::getInstance()->addChild(_node, ZORDER_BATTLE_ROLE);
 
 	initRoleAnimiPlayers();
+
+	setCurrentAnimiActionIndex(HERO_ANIMI_ACTION_STAND);
 
 	return true;
 }
@@ -45,31 +51,31 @@ void BattleRole::initRoleAnimiPlayers()
 {
 	if (!_roleData) return;
 
-	const char* animiPath = String::createWithFormat("animi/%s.plist", _roleData->_roleAnimiName)->getCString();
+	const char* animiPath = String::createWithFormat("%s%s.plist", _roleData->_roleAnimiPath, _roleData->_roleAnimiName)->getCString();
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(animiPath);
-
-	for(int i=0; i<_roleData->_animiCount; i++)
+	if (_roleData->_roleAnimiActions)
 	{
-		if (_roleData->_roleAnimiActions)
+		for(auto &actionData : *_roleData->_roleAnimiActions)
 		{
-			auto actionData = _roleData->_roleAnimiActions;
-			if (actionData)
+			Vector<SpriteFrame*> frames;
+			for(int j=actionData->_actionIndexs[0]; j<=actionData->_actionIndexs[1]; j++)
 			{
-				Vector<SpriteFrame*> frames;
-				for(int j=actionData->_actionIndexs[0]; j<=actionData->_actionIndexs[1]; j++)
-				{
-					const char* imgName = String::createWithFormat("%s_%03d.png", _roleData->_roleAnimiName, j)->getCString();
-					frames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName(imgName));
-				}
-				auto player = AnimiPlayer::create(frames);
-				_node->addChild(player);
-
-				_animiPlayers.insert(actionData->_actionType, player);
+				const char* imgName = String::createWithFormat("%s_%03d.png", _roleData->_roleAnimiName, j)->getCString();
+				frames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName(imgName));
 			}
+			auto player = AnimiPlayer::create(frames, 0.2f);
+			player->setAnchorPoint(Point(0, 0));
+			player->setScale(0.65f);
+			//player->start();
+			if (!_roleData->_ememy) player->setPositionY(35);
+			else player->setPositionY(-15);
+			_node->addChild(player);
 
-			_roleData->_roleAnimiActions++;
+			_animiPlayers.insert(actionData->_actionType, player);
 		}
 	}
+
+	setGirdIndex(_roleData->_grid);
 }
 
 void BattleRole::setGirdIndex(const Point &grid, bool updatePosition)
@@ -78,7 +84,7 @@ void BattleRole::setGirdIndex(const Point &grid, bool updatePosition)
 	if (updatePosition)
 	{
 		bool bounds = CHECK_GRID_BOUNDS(_gridIndex.x, _gridIndex.y);
-		_node->setVisible(bounds);
+		_node->setVisible(!bounds);
 		if(!bounds)
 			_node->setPosition(GRID_CONVER_TO_PIXEL(_gridIndex.x, _gridIndex.y));
 	}
@@ -87,4 +93,27 @@ void BattleRole::setGirdIndex(const Point &grid, bool updatePosition)
 void BattleRole::setLeft(bool left)
 {
 	_left = left;
+}
+
+void BattleRole::setCurrentAnimiActionIndex(int index, bool resume)
+{
+	if (index != _currentAnimiActionIndex)
+	{
+		auto player = _animiPlayers.at(index);
+		if (!player) return;
+
+		if (_currentPlayer ) _currentPlayer->stop(true);
+		_currentPlayer = player;
+		_currentPlayer->start();
+
+		_currentAnimiActionIndex = index;
+	}
+	else
+	{
+		if (resume && _currentPlayer)
+		{
+			_currentPlayer->stop();
+			_currentPlayer->start(_currentPlayer->getLoops(), _currentPlayer->getOverVisible());
+		}
+	}
 }

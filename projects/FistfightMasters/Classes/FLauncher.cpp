@@ -32,7 +32,7 @@ void FLauncher::onLoad()
     // set FPS. the default value is 1.0/60 if you don't call this
 	director->setAnimationInterval(1.0 / 60);
 
-	eglView->setDesignResolutionSize(SCREEN_WIDTH, SCREEN_HEIGHT, kResolutionShowAll);
+	eglView->setDesignResolutionSize(SCREEN_WIDTH, SCREEN_HEIGHT, ResolutionPolicy::SHOW_ALL);
 
 	
     Size visibleSize = Director::getInstance()->getVisibleSize();
