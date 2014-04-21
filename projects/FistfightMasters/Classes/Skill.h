@@ -1,7 +1,9 @@
 #pragma once
 #include "RPGHead.h"
 #include "RoleData.h"
+#include "SkillData.h"
 #include "BattleRole.h"
+#include "SkillStep.h"
 
 class Skill : public Object
 {
@@ -9,9 +11,11 @@ public:
 	Skill(void);
 	~Skill(void);
 
-	virtual bool init(SkillData *_skillData);
+	virtual bool init(SkillStep *skillStep, BattleRole* srcRole);
 
-	virtual void start(BattleRole* srcRole);
+	virtual void start();
+
+	virtual void stop();
 
 	virtual void doDamage();
 
@@ -20,6 +24,10 @@ public:
 	virtual void getCanAttackRoles();
 
 	virtual std::vector<Point> getCanAttackGrids();
+
+	virtual bool isOver() { return _over; }
+
+	virtual void setOver(bool over) { _over = over; }
 
 protected:
 	/** 技能类型 */
@@ -34,7 +42,8 @@ protected:
 	/** 攻击者 */
 	BattleRole *_srcRole;
 
-	/** 技能数据 */
-	SkillData *_skillData;
+	bool _over;
+
+	SkillStep *_skillStep;
 };
 

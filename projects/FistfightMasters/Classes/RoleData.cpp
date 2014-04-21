@@ -1,20 +1,5 @@
 #include "RoleData.h"
 
-SkillData::SkillData(void)
-{
-}
-
-
-SkillData::~SkillData(void)
-{
-}
-
-bool SkillData::init(void)
-{
-
-	return true;
-}
-
 RoleData::RoleData(void)
 	: _roleAnimiActions(nullptr)
 	, _ememy(false)

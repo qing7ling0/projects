@@ -22,3 +22,7 @@ void Monitor::update(float dt) { }
 void Monitor::onEnter() { }
 
 void Monitor::onExit() { }
+
+void WaitNewRound::update(float dt)
+{
+}

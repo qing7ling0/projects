@@ -44,24 +44,6 @@ struct AnimiAction
 	int _actionIndexs[2];
 };
 
-class SkillData : public Object
-{
-public:
-	SkillData(void);
-
-	~SkillData(void);
-
-	bool init(void);
-
-	CREATE_FUNC(SkillData);
-
-public:
-	char *_animiName;
-	char *_animiPath;
-	int _animiIndexs[2];
-	SkillType _skillType;
-};
-
 class RoleData : public Object
 {
 public:

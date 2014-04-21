@@ -1,6 +1,6 @@
 #include "SelfMonitor.h"
 #include "BattleController.h"
-#include "AttackMonitor.h"
+#include "GameServer.h"
 #include "BattleRoles.h"
 
 
@@ -46,7 +46,7 @@ void SelfMonitor::update(float dt)
 	else if (step == 2)
 	{
 		setOver(true);
-		BattleController::getInstance()->setMonitor(AttackMonitor::create(BattleRoles::getInstance()->getSelfRoles()));
+		GameServer::getInstance()->attack();
 		step++;
 	}
 }

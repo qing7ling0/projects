@@ -1,4 +1,6 @@
 #include "PlayAnimiMonitor.h"
+#include "BattleController.h"
+#include "Skill.h"
 
 
 PlayAnimiMonitor::PlayAnimiMonitor(void)
@@ -24,6 +26,7 @@ bool PlayAnimiMonitor::init(AttackData *attackData)
 
 void PlayAnimiMonitor::onEnter()
 {
+
 }
 
 void PlayAnimiMonitor::onExit()
@@ -32,4 +35,12 @@ void PlayAnimiMonitor::onExit()
 
 void PlayAnimiMonitor::update(float dt)
 {
+	if (_attackData && _attackData->_skill)
+	{
+		_attackData->_skill->update(dt);
+		if (_attackData->_skill->isOver())
+		{
+			BattleController::getInstance()->setMonitor(WaitNewRound::create());
+		}
+	}
 }

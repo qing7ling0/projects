@@ -19,41 +19,53 @@
     <Filter Include="Classes\battle">
       <UniqueIdentifier>{b5bd49b4-443f-46b7-be50-03ff21bae1f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\battle\role">
-      <UniqueIdentifier>{e7fcf1d1-7bd6-4e16-b751-96381849fd4c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\animi">
-      <UniqueIdentifier>{3e00f0d7-4aaa-4ea0-abf2-9012042cc866}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\data">
-      <UniqueIdentifier>{8b2b8e24-1e3b-4059-a2bb-3aebb8c7b4cf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\skill">
-      <UniqueIdentifier>{d32f3785-e4e9-4993-a3d1-f938cd696e64}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\monitor">
-      <UniqueIdentifier>{677de6de-ffee-480f-aa89-00fe007f37f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\monitor\self">
-      <UniqueIdentifier>{59e810f0-c65a-466c-a02d-df66f0673ecf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\monitor\other">
-      <UniqueIdentifier>{85cebc9e-cee5-4ba2-a478-ac35cb02d464}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\monitor\wait">
-      <UniqueIdentifier>{7681da74-f641-46e4-84ea-7c459fce5c05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\map">
-      <UniqueIdentifier>{bfddf0a5-e65e-4664-98dc-e5147ff87c8f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\monitor\play">
-      <UniqueIdentifier>{78931ff8-d6e0-4db7-ae58-dfdc0883fdd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Classes\battle\attack">
-      <UniqueIdentifier>{e3ef0b08-02d5-4cb6-bac0-405715a49bff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Classes\battle\server">
       <UniqueIdentifier>{bcc63e4e-ce65-4a4f-89f6-55052467d850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client">
+      <UniqueIdentifier>{039f3910-274a-4b6c-99ee-7a913d6f431f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\animi">
+      <UniqueIdentifier>{3e00f0d7-4aaa-4ea0-abf2-9012042cc866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\attack">
+      <UniqueIdentifier>{e3ef0b08-02d5-4cb6-bac0-405715a49bff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\data">
+      <UniqueIdentifier>{8b2b8e24-1e3b-4059-a2bb-3aebb8c7b4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\data\skill">
+      <UniqueIdentifier>{97a4417c-76fb-45ae-ad4b-062f3d9a43e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\map">
+      <UniqueIdentifier>{bfddf0a5-e65e-4664-98dc-e5147ff87c8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\monitor">
+      <UniqueIdentifier>{677de6de-ffee-480f-aa89-00fe007f37f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\monitor\self">
+      <UniqueIdentifier>{59e810f0-c65a-466c-a02d-df66f0673ecf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\monitor\other">
+      <UniqueIdentifier>{85cebc9e-cee5-4ba2-a478-ac35cb02d464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\monitor\wait">
+      <UniqueIdentifier>{7681da74-f641-46e4-84ea-7c459fce5c05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\monitor\play">
+      <UniqueIdentifier>{78931ff8-d6e0-4db7-ae58-dfdc0883fdd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\role">
+      <UniqueIdentifier>{e7fcf1d1-7bd6-4e16-b751-96381849fd4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\skill">
+      <UniqueIdentifier>{d32f3785-e4e9-4993-a3d1-f938cd696e64}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\skill\skillstep">
+      <UniqueIdentifier>{35fff04c-3bac-4eeb-9c3e-ba5ae8ae5499}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\tasks">
+      <UniqueIdentifier>{2e7b1d61-13f6-474e-be64-6620fbdd3d6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,50 +87,65 @@
     <ClCompile Include="..\Classes\MainMenu.cpp">
       <Filter>Classes\mainmenu</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BattleController.cpp">
-      <Filter>Classes\battle</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Role.cpp">
-      <Filter>Classes\battle\role</Filter>
+      <Filter>Classes\battle\client\role</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BattleRole.cpp">
-      <Filter>Classes\battle\role</Filter>
+      <Filter>Classes\battle\client\role</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AnimiPlayer.cpp">
-      <Filter>Classes\battle\animi</Filter>
+      <Filter>Classes\battle\client\animi</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\RoleData.cpp">
-      <Filter>Classes\battle\data</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\SkillData.cpp">
-      <Filter>Classes\battle\data</Filter>
+      <Filter>Classes\battle\client\data</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BattleRoles.cpp">
-      <Filter>Classes\battle\role</Filter>
+      <Filter>Classes\battle\client\role</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Skill.cpp">
-      <Filter>Classes\battle\skill</Filter>
+      <Filter>Classes\battle\client\skill</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TestData.cpp">
       <Filter>Classes\mainmenu</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Monitor.cpp">
-      <Filter>Classes\battle\monitor</Filter>
+      <Filter>Classes\battle\client\monitor</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BattleMap.cpp">
-      <Filter>Classes\battle\map</Filter>
+      <Filter>Classes\battle\client\map</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SelfMonitor.cpp">
-      <Filter>Classes\battle\monitor\self</Filter>
+      <Filter>Classes\battle\client\monitor\self</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\PlayAnimiMonitor.cpp">
-      <Filter>Classes\battle\monitor\play</Filter>
+      <Filter>Classes\battle\client\monitor\play</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\AttackData.cpp">
-      <Filter>Classes\battle\attack</Filter>
+      <Filter>Classes\battle\client\attack</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\AttackMonitor.cpp">
-      <Filter>Classes\battle\monitor</Filter>
+    <ClCompile Include="..\Classes\SkillStep.cpp">
+      <Filter>Classes\battle\client\skill\skillstep</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SkillData.cpp">
+      <Filter>Classes\battle\client\data\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameServer.cpp">
+      <Filter>Classes\battle\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BattleController.cpp">
+      <Filter>Classes\battle\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ServerConfig.cpp">
+      <Filter>Classes\battle\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\ServerData.cpp">
+      <Filter>Classes\battle\server</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Task.cpp">
+      <Filter>Classes\battle\client\tasks</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\WaitingNewRound.cpp">
+      <Filter>Classes\battle\client\monitor\wait</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,53 +170,68 @@
     <ClInclude Include="..\Classes\MainMenu.h">
       <Filter>Classes\mainmenu</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\BattleController.h">
-      <Filter>Classes\battle</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BattleConfig.h">
-      <Filter>Classes\battle</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Role.h">
-      <Filter>Classes\battle\role</Filter>
+      <Filter>Classes\battle\client\role</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleRole.h">
-      <Filter>Classes\battle\role</Filter>
+      <Filter>Classes\battle\client\role</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AnimiPlayer.h">
-      <Filter>Classes\battle\animi</Filter>
+      <Filter>Classes\battle\client\animi</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\RoleData.h">
-      <Filter>Classes\battle\data</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\SkillData.h">
-      <Filter>Classes\battle\data</Filter>
+      <Filter>Classes\battle\client\data</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleRoles.h">
-      <Filter>Classes\battle\role</Filter>
+      <Filter>Classes\battle\client\role</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Skill.h">
-      <Filter>Classes\battle\skill</Filter>
+      <Filter>Classes\battle\client\skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TestData.h">
       <Filter>Classes\mainmenu</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Monitor.h">
-      <Filter>Classes\battle\monitor</Filter>
+      <Filter>Classes\battle\client\monitor</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BattleMap.h">
-      <Filter>Classes\battle\map</Filter>
+      <Filter>Classes\battle\client\map</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SelfMonitor.h">
-      <Filter>Classes\battle\monitor\self</Filter>
+      <Filter>Classes\battle\client\monitor\self</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\PlayAnimiMonitor.h">
-      <Filter>Classes\battle\monitor\play</Filter>
+      <Filter>Classes\battle\client\monitor\play</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\AttackData.h">
-      <Filter>Classes\battle\attack</Filter>
+      <Filter>Classes\battle\client\attack</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\AttackMonitor.h">
-      <Filter>Classes\battle\monitor</Filter>
+    <ClInclude Include="..\Classes\SkillStep.h">
+      <Filter>Classes\battle\client\skill\skillstep</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SkillData.h">
+      <Filter>Classes\battle\client\data\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameServer.h">
+      <Filter>Classes\battle\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleConfig.h">
+      <Filter>Classes\battle\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BattleController.h">
+      <Filter>Classes\battle\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ServerConfig.h">
+      <Filter>Classes\battle\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ServerData.h">
+      <Filter>Classes\battle\server</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Task.h">
+      <Filter>Classes\battle\client\tasks</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\WaitingNewRound.h">
+      <Filter>Classes\battle\client\monitor\wait</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

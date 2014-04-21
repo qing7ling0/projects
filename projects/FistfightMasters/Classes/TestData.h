@@ -1,5 +1,6 @@
 #pragma once
 #include "RoleData.h"
+#include "SkillData.h"
 
 class TestData : public Object
 {

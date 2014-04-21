@@ -25,9 +25,15 @@ public:
 
 	virtual Point getGridIndex() const { return _gridIndex; }
 
+	virtual void setDefaultAction();
+
 	virtual int getCurrentAnimiActionIndex(void) { return _currentAnimiActionIndex;}
 
-	virtual void setCurrentAnimiActionIndex(int index, bool resume=true);
+	virtual void setCurrentAnimiActionIndex(int index, int loop=1, bool resume=true);
+
+	virtual AnimiPlayer* getCurrentAnimiPlayer() { return _currentPlayer; }
+
+	virtual bool isAnimiPlayerOver() { if (_currentPlayer) return _currentPlayer->isOver(); return false; }
 
 	static BattleRole* create(RoleData *roleData)
 	{

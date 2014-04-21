@@ -42,9 +42,16 @@ bool BattleRole::init(RoleData *data)
 
 	initRoleAnimiPlayers();
 
-	setCurrentAnimiActionIndex(HERO_ANIMI_ACTION_STAND);
+	setDefaultAction();
+	
 
 	return true;
+}
+
+void BattleRole::setDefaultAction()
+{
+
+	setCurrentAnimiActionIndex(HERO_ANIMI_ACTION_STAND);
 }
 
 void BattleRole::initRoleAnimiPlayers()
@@ -95,7 +102,7 @@ void BattleRole::setLeft(bool left)
 	_left = left;
 }
 
-void BattleRole::setCurrentAnimiActionIndex(int index, bool resume)
+void BattleRole::setCurrentAnimiActionIndex(int index, int loop, bool resume)
 {
 	if (index != _currentAnimiActionIndex)
 	{
@@ -104,7 +111,7 @@ void BattleRole::setCurrentAnimiActionIndex(int index, bool resume)
 
 		if (_currentPlayer ) _currentPlayer->stop(true);
 		_currentPlayer = player;
-		_currentPlayer->start();
+		_currentPlayer->start(loop);
 
 		_currentAnimiActionIndex = index;
 	}

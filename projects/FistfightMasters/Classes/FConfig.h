@@ -67,7 +67,7 @@ static __TYPE__* create(_VARTYPE_ _VARNAME_) \
 }
 
 #define F_CREATE_FUNC_ARGS_2(__TYPE__, _VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_) \
-static __TYPE__* create(_VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_) \
+static __TYPE__* create(_VARTYPE1_ _VARNAME1_, _VARTYPE2_ _VARNAME2_) \
 { \
     __TYPE__ *pRet = new __TYPE__(); \
     if (pRet && pRet->init(_VARNAME1_, _VARNAME2_)) \
@@ -84,7 +84,7 @@ static __TYPE__* create(_VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_) \
 }
 
 #define F_CREATE_FUNC_ARGS_3(__TYPE__, _VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_, _VARTYPE3_, _VARNAME3_) \
-static __TYPE__* create(_VARTYPE1_, _VARNAME1_, _VARTYPE2_, _VARNAME2_, _VARTYPE3_, _VARNAME3_) \
+static __TYPE__* create(_VARTYPE1_ _VARNAME1_, _VARTYPE2_ _VARNAME2_, _VARTYPE3_ _VARNAME3_) \
 { \
     __TYPE__ *pRet = new __TYPE__(); \
     if (pRet && pRet->init(_VARNAME1_, _VARNAME2_, _VARNAME3_)) \

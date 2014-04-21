@@ -3,7 +3,7 @@
 
 
 Skill::Skill(void)
-	: _skillData(nullptr)
+	: _skillStep(nullptr)
 	, _srcRole(nullptr)
 	, _skillAttackType(SkillAttackType::attackFront1)
 	, _skillType(SkillType::SkillClose)
@@ -13,27 +13,33 @@ Skill::Skill(void)
 
 Skill::~Skill(void)
 {
-	CC_SAFE_RELEASE(_skillData);
+	CC_SAFE_RELEASE(_skillStep);
 
 	CC_SAFE_RELEASE(_srcRole);
 }
 
-bool Skill::init(SkillData *skillData)
+bool Skill::init(SkillStep *skillStep, BattleRole* srcRole)
 {
-	_skillData = skillData;
-	CC_SAFE_RETAIN(_skillData);
-
 	_targetRoles.reserve(5);
+
+	_skillStep = skillStep;
+	CC_SAFE_RETAIN(_skillStep);
+
+	_srcRole = srcRole;
+	CC_SAFE_RETAIN(_srcRole);
 
 	return true;
 }
 
-void Skill::start(BattleRole* srcRole)
+void Skill::start()
 {
-	_srcRole = srcRole;
-	CC_SAFE_RETAIN(_srcRole);
+	//getCanAttackRoles();
+	if (_skillStep) _skillStep->start();
+}
 
-	getCanAttackRoles();
+void Skill::stop()
+{
+	if (_skillStep) _skillStep->stop();
 }
 
 void Skill::doDamage()

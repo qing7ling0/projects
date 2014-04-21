@@ -1,4 +1,5 @@
 #include "TestData.h"
+
 TestData::TestData(void)
 {
 	_roleDatas.reserve(3);

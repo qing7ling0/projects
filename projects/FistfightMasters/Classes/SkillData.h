@@ -1,13 +1,60 @@
 #pragma once
 #include "RPGHead.h"
+#include "RoleData.h"
 
-class SkillData2 : public Object
+typedef enum 
+{
+	SKILL_STEP_HERO = 1,
+	SKILL_STEP_NORMAL_BOMB,
+
+} SkillStepType;
+
+class SkillStepData : public Object
 {
 public:
-	SkillData2(void);
-	~SkillData2(void);
+	SkillStepData(void);
+	~SkillStepData(void);
 
+protected:
+	SkillStepType _stepType;
+};
+
+
+class SkillStepHeroData : public SkillStepData
+{
+public:
+	SkillStepHeroData(void);
+	~SkillStepHeroData(void);
+public:
+	Point _roleGridIndex;
+	int _roleAnimiActionIndex;
+};
+
+class SkillStepNormalBombData : public SkillStepData
+{
+public:
+	SkillStepNormalBombData(void);
+	~SkillStepNormalBombData(void);
+public:
 	char *_animiName;
-	int _animiIndex[2];
+	char *_animiPath;
+	int _animiIndexs[2];
+	Point _roleGridIndex;
+};
+
+class SkillData : public Object
+{
+public:
+	SkillData(void);
+
+	~SkillData(void);
+
+	bool init(void);
+
+	CREATE_FUNC(SkillData);
+
+public:
+	Vector<SkillStepData*>* _stepDatas;
+	SkillType _skillType;
 };
 

@@ -1,10 +1,16 @@
 #include "SkillData.h"
 
-SkillData2::SkillData2(void)
+SkillData::SkillData(void)
+	: _stepDatas(new Vector<SkillStepData*>())
 {
 }
 
-
-SkillData2::~SkillData2(void)
+SkillData::~SkillData(void)
 {
+	CC_SAFE_DELETE(_stepDatas);
+}
+
+bool SkillData::init(void)
+{
+	return true;
 }

@@ -21,3 +21,11 @@
 #define CHECK_GRID_BOUNDS(_GRID_X_, _GRID_Y_) (_GRID_X_<0 || _GRID_X_>=MAP_GRID_X_COUNT || _GRID_Y_<0 || _GRID_Y_>=MAP_GRID_Y_COUNT)
 
 #define GRID_CONVER_TO_PIXEL(_GRID_X_, _GRID_Y_) (Point(_GRID_X_*MAP_GRID_WIDTH+MAP_GRID_WIDTH/2+30, _GRID_Y_*MAP_GRID_HEIGHT+MAP_GRID_HEIGHT/2+15))
+
+
+typedef enum{
+	MonitorAll,
+	MonitorAttack,
+	MonitorPlayAnimi,
+	MonitorWaitNewRound
+} MonitorType;
