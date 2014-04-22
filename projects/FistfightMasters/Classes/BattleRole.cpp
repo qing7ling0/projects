@@ -9,6 +9,7 @@ BattleRole::BattleRole(void)
 	, _left(false)
 	, _currentAnimiActionIndex(0)
 	, _currentPlayer(nullptr)
+	, _currenSelectSkill(nullptr)
 {
 }
 
@@ -44,13 +45,13 @@ bool BattleRole::init(RoleData *data)
 
 	setDefaultAction();
 	
+	_currenSelectSkill = _roleData->_skillDatas.at(0);
 
 	return true;
 }
 
 void BattleRole::setDefaultAction()
 {
-
 	setCurrentAnimiActionIndex(HERO_ANIMI_ACTION_STAND);
 }
 

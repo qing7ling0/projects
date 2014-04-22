@@ -67,6 +67,9 @@
     <Filter Include="Classes\battle\client\tasks">
       <UniqueIdentifier>{2e7b1d61-13f6-474e-be64-6620fbdd3d6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\battle\server\skill">
+      <UniqueIdentifier>{7455e0cd-9a9a-4912-a064-aa6bb30abfde}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\WaitingNewRound.cpp">
       <Filter>Classes\battle\client\monitor\wait</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\SSkill.cpp">
+      <Filter>Classes\battle\server\skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\WaitingNewRound.h">
       <Filter>Classes\battle\client\monitor\wait</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SSkill.h">
+      <Filter>Classes\battle\server\skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

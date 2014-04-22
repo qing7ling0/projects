@@ -14,6 +14,14 @@ const int HERO_ANIMI_ACTION_HITTED = 3;
 // 移动动作
 const int HERO_ANIMI_ACTION_MOVE = 4;
 
+typedef enum{
+	MonitorAll,
+	MonitorAttack,
+	MonitorPlayAnimi,
+	MonitorWaitNewRound
+} MonitorType;
+
+
 enum SkillType
 {
 	// 近身攻击

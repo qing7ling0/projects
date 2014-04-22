@@ -11,7 +11,7 @@ public:
 	Skill(void);
 	~Skill(void);
 
-	virtual bool init(SkillStep *skillStep, BattleRole* srcRole);
+	virtual bool init(SkillStep *skillStep);
 
 	virtual void start();
 
@@ -21,13 +21,11 @@ public:
 
 	virtual const int getDamage() const;
 
-	virtual void getCanAttackRoles();
-
-	virtual std::vector<Point> getCanAttackGrids();
-
 	virtual bool isOver() { return _over; }
 
 	virtual void setOver(bool over) { _over = over; }
+
+	F_CREATE_FUNC_ARGS_1(Skill, SkillStep*, skillStep);
 
 protected:
 	/** 技能类型 */
