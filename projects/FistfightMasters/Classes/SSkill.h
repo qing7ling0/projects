@@ -12,7 +12,7 @@ public:
 	SSkill(void);
 	~SSkill(void);
 
-	virtual bool init(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> stepDatas);
+	virtual bool init(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> &stepDatas);
 
 	virtual Skill* doSkill(void) { return nullptr; };
 
@@ -20,7 +20,7 @@ public:
 
 	static std::vector<Point> getCanAttackGrids(SkillAttackType skillAttackType, BattleRole *attackRole);
 
-	static SSkill* createSSKill(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> stepDatas);
+	static SSkill* createSSKill(SkillType skillType, SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> &stepDatas);
 
 protected:
 	Vector<SkillStepData*> *_stepDatas;

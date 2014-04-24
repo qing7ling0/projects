@@ -9,11 +9,12 @@ public:
 	AttackData(void);
 	~AttackData(void);
 
-	bool init(Skill *skill);
+	bool init();
+	void addSkill(Skill *skill);
 
-	F_CREATE_FUNC_ARGS_1(AttackData, Skill*, skill);
+	CREATE_FUNC(AttackData);
 
 public:
-	Skill *_skill;
+	Vector<Skill*> *_skills;
 };
 

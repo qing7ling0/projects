@@ -17,7 +17,7 @@ SSkill::~SSkill(void)
 	CC_SAFE_RELEASE(_attackRole);
 }
 
-bool SSkill::init(Vector<SkillStepData*> stepDatas, BattleRole *attackRole, SkillAttackType skillAttackType)
+bool SSkill::init(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> &stepDatas)
 {
 	_targetRoles.reserve(5);
 	_skillAttackType = skillAttackType;
@@ -99,12 +99,15 @@ void SSkill::getCanAttackRoles(SkillAttackType skillAttackType, BattleRole *atta
     }
 }
 
-SSkill* SSkill::createSSKill(SkillType skillType, SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> stepDatas)
+SSkill* SSkill::createSSKill(SkillType skillType, SkillAttackType skillAttackType, BattleRole *attackRole, Vector<SkillStepData*> &stepDatas)
 {
-	switch(skillAttackType)
+	switch(skillType)
 	{
-		case SkillAttackType::
+	case SkillType::SkillRemote:
+		return SRemoteSkill::create(skillAttackType, attackRole, stepDatas);
 	}
+
+	return nullptr;
 }
 
 SRemoteSkill::SRemoteSkill(void)

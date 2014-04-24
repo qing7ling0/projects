@@ -1,7 +1,7 @@
 #include "Task.h"
 #include "AttackData.h"
 #include "BattleController.h"
-#include "AttackMonitor.h"
+#include "PlayAnimiMonitor.h"
 
 
 DEFINE_CREATE_INSTANCE_FUNC(Tasks);
@@ -71,6 +71,6 @@ void AttackTask::doTask(MonitorType monitorType)
 {
 	if (_monitorType == monitorType)
 	{
-		BattleController::getInstance()->setMonitor(AttackMonitor::create(_attackData));
+		BattleController::getInstance()->setMonitor(PlayAnimiMonitor::create(_attackData));
 	}
 }

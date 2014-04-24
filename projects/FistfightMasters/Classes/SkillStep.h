@@ -6,14 +6,14 @@ class BattleRole;
 
 #define STE_SKILL_STEP_DATA(varType, varName)    \
 protected: varType varName; \
-public: virtual void set##funName(const SkillStepData* var)   \
+public: virtual void setSkillStepData(varType var)   \
 { \
     if (varName != var) \
     { \
         CC_SAFE_RELEASE(varName); \
 		varName = nullptr; \
 		if (var) { \
-			varName = static_cast<varType>(var);\
+			varName = var;\
 			CC_SAFE_RETAIN(varName); \
 		} \
     } \
@@ -45,11 +45,9 @@ public:
 
 	virtual void setStart(const bool start) { _start = start; }
 
-	virtual SkillStepData* getSkillStepData(void) { return nullptr; } const
+	virtual SkillStepData* getSkillStepData(void) const { return nullptr; }
 
-	virtual void setSkillStepData(const SkillStepData* skillStepData) {}
-
-	virtual void setTargetRole(BattleRole* role);
+	virtual void setSkillStepData(SkillStepData* skillStepData) {}
 
 protected:
 	bool _over;
@@ -57,8 +55,6 @@ protected:
 	bool _start;
 
 	int _step;
-
-	BattleRole *_targetRole;
 };
 
 
@@ -111,14 +107,14 @@ public:
 
 	virtual void update(float dt);
 
-	virtual bool init(SkillStepData* stepData);
+	virtual bool init(SkillStepData* stepData, BattleRole* targetRole);
 
-	F_CREATE_FUNC_ARGS_1(SkillHeroStep, SkillStepData*, stepData);
+	F_CREATE_FUNC_ARGS_2(SkillHeroStep, SkillStepData*, stepData, BattleRole*, targetRole);
 
 	STE_SKILL_STEP_DATA(SkillStepHeroData*, _stepData);
 
 protected:
-
+	BattleRole *_targetRole;
 };
 
 class SkillNormalBombStep : public SkillStep
@@ -137,11 +133,14 @@ public:
 
 	virtual bool init(SkillStepData* stepData);
 
+	virtual void addTargetRole(BattleRole* targetRole);
+
 	F_CREATE_FUNC_ARGS_1(SkillNormalBombStep, SkillStepData*, stepData);
 
 	STE_SKILL_STEP_DATA(SkillStepNormalBombData*, _stepData);
 
 protected:
 	AnimiPlayer *_animiPlayer;
+	Vector<BattleRole*> _targetRoles;
 };
 

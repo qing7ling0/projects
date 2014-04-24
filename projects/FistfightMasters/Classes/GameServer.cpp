@@ -1,5 +1,11 @@
 #include "GameServer.h"
+#include "BattleRole.h"
 #include "BattleRoles.h"
+#include "SkillStep.h"
+#include "SkillData.h"
+#include "SSkill.h"
+#include "AttackData.h"
+#include "Task.h"
 
 DEFINE_CREATE_INSTANCE_FUNC(GameServer);
 
@@ -34,8 +40,21 @@ void GameServer::gameEnd(void)
 
 void GameServer::attack(void)
 {
-	Vector<BattleRole*> roles = _roundInfo->_selfRound ? BattleRoles::getInstance()->getSelfRoles():BattleRoles::getInstance()->getEnemyRoles();
+	AttackData *attackData = AttackData::create();
 
+	Vector<BattleRole*> roles = _roundInfo->_selfRound ? BattleRoles::getInstance()->getSelfRoles():BattleRoles::getInstance()->getEnemyRoles();
+	
+	for(BattleRole *role : roles)
+	{
+		auto skill = role->getCurrentSelectSkill();
+		if (skill)
+		{
+			auto sskill = SSkill::createSSKill(skill->_skillType, skill->_skillAttackType, role, *skill->_stepDatas);
+			attackData->addSkill(sskill->doSkill());
+		}
+	}
+
+	Tasks::getInstance()->addTask(AttackTask::create(attackData, MonitorType::MonitorWaitNext));
 }
 
 void GameServer::nextRound(void)

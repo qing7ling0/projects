@@ -23,6 +23,7 @@ void Monitor::onEnter() { }
 
 void Monitor::onExit() { }
 
-void WaitNewRound::update(float dt)
+
+void WaitingNext::update(float dt)
 {
 }

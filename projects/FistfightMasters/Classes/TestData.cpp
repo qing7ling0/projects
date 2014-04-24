@@ -28,11 +28,20 @@ TestData::TestData(void)
 	roleData->_roleAnimiActions->push_back(action);
 
 	auto skill = SkillData::create();
-	skill->_animiIndexs[0] = 1;
-	skill->_animiIndexs[1] = 5;
-	skill->_animiName = "e_longjuan";
-	skill->_animiPath = "animi/skill/";
+
+	auto skillStep = new SkillStepHeroData();
+	skillStep->_roleAnimiActionIndex = HERO_ANIMI_ACTION_ATTACK;
+	skill->_stepDatas->pushBack(skillStep);
+
+	auto skillStep2 = new SkillStepNormalBombData();
+	skillStep2->_animiIndexs[0] = 1;
+	skillStep2->_animiIndexs[1] = 5;
+	skillStep2->_animiName = "e_longjuan";
+	skillStep2->_animiPath = "animi/skill/";
+	skill->_stepDatas->pushBack(skillStep2);
+
 	skill->_skillType = SkillType::SkillRemote;
+	skill->_skillAttackType = SkillAttackType::attackFront1;
 	roleData->_skillDatas.pushBack(skill);
 
 	roleData->_ememy = true;
@@ -40,6 +49,7 @@ TestData::TestData(void)
 	_roleDatas.pushBack(roleData);
 
 
+	//-------------------------------------------------
 	roleData = RoleData::create();
 	roleData->_roleAnimiName = "mm_01";
 	roleData->_roleAnimiPath = "animi/npc/";
@@ -63,16 +73,26 @@ TestData::TestData(void)
 	roleData->_roleAnimiActions->push_back(action);
 
 	skill = SkillData::create();
-	skill->_animiIndexs[0] = 1;
-	skill->_animiIndexs[1] = 10;
-	skill->_animiName = "e_tabomb";
-	skill->_animiPath = "animi/skill/";
+
+	skillStep = new SkillStepHeroData();
+	skillStep->_roleAnimiActionIndex = HERO_ANIMI_ACTION_ATTACK;
+	skill->_stepDatas->pushBack(skillStep);
+
+	skillStep2 = new SkillStepNormalBombData();
+	skillStep2->_animiIndexs[0] = 1;
+	skillStep2->_animiIndexs[1] = 5;
+	skillStep2->_animiName = "e_tabomb";
+	skillStep2->_animiPath = "animi/skill/";
+	skill->_stepDatas->pushBack(skillStep2);
+
 	skill->_skillType = SkillType::SkillRemote;
+	skill->_skillAttackType = SkillAttackType::attackFront1;
 	roleData->_skillDatas.pushBack(skill);
 
 	roleData->_ememy = false;
 	roleData->_grid = Point(7, 2);
 	_roleDatas.pushBack(roleData);
+	//-------------------------------------------------
 }
 
 

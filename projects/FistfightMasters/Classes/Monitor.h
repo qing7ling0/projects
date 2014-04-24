@@ -1,6 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 #include "BattleConfig.h"
+#include "RoleData.h"
 
 class Monitor : public Object
 {
@@ -28,14 +29,17 @@ protected:
 	float f_time;
 };
 
-class WaitNewRound : public Monitor
+class WaitingNext : public Monitor
 {
 public:
 
 	virtual void update(float dt);
 
-	MonitorType getMonitorType() { return MonitorType::MonitorWaitNewRound; }
+	MonitorType getMonitorType() { return MonitorType::MonitorWaitNext; }
 
-	CREATE_FUNC(WaitNewRound);
+	CREATE_FUNC(WaitingNext);
+};
 
+class GameStartMonitor : public Monitor
+{
 };

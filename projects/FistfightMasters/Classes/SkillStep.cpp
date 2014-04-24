@@ -7,7 +7,6 @@
 SkillStep::SkillStep(void)
 	: _over(false)
 	, _step(0)
-	, _targetRole(nullptr)
 {
 	setSkillStepData(nullptr);
 }
@@ -15,7 +14,6 @@ SkillStep::SkillStep(void)
 SkillStep::~SkillStep(void)
 {
 	CC_SAFE_RELEASE(getSkillStepData());
-	CC_SAFE_RELEASE(_targetRole);
 }
 
 void SkillStep::start(void)
@@ -29,16 +27,6 @@ void SkillStep::stop(void)
 {
 	setOver(true);
 	setStart(false);
-}
-
-void SkillStep::setTargetRole(BattleRole* role)
-{
-	if (_targetRole != role)
-	{
-		CC_SAFE_RELEASE(_targetRole);
-		CC_SAFE_RETAIN(role);
-		_targetRole = role;
-	}
 }
 
 bool SkillStep::init(SkillStepData* stepData)
@@ -195,11 +183,13 @@ bool SequenceSkillStep::initWithTwoSteps(SkillStep *stepOne, SkillStep *stepTwo)
 
 /*--------------  SkillHeroStep BEGAN ----------------*/
 SkillHeroStep::SkillHeroStep(void)
+	: _targetRole(nullptr)
 {
 }
 
 SkillHeroStep::~SkillHeroStep(void)
 {
+	CC_SAFE_RELEASE(_targetRole);
 }
 
 void SkillHeroStep::loadRes(void)
@@ -210,7 +200,6 @@ void SkillHeroStep::start(void)
 {
 	SkillStep::start();
 	if (!_stepData) return;
-	setTargetRole(BattleRoles::getInstance()->getRoleByGrid(_stepData->_roleGridIndex));
 }
 
 void SkillHeroStep::stop(void)
@@ -238,9 +227,12 @@ void SkillHeroStep::update(float dt)
 	}
 }
 
-bool SkillHeroStep::init(SkillStepData* stepData)
+bool SkillHeroStep::init(SkillStepData* stepData, BattleRole* targetRole)
 {
-	if (!SkillStep::init(stepData)) return false;
+	if (!SkillStep::init(stepData) || !targetRole) return false;
+
+	_targetRole = targetRole;
+	CC_SAFE_RETAIN(targetRole);
 
 	return true;
 }
@@ -266,7 +258,6 @@ void SkillNormalBombStep::start(void)
 {
 	SkillStep::start();
 	if (!_stepData) return;
-	setTargetRole(BattleRoles::getInstance()->getRoleByGrid(_stepData->_roleGridIndex));
 }
 
 void SkillNormalBombStep::stop(void)
@@ -276,7 +267,7 @@ void SkillNormalBombStep::stop(void)
 
 void SkillNormalBombStep::update(float dt)
 {
-	if (!start || !_stepData || _targetRole) return;
+	if (!start || !_stepData || _targetRoles.size()==0) return;
 
 	if (_step == 0)
 	{
@@ -284,17 +275,27 @@ void SkillNormalBombStep::update(float dt)
 	}
 	else if (_step == 1)
 	{
-		if (_targetRole->isAnimiPlayerOver())
+		/*if (_targetRole->isAnimiPlayerOver())
 		{
 			_targetRole->setDefaultAction();
 			stop();
 			_step++;
-		}
+		}*/
 	}
 }
 
 bool SkillNormalBombStep::init(SkillStepData* stepData)
 {
+	if (!SkillStep::init(stepData)) return false;
+
+	_targetRoles.reserve(5);
+
 	return true;
+}
+
+void SkillNormalBombStep::addTargetRole(BattleRole* targetRole)
+{
+	if (targetRole)
+		_targetRoles.pushBack(targetRole);
 }
 /*--------------  SkillNormalBombStep END ----------------*/

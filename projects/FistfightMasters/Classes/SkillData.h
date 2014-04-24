@@ -2,9 +2,12 @@
 #include "RPGHead.h"
 #include "RoleData.h"
 
+class BattleRole;
+
 typedef enum 
 {
-	SKILL_STEP_HERO = 1,
+	SKILL_STEP_NONE = 1,
+	SKILL_STEP_HERO,
 	SKILL_STEP_NORMAL_BOMB,
 
 } SkillStepType;
@@ -26,7 +29,6 @@ public:
 	SkillStepHeroData(void);
 	~SkillStepHeroData(void);
 public:
-	Point _roleGridIndex;
 	int _roleAnimiActionIndex;
 };
 
@@ -39,7 +41,6 @@ public:
 	char *_animiName;
 	char *_animiPath;
 	int _animiIndexs[2];
-	Point _roleGridIndex;
 };
 
 class SkillData : public Object
@@ -56,5 +57,6 @@ public:
 public:
 	Vector<SkillStepData*>* _stepDatas;
 	SkillType _skillType;
+	SkillAttackType _skillAttackType;
 };
 

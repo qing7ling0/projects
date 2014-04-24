@@ -18,7 +18,8 @@ typedef enum{
 	MonitorAll,
 	MonitorAttack,
 	MonitorPlayAnimi,
-	MonitorWaitNewRound
+	MonitorWaitNewRound,
+	MonitorWaitNext
 } MonitorType;
 
 

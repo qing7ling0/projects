@@ -46,6 +46,7 @@ void SelfMonitor::update(float dt)
 	else if (step == 2)
 	{
 		setOver(true);
+		BattleController::getInstance()->setMonitor(WaitingNext::create());
 		GameServer::getInstance()->attack();
 		step++;
 	}

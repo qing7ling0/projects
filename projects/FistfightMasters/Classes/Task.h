@@ -1,5 +1,6 @@
 #pragma once
 #include "RPGHead.h"
+#include "RoleData.h"
 #include "BattleConfig.h"
 
 class AttackData;

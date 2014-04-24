@@ -3,18 +3,22 @@
 
 
 AttackData::AttackData(void)
-	: _skill(nullptr)
+	: _skills(new Vector<Skill*>())
 {
 }
 
 
 AttackData::~AttackData(void)
 {
-	CC_SAFE_DELETE(_skill);
+	CC_SAFE_DELETE(_skills);
 }
 
-bool AttackData::init(Skill *skill)
+bool AttackData::init()
 {
-	_skill = skill;
-	CC_SAFE_RETAIN(_skill);
+	return true;
+}
+
+void AttackData::addSkill(Skill *skill)
+{
+	_skills->pushBack(skill);
 }
