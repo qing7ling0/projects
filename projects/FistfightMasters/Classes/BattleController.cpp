@@ -3,6 +3,9 @@
 #include "BattleRoles.h"
 #include "BattleRole.h"
 #include "Monitor.h"
+#include "MessageServer.h"
+#include "Task.h"
+#include "GameServer.h"
 
 static BattleController *_instance = nullptr;
 
@@ -10,6 +13,7 @@ BattleController::BattleController(void)
 	: _map(nullptr)
 	, _battleRoles(nullptr)
 	, _monitor(nullptr)
+	, _roundInfo(nullptr)
 {
 }
 
@@ -18,6 +22,7 @@ BattleController::~BattleController(void)
 	CC_SAFE_RELEASE(_map);
 	CC_SAFE_RELEASE(_battleRoles);
 	CC_SAFE_RELEASE(_monitor);
+	CC_SAFE_RELEASE(_roundInfo);
 }
 
 BattleController* BattleController::getInstance()
@@ -44,6 +49,13 @@ bool BattleController::init(void)
 	_battleRoles = BattleRoles::create();
 	CC_SAFE_RETAIN(_battleRoles);
 
+	Tasks::create();
+	GameServer::create();
+
+	addChild(MessageServer::getInstance());
+
+	setMonitor(WaitingNext::create());
+
 	return true;
 }
 
@@ -51,6 +63,7 @@ void BattleController::onEnter(void)
 {
 	Layer::onEnter();
 	scheduleUpdate();
+	gameStart();
 }
 
 void BattleController::onExit(void)
@@ -61,7 +74,7 @@ void BattleController::onExit(void)
 
 void BattleController::gameStart()
 {
-
+	GameServer::getInstance()->gameStart();
 }
 
 void BattleController::setMonitor(Monitor *monitor)
@@ -80,4 +93,9 @@ void BattleController::setMonitor(Monitor *monitor)
 void BattleController::update(float dt)
 {
 	if (_monitor) _monitor->update(dt);
+	if (_monitor) Tasks::getInstance()->doTasks(_monitor->getMonitorType());
+
+
+
+	GameServer::getInstance()->update(dt);
 }

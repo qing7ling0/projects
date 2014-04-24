@@ -1,4 +1,5 @@
 #include "RoleData.h"
+#include "SkillData.h"
 
 RoleData::RoleData(void)
 	: _roleAnimiActions(nullptr)
@@ -27,4 +28,16 @@ bool RoleData::init(void)
 	_skillDatas.reserve(3);
 	_roleAnimiActions = new std::vector<AnimiAction*>();
 	return true;
+}
+
+
+RoundInfo::RoundInfo(void)
+	: _currentRound(0)
+	, _selfRound(false)
+{
+}
+
+
+RoundInfo::~RoundInfo(void)
+{
 }

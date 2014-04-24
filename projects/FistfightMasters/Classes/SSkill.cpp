@@ -123,10 +123,18 @@ Skill* SRemoteSkill::doSkill(void)
 {
 	if (!_attackRole) return nullptr;
 
-	SSkill::getCanAttackRoles(_skillAttackType, _attackRole, _targetRoles);
+	Vector<BattleRole*> targetRoles;
+	targetRoles.reserve(5);
 
-	auto step1 = SkillHeroStep::create(_stepDatas->at(0));
+	SSkill::getCanAttackRoles(_skillAttackType, _attackRole, targetRoles);
+
+	auto step1 = SkillHeroStep::create(_stepDatas->at(0), _attackRole);
 	auto step2 = SkillNormalBombStep::create(_stepDatas->at(1));
+	for(auto role : targetRoles)
+	{
+		step2->addTargetRole(role);
+	}
+	targetRoles.clear();
 
 	return Skill::create(SequenceSkillStep::createWithTwoSteps(step1, step2));
 }

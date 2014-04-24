@@ -35,12 +35,19 @@ void PlayAnimiMonitor::onExit()
 
 void PlayAnimiMonitor::update(float dt)
 {
-	if (_attackData && _attackData->_skill)
+	if (_attackData && _attackData->_skills)
 	{
-		_attackData->_skill->update(dt);
-		if (_attackData->_skill->isOver())
+		bool over = true;
+
+		for(auto skill : *_attackData->_skills)
 		{
-			BattleController::getInstance()->setMonitor(WaitNewRound::create());
+			skill->update(dt);
+			if (!skill->isOver())
+			{
+				over = false;
+			}
 		}
+
+		if (over) BattleController::getInstance()->setMonitor(WaitingNext::create());
 	}
 }

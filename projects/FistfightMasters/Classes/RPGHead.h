@@ -8,3 +8,4 @@
 
 using namespace cocostudio;
 using namespace cocos2d;
+using namespace gui;

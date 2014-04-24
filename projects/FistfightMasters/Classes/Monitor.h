@@ -21,11 +21,13 @@ public:
 
 	virtual void setOver(bool over) { _over = over; }
 
+	virtual bool canBreak() { return true; }
+
 	virtual MonitorType getMonitorType() { return MonitorType::MonitorAll; }
 
 protected:
 	bool _over;
-	int step;
+	int _step;
 	float f_time;
 };
 
@@ -40,6 +42,34 @@ public:
 	CREATE_FUNC(WaitingNext);
 };
 
+class NewRoundMonitor : public Monitor
+{
+public:
+	NewRoundMonitor(void);
+	~NewRoundMonitor(void);
+
+	virtual bool init(RoundInfo* roundInfo);
+	
+	virtual void onEnter(void);
+
+	virtual void update(float dt);
+
+	MonitorType getMonitorType() { return MonitorType::MonitorNewRound; }
+
+	F_CREATE_FUNC_ARGS_1(NewRoundMonitor, RoundInfo*, roundInfo);
+
+private:
+	RoundInfo* _roundInfo;
+};
+
 class GameStartMonitor : public Monitor
 {
+public:
+	virtual void onEnter(void);
+
+	virtual void update(float dt);
+
+	MonitorType getMonitorType() { return MonitorType::MonitorGameStart; }
+
+	CREATE_FUNC(GameStartMonitor);
 };

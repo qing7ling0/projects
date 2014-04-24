@@ -1,7 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 
-class BattleRole;
+#include "BattleRole.h"
 
 class BattleRoles : public Object
 {

@@ -1,6 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 #include "BattleConfig.h"
+#include "RoleData.h"
 
 class BattleMap;
 class BattleRoles;
@@ -27,6 +28,10 @@ public:
 	void setMonitor(Monitor *monitor);
 
 	Monitor* getMonitor() { return _monitor; }
+
+	void initNewRound() {}
+
+	CC_SYNTHESIZE_RETAIN(RoundInfo*, _roundInfo, RoundInfo);
 
 	CREATE_SECNE_FUNC(BattleController);
 

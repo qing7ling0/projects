@@ -30,25 +30,25 @@ void SelfMonitor::onExit()
 
 void SelfMonitor::update(float dt)
 {
-	if (step == 0)
+	if (_step == 0)
 	{
 		f_time = 0;
-		step++;
+		_step++;
 	}
-	else if (step == 1)
+	else if (_step == 1)
 	{
 		f_time += dt;
 		if (f_time > 2)
 		{
-			step++;
+			_step++;
 		}
 	}
-	else if (step == 2)
+	else if (_step == 2)
 	{
 		setOver(true);
 		BattleController::getInstance()->setMonitor(WaitingNext::create());
 		GameServer::getInstance()->attack();
-		step++;
+		_step++;
 	}
 }
 

@@ -6,6 +6,7 @@
 #include "SSkill.h"
 #include "AttackData.h"
 #include "Task.h"
+#include "RoleData.h"
 
 DEFINE_CREATE_INSTANCE_FUNC(GameServer);
 
@@ -31,6 +32,7 @@ bool GameServer::init(void)
 
 void GameServer::gameStart(void)
 {
+	Tasks::getInstance()->addTask(GameStartTask::create(MonitorType::MonitorWaitNext));
 	nextRound();	
 }
 
@@ -61,4 +63,10 @@ void GameServer::nextRound(void)
 {
 	_roundInfo->_currentRound++;
 	_roundInfo->_selfRound = !_roundInfo->_selfRound;
+
+	RoundInfo* round = RoundInfo::create();
+	round->_currentRound = _roundInfo->_currentRound;
+	round->_selfRound = _roundInfo->_selfRound;
+
+	Tasks::getInstance()->addTask(NewRoundTask::create(MonitorType::MonitorWaitNext, round));
 }

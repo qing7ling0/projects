@@ -1,9 +1,11 @@
 #include "Monitor.h"
+#include "BattleController.h"
+#include "MessageServer.h"
 
 
 Monitor::Monitor(void)
 	: _over(false)
-	, step(0)
+	, _step(0)
 {
 }
 
@@ -26,4 +28,53 @@ void Monitor::onExit() { }
 
 void WaitingNext::update(float dt)
 {
+}
+
+NewRoundMonitor::NewRoundMonitor(void)
+	: _roundInfo(nullptr)
+{
+}
+
+
+NewRoundMonitor::~NewRoundMonitor(void)
+{
+	CC_SAFE_RELEASE(_roundInfo);
+}
+
+bool NewRoundMonitor::init(RoundInfo* roundInfo)
+{
+	if (!Monitor::init()) return false;
+
+	_roundInfo = roundInfo;
+	CC_SAFE_RETAIN(_roundInfo);
+	return true;
+}
+
+void NewRoundMonitor::onEnter()
+{
+	Monitor::onEnter();
+	if (_roundInfo) BattleController::getInstance()->setRoundInfo(_roundInfo);
+}
+
+void NewRoundMonitor::update(float dt)
+{
+	if (_step == 0)
+	{
+		_step++;
+		BattleController::getInstance()->setMonitor(WaitingNext::create());
+	}
+}
+
+void GameStartMonitor::onEnter()
+{
+	MessageServer::getInstance()->addMessage(MessageItem::create("Game Start"));
+}
+
+void GameStartMonitor::update(float dt)
+{
+	if (_step == 0)
+	{
+		_step++;
+		BattleController::getInstance()->setMonitor(WaitingNext::create());
+	}
 }

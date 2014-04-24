@@ -16,12 +16,14 @@ const int HERO_ANIMI_ACTION_MOVE = 4;
 
 typedef enum{
 	MonitorAll,
+	MonitorGameStart,
 	MonitorAttack,
 	MonitorPlayAnimi,
-	MonitorWaitNewRound,
+	MonitorNewRound,
 	MonitorWaitNext
 } MonitorType;
 
+class SkillData;
 
 enum SkillType
 {
@@ -82,3 +84,19 @@ public:
 	Point _grid;
 };
 
+
+class RoundInfo : public Object
+{
+public:
+	RoundInfo(void);
+
+	~RoundInfo(void);
+
+	bool init() { return true; }
+
+	CREATE_FUNC(RoundInfo);
+
+public:
+	int _currentRound;
+	bool _selfRound;
+};

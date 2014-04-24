@@ -77,7 +77,7 @@ void SequenceSkillStep::stop(void)
 
 void SequenceSkillStep::update(float dt)
 {
-	if (!start) return;
+	if (!_start) return;
 
 	if (_lastStep)
 	{
@@ -168,6 +168,23 @@ SequenceSkillStep* SequenceSkillStep::create(const Vector<SkillStep*>& arrayOfSt
     return ret;
 }
 
+SequenceSkillStep* SequenceSkillStep::createWithTwoSteps(SkillStep *stepOne, SkillStep *stepTwo)
+{
+	auto step = new SequenceSkillStep();
+	if (step->initWithTwoSteps(stepOne, stepTwo))
+	{
+		step->autorelease();
+		return step;
+	}
+	else
+	{
+		delete step;
+		step = nullptr;
+	}
+
+	return nullptr;
+}
+
 bool SequenceSkillStep::initWithTwoSteps(SkillStep *stepOne, SkillStep *stepTwo)
 {
 	if (!stepOne) return false;
@@ -209,7 +226,7 @@ void SkillHeroStep::stop(void)
 
 void SkillHeroStep::update(float dt)
 {
-	if (!start || !_stepData || _targetRole) return;
+	if (!_start || !_stepData || _targetRole) return;
 
 	if (_step == 0)
 	{
@@ -267,7 +284,7 @@ void SkillNormalBombStep::stop(void)
 
 void SkillNormalBombStep::update(float dt)
 {
-	if (!start || !_stepData || _targetRoles.size()==0) return;
+	if (!_start || !_stepData || _targetRoles.size()==0) return;
 
 	if (_step == 0)
 	{

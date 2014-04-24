@@ -4,6 +4,7 @@
 #include "BattleConfig.h"
 
 class AttackData;
+class RoundInfo;
 
 class Task : public Object
 {
@@ -61,4 +62,29 @@ public:
 
 protected:
 	AttackData *_attackData;
+};
+
+class GameStartTask : public Task
+{
+public:
+	virtual void doTask(MonitorType monitorType);
+
+	F_CREATE_FUNC_ARGS_1(GameStartTask, MonitorType, monitorType);
+
+};
+
+class NewRoundTask : public Task
+{
+public:
+	NewRoundTask(void);
+	~NewRoundTask(void);
+
+	bool init(MonitorType monitorType, RoundInfo* roundInfo);
+
+	virtual void doTask(MonitorType monitorType);
+
+	F_CREATE_FUNC_ARGS_2(NewRoundTask, MonitorType, monitorType, RoundInfo*, roundInfo);
+
+protected:
+	RoundInfo* _roundInfo;
 };

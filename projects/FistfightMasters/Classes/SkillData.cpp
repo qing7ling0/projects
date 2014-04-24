@@ -6,21 +6,26 @@ SkillStepData::SkillStepData(void)
 {
 }
 
-SkillStepHeroData::~SkillStepHeroData(void)
+SkillStepData::~SkillStepData(void)
+{
+}
+
+
+SkillStepHeroData::SkillStepHeroData(void)
 {
 	_stepType = SkillStepType::SKILL_STEP_HERO;
 }
 
-SkillStepHeroData::SkillStepHeroData(void)
+SkillStepHeroData::~SkillStepHeroData(void)
 {
 }
 
-SkillStepNormalBombData::~SkillStepNormalBombData(void)
+SkillStepNormalBombData::SkillStepNormalBombData(void)
 {
 	_stepType = SkillStepType::SKILL_STEP_NORMAL_BOMB;
 }
 
-SkillStepNormalBombData::SkillStepNormalBombData(void)
+SkillStepNormalBombData::~SkillStepNormalBombData(void)
 {
 }
 
