@@ -3,6 +3,7 @@
 #include "Role.h"
 #include "RoleData.h"
 #include "AnimiPlayer.h"
+#include "SkillData.h"
 
 
 class BattleRole : public Role
@@ -34,6 +35,8 @@ public:
 	virtual AnimiPlayer* getCurrentAnimiPlayer() { return _currentPlayer; }
 
 	virtual bool isAnimiPlayerOver() { if (_currentPlayer) return _currentPlayer->isOver(); return false; }
+
+	virtual SkillData* getCurrentSelectSkill() { return _currenSelectSkill; }
 
 	static BattleRole* create(RoleData *roleData)
 	{
@@ -70,5 +73,7 @@ protected:
 	int _currentAnimiActionIndex;
 
 	AnimiPlayer* _currentPlayer;
+
+	SkillData *_currenSelectSkill;
 };
 

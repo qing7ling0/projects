@@ -1,4 +1,5 @@
 #include "GameServer.h"
+#include "BattleRoles.h"
 
 DEFINE_CREATE_INSTANCE_FUNC(GameServer);
 
@@ -33,6 +34,7 @@ void GameServer::gameEnd(void)
 
 void GameServer::attack(void)
 {
+	Vector<BattleRole*> roles = _roundInfo->_selfRound ? BattleRoles::getInstance()->getSelfRoles():BattleRoles::getInstance()->getEnemyRoles();
 
 }
 
