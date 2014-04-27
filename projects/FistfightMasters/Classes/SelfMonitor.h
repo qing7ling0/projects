@@ -16,6 +16,8 @@ public:
 
 	void update(float dt);
 
+	CREATE_FUNC(SelfMonitor);
+
 protected:
 
 };

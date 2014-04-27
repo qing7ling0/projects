@@ -21,26 +21,23 @@ public:
 
 	virtual const int getDamage() const;
 
-	virtual bool isOver() { return _over; }
+	virtual bool isOver() { return _over; } const
 
-	virtual void setOver(bool over) { _over = over; }
+	virtual void setOver(const bool over) { _over = over; }
+
+	virtual bool isStart(void) { return _start; } const
+
+	virtual void setStart(const bool start) { _start = start; }
+
+	virtual void update(float dt);
 
 	F_CREATE_FUNC_ARGS_1(Skill, SkillStep*, skillStep);
 
 protected:
-	/** 技能类型 */
-	SkillType _skillType;
-
-	/** 攻击范围的类型 */
-	SkillAttackType _skillAttackType;
-
-	/** 攻击的目标 */
-	Vector<BattleRole*> _targetRoles;
-
-	/** 攻击者 */
-	BattleRole *_srcRole;
 
 	bool _over;
+
+	bool _start;
 
 	SkillStep *_skillStep;
 };

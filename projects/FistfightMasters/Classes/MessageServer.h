@@ -42,6 +42,8 @@ public:
 
 	void addMessage(MessageItem* item);
 
+	CREATE_FUNC(MessageServer);
+
 	EXTERN_CREATE_INSTANCE_FUNC(MessageServer);
 
 private:

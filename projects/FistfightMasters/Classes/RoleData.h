@@ -79,7 +79,7 @@ public:
 
 	int _animiCount;
 
-	bool _ememy;
+	bool _enemy;
 
 	Point _grid;
 };

@@ -29,9 +29,8 @@ void SkillStep::stop(void)
 	setStart(false);
 }
 
-bool SkillStep::init(SkillStepData* stepData)
+bool SkillStep::init(void)
 {
-	setSkillStepData(stepData);
 	return true;
 }
 /*--------------  SkillHeroStep END ----------------*/
@@ -201,6 +200,7 @@ bool SequenceSkillStep::initWithTwoSteps(SkillStep *stepOne, SkillStep *stepTwo)
 /*--------------  SkillHeroStep BEGAN ----------------*/
 SkillHeroStep::SkillHeroStep(void)
 	: _targetRole(nullptr)
+	, _stepData(nullptr)
 {
 }
 
@@ -226,7 +226,7 @@ void SkillHeroStep::stop(void)
 
 void SkillHeroStep::update(float dt)
 {
-	if (!_start || !_stepData || _targetRole) return;
+	if (!_start || !_stepData || !_targetRole) return;
 
 	if (_step == 0)
 	{
@@ -237,17 +237,18 @@ void SkillHeroStep::update(float dt)
 	{
 		if (_targetRole->isAnimiPlayerOver())
 		{
-			_targetRole->setDefaultAction();
+			//_targetRole->setDefaultAction();
 			stop();
 			_step++;
 		}
 	}
 }
 
-bool SkillHeroStep::init(SkillStepData* stepData, BattleRole* targetRole)
+bool SkillHeroStep::init(SkillStepHeroData* stepData, BattleRole* targetRole)
 {
-	if (!SkillStep::init(stepData) || !targetRole) return false;
+	if (!SkillStep::init() || !targetRole) return false;
 
+	setSkillStepData(stepData);
 	_targetRole = targetRole;
 	CC_SAFE_RETAIN(targetRole);
 
@@ -259,6 +260,7 @@ bool SkillHeroStep::init(SkillStepData* stepData, BattleRole* targetRole)
 /*--------------  SkillNormalBombStep BEGAN ----------------*/
 SkillNormalBombStep::SkillNormalBombStep(void)
 	: _animiPlayer(nullptr)
+	, _stepData(nullptr)
 {
 }
 
@@ -301,10 +303,11 @@ void SkillNormalBombStep::update(float dt)
 	}
 }
 
-bool SkillNormalBombStep::init(SkillStepData* stepData)
+bool SkillNormalBombStep::init(SkillStepNormalBombData* stepData)
 {
-	if (!SkillStep::init(stepData)) return false;
-
+	if (!SkillStep::init()) return false;
+	
+	setSkillStepData(stepData);
 	_targetRoles.reserve(5);
 
 	return true;

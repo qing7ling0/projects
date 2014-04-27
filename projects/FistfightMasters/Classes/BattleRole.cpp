@@ -39,6 +39,8 @@ bool BattleRole::init(RoleData *data)
 	_roleData = data;
 	CC_SAFE_RETAIN(_roleData);
 
+	if (_roleData) _enemy = _roleData->_enemy;
+
 	BattleController::getInstance()->addChild(_node, ZORDER_BATTLE_ROLE);
 
 	initRoleAnimiPlayers();
@@ -75,7 +77,7 @@ void BattleRole::initRoleAnimiPlayers()
 			player->setAnchorPoint(Point(0, 0));
 			player->setScale(0.65f);
 			//player->start();
-			if (!_roleData->_ememy) player->setPositionY(35);
+			if (!_roleData->_enemy) player->setPositionY(35);
 			else player->setPositionY(-15);
 			_node->addChild(player);
 
@@ -110,7 +112,7 @@ void BattleRole::setCurrentAnimiActionIndex(int index, int loop, bool resume)
 		auto player = _animiPlayers.at(index);
 		if (!player) return;
 
-		if (_currentPlayer ) _currentPlayer->stop(true);
+		if (_currentPlayer ) _currentPlayer->stop(false);
 		_currentPlayer = player;
 		_currentPlayer->start(loop);
 

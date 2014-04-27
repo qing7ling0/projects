@@ -41,6 +41,7 @@ void PlayAnimiMonitor::update(float dt)
 
 		for(auto skill : *_attackData->_skills)
 		{
+			if (!skill->isStart() && !skill->isOver()) skill->start();
 			skill->update(dt);
 			if (!skill->isOver())
 			{

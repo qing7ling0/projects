@@ -44,7 +44,8 @@ Node* MessageItem::getNode()
 					FadeOut::create(1)
 				),
 				MoveBy::create(1, Point(0, -30)),
-				CallFunc::create(this, callfunc_selector(MessageItem::over))
+				CallFunc::create(this, callfunc_selector(MessageItem::over)),
+				NULL
 			));
 		_node = nodeBg;
 		CC_SAFE_RETAIN(_node);

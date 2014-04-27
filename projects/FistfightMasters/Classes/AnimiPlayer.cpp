@@ -59,19 +59,26 @@ bool AnimiPlayer::init(Vector<SpriteFrame*> frames, float delay)
 */
 void AnimiPlayer::start(unsigned int loop, bool visible)
 {
-	_animi->setLoops(true);
+	//_animi->setLoops(2);
 	_animiSprite->setVisible(true);
-	auto action = CCRepeatForever::create(CCAnimate::create(_animi));;
-	/*if (loop==0)
+	//auto action = RepeatForever::create(Animate::create(_animi));
+	Action *action = nullptr;
+	if (loop==0)
 		action = CCRepeatForever::create(CCAnimate::create(_animi));
-	else
+	else if (loop == 1)
+	{
 		action = Sequence::create(
 			CCAnimate::create(_animi),
 			CallFunc::create(
 				[&](){
 					stop(visible);
 				}),
-			NULL);*/
+			NULL);
+	}
+	else
+	{
+		action = Repeat::create(CCAnimate::create(_animi), loop);
+	}
 	action->setTag(9999);
 	_animiSprite->runAction(action);
 }

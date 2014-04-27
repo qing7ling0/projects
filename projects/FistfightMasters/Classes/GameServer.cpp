@@ -7,6 +7,7 @@
 #include "AttackData.h"
 #include "Task.h"
 #include "RoleData.h"
+#include "SelfMonitor.h"
 
 DEFINE_CREATE_INSTANCE_FUNC(GameServer);
 
@@ -19,6 +20,7 @@ GameServer::GameServer(void)
 GameServer::~GameServer(void)
 {
 	CC_SAFE_RELEASE(_roundInfo);
+	_instance = nullptr;
 }
 
 bool GameServer::init(void)
@@ -37,6 +39,10 @@ void GameServer::gameStart(void)
 }
 
 void GameServer::gameEnd(void)
+{
+}
+
+void GameServer::update(float dt)
 {
 }
 
@@ -69,4 +75,7 @@ void GameServer::nextRound(void)
 	round->_selfRound = _roundInfo->_selfRound;
 
 	Tasks::getInstance()->addTask(NewRoundTask::create(MonitorType::MonitorWaitNext, round));
+
+	if (!round->_selfRound)
+		attack();
 }

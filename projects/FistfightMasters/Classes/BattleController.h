@@ -6,6 +6,8 @@
 class BattleMap;
 class BattleRoles;
 class Monitor;
+class GameServer;
+class Tasks;
 
 class BattleController : public Layer
 {
@@ -43,5 +45,9 @@ private:
 	BattleRoles *_battleRoles;
 
 	Monitor *_monitor;
+
+	GameServer *_gameServer;
+
+	Tasks *_tasks;
 };
 

@@ -17,6 +17,8 @@ public:
 
 	void attack(void);
 
+	void update(float dt);
+
 	CREATE_FUNC(GameServer);
 
 	EXTERN_CREATE_INSTANCE_FUNC(GameServer);

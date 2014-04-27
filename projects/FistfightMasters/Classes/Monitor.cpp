@@ -1,6 +1,7 @@
 #include "Monitor.h"
 #include "BattleController.h"
 #include "MessageServer.h"
+#include "SelfMonitor.h"
 
 
 Monitor::Monitor(void)
@@ -61,7 +62,10 @@ void NewRoundMonitor::update(float dt)
 	if (_step == 0)
 	{
 		_step++;
-		BattleController::getInstance()->setMonitor(WaitingNext::create());
+		if (_roundInfo->_selfRound)
+			BattleController::getInstance()->setMonitor(SelfMonitor::create());
+		else
+			BattleController::getInstance()->setMonitor(WaitingNext::create());
 	}
 }
 

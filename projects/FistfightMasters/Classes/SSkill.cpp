@@ -2,6 +2,8 @@
 #include "BattleRole.h"
 #include "BattleRoles.h"
 #include "Skill.h"
+#include "RoleData.h"
+#include "SkillData.h"
 
 SSkill::SSkill(void)
 	: _stepDatas(new Vector<SkillStepData*>())
@@ -128,8 +130,11 @@ Skill* SRemoteSkill::doSkill(void)
 
 	SSkill::getCanAttackRoles(_skillAttackType, _attackRole, targetRoles);
 
-	auto step1 = SkillHeroStep::create(_stepDatas->at(0), _attackRole);
-	auto step2 = SkillNormalBombStep::create(_stepDatas->at(1));
+	SkillStepHeroData* stepData = static_cast<SkillStepHeroData*> (_stepDatas->at(0));
+	auto step1 = SkillHeroStep::create(stepData, _attackRole);
+
+	SkillStepNormalBombData* stepData2 = static_cast<SkillStepNormalBombData*> (_stepDatas->at(1));
+	auto step2 = SkillNormalBombStep::create(stepData2);
 	for(auto role : targetRoles)
 	{
 		step2->addTargetRole(role);

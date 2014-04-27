@@ -26,6 +26,7 @@ Tasks::Tasks(void)
 
 Tasks::~Tasks(void)
 {
+	_instance = nullptr;
 }
 
 bool Tasks::init(void)
@@ -46,7 +47,8 @@ void Tasks::doTasks(MonitorType monitorType)
 
 	Task *task = _tasks.at(0);
 	task->doTask(monitorType);
-	if (task->isFinish()) _tasks.eraseObject(task);
+	if (task->isFinish()) 
+		_tasks.eraseObject(task);
 }
 
 AttackTask::AttackTask(void)
@@ -66,6 +68,8 @@ bool AttackTask::init(AttackData *attackData, MonitorType monitorType)
 
 	_attackData = attackData;
 	CC_SAFE_RETAIN(_attackData);
+
+	return true;
 }
 
 void AttackTask::doTask(MonitorType monitorType)
@@ -73,6 +77,7 @@ void AttackTask::doTask(MonitorType monitorType)
 	if (_monitorType == monitorType)
 	{
 		BattleController::getInstance()->setMonitor(PlayAnimiMonitor::create(_attackData));
+		setFinish(true);
 	}
 }
 
@@ -81,6 +86,7 @@ void GameStartTask::doTask(MonitorType monitorType)
 	if (_monitorType == monitorType)
 	{
 		BattleController::getInstance()->setMonitor(GameStartMonitor::create());
+		setFinish(true);
 	}
 }
 
@@ -111,5 +117,6 @@ void NewRoundTask::doTask(MonitorType monitorType)
 	if (_monitorType == monitorType)
 	{
 		BattleController::getInstance()->setMonitor(NewRoundMonitor::create(_roundInfo));
+		setFinish(true);
 	}
 }

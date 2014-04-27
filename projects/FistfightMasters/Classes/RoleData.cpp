@@ -3,7 +3,7 @@
 
 RoleData::RoleData(void)
 	: _roleAnimiActions(nullptr)
-	, _ememy(false)
+	, _enemy(false)
 	, _animiCount(0)
 	, _grid(Point::ZERO)
 {

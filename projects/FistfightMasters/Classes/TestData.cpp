@@ -44,7 +44,7 @@ TestData::TestData(void)
 	skill->_skillAttackType = SkillAttackType::attackFront1;
 	roleData->_skillDatas.pushBack(skill);
 
-	roleData->_ememy = true;
+	roleData->_enemy = true;
 	roleData->_grid = Point(2, 2);
 	_roleDatas.pushBack(roleData);
 
@@ -89,7 +89,7 @@ TestData::TestData(void)
 	skill->_skillAttackType = SkillAttackType::attackFront1;
 	roleData->_skillDatas.pushBack(skill);
 
-	roleData->_ememy = false;
+	roleData->_enemy = false;
 	roleData->_grid = Point(7, 2);
 	_roleDatas.pushBack(roleData);
 	//-------------------------------------------------

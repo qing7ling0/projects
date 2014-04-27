@@ -27,7 +27,7 @@ public:
 
 	virtual void loadRes(void) {}
 
-	virtual bool init(SkillStepData* stepData);
+	virtual bool init();
 	
 	virtual void start(void);
 
@@ -47,7 +47,7 @@ public:
 
 	virtual SkillStepData* getSkillStepData(void) const { return nullptr; }
 
-	virtual void setSkillStepData(SkillStepData* skillStepData) {}
+	virtual void setSkillStepData(SkillStepData* skillStepData){}
 
 protected:
 	bool _over;
@@ -107,9 +107,9 @@ public:
 
 	virtual void update(float dt);
 
-	virtual bool init(SkillStepData* stepData, BattleRole* targetRole);
+	virtual bool init(SkillStepHeroData* stepData, BattleRole* targetRole);
 
-	F_CREATE_FUNC_ARGS_2(SkillHeroStep, SkillStepData*, stepData, BattleRole*, targetRole);
+	F_CREATE_FUNC_ARGS_2(SkillHeroStep, SkillStepHeroData*, stepData, BattleRole*, targetRole);
 
 	STE_SKILL_STEP_DATA(SkillStepHeroData*, _stepData);
 
@@ -131,11 +131,11 @@ public:
 
 	virtual void update(float dt);
 
-	virtual bool init(SkillStepData* stepData);
+	virtual bool init(SkillStepNormalBombData* stepData);
 
 	virtual void addTargetRole(BattleRole* targetRole);
 
-	F_CREATE_FUNC_ARGS_1(SkillNormalBombStep, SkillStepData*, stepData);
+	F_CREATE_FUNC_ARGS_1(SkillNormalBombStep, SkillStepNormalBombData*, stepData);
 
 	STE_SKILL_STEP_DATA(SkillStepNormalBombData*, _stepData);
 
