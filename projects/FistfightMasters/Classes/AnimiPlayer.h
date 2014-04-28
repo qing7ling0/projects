@@ -1,13 +1,15 @@
 #pragma once
 #include "RPGHead.h"
 
-class AnimiPlayer : public Layer
+class AnimiPlayer : public Layer, public Clonable
 {
 public:
 	AnimiPlayer(void);
 	~AnimiPlayer(void);
 
 	virtual bool init(Vector<SpriteFrame*> frames, float delay);
+
+	virtual bool init(Animation *animi);
 
 	virtual Animation* getAnimation() { return _animi; }
 
@@ -22,6 +24,8 @@ public:
 	virtual unsigned int getLoops();
 
 	virtual bool isOver() const;
+	
+	virtual AnimiPlayer* clone() const override;
 
 	static AnimiPlayer* create(Vector<SpriteFrame*> frames, float delay=0.05f);
 

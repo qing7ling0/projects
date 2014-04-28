@@ -78,9 +78,9 @@ std::vector<Point> SSkill::getCanAttackGrids(SkillAttackType skillAttackType, Ba
 
 	if (_doFlag == 1)
 	{
-		for(int i=0; i<count; i++)
+		for(int i=1; i<=count; i++)
 		{
-			point.x = srcGrid.x - i;
+			point.x = isLeft ? srcGrid.x - i : srcGrid.x + i;
 			point.y = srcGrid.y;
 			bool bounds = CHECK_GRID_BOUNDS(point.x, point.y);
 			if (!bounds) grids.push_back(Point(point));
@@ -90,7 +90,7 @@ std::vector<Point> SSkill::getCanAttackGrids(SkillAttackType skillAttackType, Ba
 	return grids;
 }
 
-void SSkill::getCanAttackRoles(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<BattleRole*> targetRoles)
+void SSkill::getCanAttackRoles(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<BattleRole*> &targetRoles)
 {
 	std::vector<Point> grids = getCanAttackGrids(skillAttackType, attackRole);
 
@@ -130,6 +130,7 @@ Skill* SRemoteSkill::doSkill(void)
 
 	SSkill::getCanAttackRoles(_skillAttackType, _attackRole, targetRoles);
 
+	if (targetRoles.size() == 0) return nullptr;
 	SkillStepHeroData* stepData = static_cast<SkillStepHeroData*> (_stepDatas->at(0));
 	auto step1 = SkillHeroStep::create(stepData, _attackRole);
 

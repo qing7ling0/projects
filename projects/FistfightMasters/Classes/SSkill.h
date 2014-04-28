@@ -16,7 +16,7 @@ public:
 
 	virtual Skill* doSkill(void) { return nullptr; };
 
-	static void getCanAttackRoles(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<BattleRole*> targetRoles);
+	static void getCanAttackRoles(SkillAttackType skillAttackType, BattleRole *attackRole, Vector<BattleRole*> &targetRoles);
 
 	static std::vector<Point> getCanAttackGrids(SkillAttackType skillAttackType, BattleRole *attackRole);
 

@@ -39,6 +39,16 @@ void Skill::stop()
 	if (_skillStep) _skillStep->stop();
 }
 
+void Skill::loadRes()
+{
+	if(_skillStep) _skillStep->loadRes();
+}
+
+void Skill::unloadRes()
+{
+	if(_skillStep) _skillStep->unloadRes();
+}
+
 void Skill::update(float dt)
 {
 	if(_skillStep) _skillStep->update(dt);

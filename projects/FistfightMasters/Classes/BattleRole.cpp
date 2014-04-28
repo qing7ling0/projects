@@ -54,7 +54,7 @@ bool BattleRole::init(RoleData *data)
 
 void BattleRole::setDefaultAction()
 {
-	setCurrentAnimiActionIndex(HERO_ANIMI_ACTION_STAND);
+	setCurrentAnimiActionIndex(HERO_ANIMI_ACTION_STAND, 0);
 }
 
 void BattleRole::initRoleAnimiPlayers()

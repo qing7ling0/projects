@@ -34,6 +34,8 @@ bool AnimiPlayer::init(Vector<SpriteFrame*> frames, float delay)
 		return false;
 	}
 
+	setAnchorPoint(Point(0,0));
+
 	_animi = Animation::createWithSpriteFrames(frames, delay);
 	CC_SAFE_RETAIN(_animi);
 	_animi->setRestoreOriginalFrame(true);
@@ -41,13 +43,22 @@ bool AnimiPlayer::init(Vector<SpriteFrame*> frames, float delay)
 	_animiSprite = Sprite::create();
 	addChild(_animiSprite);
 
-	/*auto line1 = LayerColor::create(Color4B(255, 0, 0, 255), 1, 200);
-	line1->setPositionY(-100);
-	addChild(line1);
+	return true;
+}
 
-	auto line2 = LayerColor::create(Color4B(255, 0, 0, 255), 200, 1);
-	line2->setPositionX(-100);
-	addChild(line2);*/
+bool AnimiPlayer::init(Animation *animi)
+{
+	if (!Layer::init())
+	{
+		return false;
+	}
+
+	setAnchorPoint(Point(0,0));
+	_animi = animi;
+	CC_SAFE_RETAIN(_animi);
+
+	_animiSprite = Sprite::create();
+	addChild(_animiSprite);
 
 	return true;
 }
@@ -115,4 +126,21 @@ bool AnimiPlayer::isOver() const
 	}
 
 	return true;
+}
+
+AnimiPlayer* AnimiPlayer::clone() const
+{
+	auto animiPlayer = new AnimiPlayer();
+	if (animiPlayer->init(_animi))
+	{
+		animiPlayer->autorelease();
+		return animiPlayer;
+	}
+	else
+	{
+		delete animiPlayer;
+		animiPlayer = nullptr;
+	}
+
+	return animiPlayer;
 }

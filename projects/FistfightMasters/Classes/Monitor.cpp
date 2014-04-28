@@ -7,6 +7,7 @@
 Monitor::Monitor(void)
 	: _over(false)
 	, _step(0)
+	, f_time(0)
 {
 }
 
@@ -78,7 +79,11 @@ void GameStartMonitor::update(float dt)
 {
 	if (_step == 0)
 	{
-		_step++;
-		BattleController::getInstance()->setMonitor(WaitingNext::create());
+		f_time += dt;
+		if (f_time > 3)
+		{
+			_step++;
+			BattleController::getInstance()->setMonitor(WaitingNext::create());
+		}
 	}
 }

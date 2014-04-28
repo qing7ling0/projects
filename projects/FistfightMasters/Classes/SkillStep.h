@@ -69,13 +69,13 @@ public:
 	
 	virtual void loadRes(void);
 
+	virtual void unloadRes(void);
+
 	virtual void start(void);
 
 	virtual void stop(void);
 
 	virtual void update(float dt);
-
-	virtual void unloadRes(void);
 
 	static SequenceSkillStep* create(SkillStep *step, ...);
 
@@ -122,8 +122,10 @@ class SkillNormalBombStep : public SkillStep
 public:
 	SkillNormalBombStep(void);
 	~SkillNormalBombStep(void);
-
+	
 	virtual void loadRes();
+
+	virtual void unloadRes();
 
 	virtual void start(void);
 
@@ -140,7 +142,7 @@ public:
 	STE_SKILL_STEP_DATA(SkillStepNormalBombData*, _stepData);
 
 protected:
-	AnimiPlayer *_animiPlayer;
+	Vector<SpriteFrame*> _frames;
 	Vector<BattleRole*> _targetRoles;
 };
 

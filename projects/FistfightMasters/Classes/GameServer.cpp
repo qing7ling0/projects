@@ -54,11 +54,12 @@ void GameServer::attack(void)
 	
 	for(BattleRole *role : roles)
 	{
-		auto skill = role->getCurrentSelectSkill();
-		if (skill)
+		auto skillData = role->getCurrentSelectSkill();
+		if (skillData)
 		{
-			auto sskill = SSkill::createSSKill(skill->_skillType, skill->_skillAttackType, role, *skill->_stepDatas);
-			attackData->addSkill(sskill->doSkill());
+			auto sskill = SSkill::createSSKill(skillData->_skillType, skillData->_skillAttackType, role, *skillData->_stepDatas);
+			auto skill = sskill->doSkill();
+			if (skill) attackData->addSkill(skill);
 		}
 	}
 

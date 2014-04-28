@@ -17,6 +17,10 @@ public:
 
 	virtual void stop();
 
+	virtual void loadRes();
+
+	virtual void unloadRes();
+
 	virtual void doDamage();
 
 	virtual const int getDamage() const;

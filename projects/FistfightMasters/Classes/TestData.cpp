@@ -41,7 +41,7 @@ TestData::TestData(void)
 	skill->_stepDatas->pushBack(skillStep2);
 
 	skill->_skillType = SkillType::SkillRemote;
-	skill->_skillAttackType = SkillAttackType::attackFront1;
+	skill->_skillAttackType = SkillAttackType::attackFront5;
 	roleData->_skillDatas.pushBack(skill);
 
 	roleData->_enemy = true;
@@ -86,7 +86,7 @@ TestData::TestData(void)
 	skill->_stepDatas->pushBack(skillStep2);
 
 	skill->_skillType = SkillType::SkillRemote;
-	skill->_skillAttackType = SkillAttackType::attackFront1;
+	skill->_skillAttackType = SkillAttackType::attackFront5;
 	roleData->_skillDatas.pushBack(skill);
 
 	roleData->_enemy = false;

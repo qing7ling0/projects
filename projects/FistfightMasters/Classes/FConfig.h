@@ -111,4 +111,28 @@ __TYPE__* __TYPE__::getInstance() \
 	return _instance; \
 }
 
+/**
+* 添加帧动画帧缓存
+*/
+#define ADD_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(path, name, frames, formatStr) \
+const char* animiPath = String::createWithFormat("%s%s.plist", path, name)->getCString(); \
+SpriteFrameCache::getInstance()->addSpriteFramesWithFile(animiPath);
+
+/**
+* 删除帧动画帧缓存
+*/
+#define REMOVE_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(path, name) \
+const char* animiPath = String::createWithFormat("%s%s.plist", path, name)->getCString(); \
+SpriteFrameCache::getInstance()->removeSpriteFrameByName(animiPath); 
+
+/**
+* 创建帧动画所有的帧
+*/
+#define CREATE_ANIMIPLAYER_FRAMES(name, formatStr, frames, actionStart, actionEnd) \
+for(int ___actionIndex___=actionStart; ___actionIndex___<=actionEnd; ___actionIndex___++) \
+{ \
+	const char* imgName = String::createWithFormat(formatStr, name, ___actionIndex___)->getCString(); \
+	frames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName(imgName)); \
+}
+
 extern Display D_display;

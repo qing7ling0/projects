@@ -1,6 +1,7 @@
 #include "SkillStep.h"
 #include "BattleRole.h"
 #include "BattleRoles.h"
+#include "BattleController.h"
 
 
 /*--------------  SkillStep BEGAN ----------------*/
@@ -237,7 +238,7 @@ void SkillHeroStep::update(float dt)
 	{
 		if (_targetRole->isAnimiPlayerOver())
 		{
-			//_targetRole->setDefaultAction();
+			_targetRole->setDefaultAction();
 			stop();
 			_step++;
 		}
@@ -259,8 +260,7 @@ bool SkillHeroStep::init(SkillStepHeroData* stepData, BattleRole* targetRole)
 
 /*--------------  SkillNormalBombStep BEGAN ----------------*/
 SkillNormalBombStep::SkillNormalBombStep(void)
-	: _animiPlayer(nullptr)
-	, _stepData(nullptr)
+	: _stepData(nullptr)
 {
 }
 
@@ -270,7 +270,22 @@ SkillNormalBombStep::~SkillNormalBombStep(void)
 
 void SkillNormalBombStep::loadRes()
 {
+	if (_stepData)
+	{
 
+		ADD_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(_stepData->_animiPath, _stepData->_animiName, "%s%s.plist");
+
+		CREATE_ANIMIPLAYER_FRAMES(_stepData->_animiName, "%s_%03d.png", _frames, _stepData->_animiIndexs[0], _stepData->_animiIndexs[1]);
+
+	}
+}
+
+void SkillNormalBombStep::unloadRes()
+{
+	if (_stepData)
+	{
+		REMOVE_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(_stepData->_animiPath, _stepData->_animiName);
+	}
 }
 
 void SkillNormalBombStep::start(void)
@@ -290,16 +305,37 @@ void SkillNormalBombStep::update(float dt)
 
 	if (_step == 0)
 	{
+		for(int i=0; i<_targetRoles.size(); i++)
+		{
+			auto player = AnimiPlayer::create(_frames, 0.2f);
+			player->setTag(1000+i);
+			player->start(1);
+			player->setPosition(GRID_CONVER_TO_PIXEL(_targetRoles.at(i)->getGridIndex().x, _targetRoles.at(i)->getGridIndex().y));
+			BattleController::getInstance()->addChild(player, ZORDER_BATTLE_EFFECT);
+		}
 		_step ++;
 	}
 	else if (_step == 1)
 	{
-		/*if (_targetRole->isAnimiPlayerOver())
+		bool over = true;
+		for(int i=0; i<_targetRoles.size(); i++)
 		{
-			_targetRole->setDefaultAction();
-			stop();
-			_step++;
-		}*/
+			auto node = BattleController::getInstance()->getChildByTag(1000+i);
+			if (node)
+			{
+				AnimiPlayer *player = static_cast<AnimiPlayer *>(node);
+				if (player->isOver())
+				{
+					player->removeFromParent();
+				}
+				else
+				{
+					over = false;
+				}
+			}
+		}
+		if (over) setOver(over);
+		_step++;
 	}
 }
 

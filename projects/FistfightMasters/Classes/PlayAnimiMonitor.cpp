@@ -26,11 +26,24 @@ bool PlayAnimiMonitor::init(AttackData *attackData)
 
 void PlayAnimiMonitor::onEnter()
 {
-
+	if (_attackData && _attackData->_skills)
+	{
+		for(auto skill : *_attackData->_skills)
+		{
+			if (skill) skill->loadRes();
+		}
+	}
 }
 
 void PlayAnimiMonitor::onExit()
 {
+	if (_attackData && _attackData->_skills)
+	{
+		for(auto skill : *_attackData->_skills)
+		{
+			if (skill) skill->unloadRes();
+		}
+	}
 }
 
 void PlayAnimiMonitor::update(float dt)

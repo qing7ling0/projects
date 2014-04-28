@@ -17,6 +17,8 @@
 
 #define ZORDER_BATTLE_ROLE				1000
 
+#define ZORDER_BATTLE_EFFECT			2000
+
 #define ZORDER_MESSAGE					99999
 
 
