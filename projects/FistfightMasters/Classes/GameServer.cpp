@@ -78,5 +78,8 @@ void GameServer::nextRound(void)
 	Tasks::getInstance()->addTask(NewRoundTask::create(MonitorType::MonitorWaitNext, round));
 
 	if (!round->_selfRound)
+	{
 		attack();
+		nextRound();
+	}
 }

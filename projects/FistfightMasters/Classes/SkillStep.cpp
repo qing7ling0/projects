@@ -334,8 +334,11 @@ void SkillNormalBombStep::update(float dt)
 				}
 			}
 		}
-		if (over) setOver(over);
-		_step++;
+		if (over)
+		{
+			setOver(over);
+			_step++;
+		}
 	}
 }
 

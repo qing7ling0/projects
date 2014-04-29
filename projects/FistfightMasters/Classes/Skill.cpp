@@ -51,7 +51,14 @@ void Skill::unloadRes()
 
 void Skill::update(float dt)
 {
-	if(_skillStep) _skillStep->update(dt);
+	if(_skillStep)
+	{
+		_skillStep->update(dt);
+		if (_skillStep->isOver())
+		{
+			setOver(true);
+		}
+	}
 }
 
 void Skill::doDamage()
