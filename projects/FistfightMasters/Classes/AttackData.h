@@ -1,7 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 
-class Skill;
+#include "Skill.h"
 
 class AttackData : public Object
 {
@@ -15,6 +15,6 @@ public:
 	CREATE_FUNC(AttackData);
 
 public:
-	Vector<Skill*> *_skills;
+	Vector<Skill*> _skills;
 };
 
