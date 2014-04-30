@@ -1,8 +1,6 @@
 #include "Task.h"
-#include "AttackData.h"
 #include "BattleController.h"
 #include "PlayAnimiMonitor.h"
-#include "RoleData.h"
 #include "Monitor.h"
 
 DEFINE_CREATE_INSTANCE_FUNC(Tasks);
@@ -59,6 +57,7 @@ AttackTask::AttackTask(void)
 
 AttackTask::~AttackTask(void)
 {
+	_monitorType = MonitorType::MonitorAll;
 	CC_SAFE_RELEASE(_attackData);
 }
 
@@ -76,8 +75,8 @@ void AttackTask::doTask(MonitorType monitorType)
 {
 	if (_monitorType == monitorType)
 	{
-		BattleController::getInstance()->setMonitor(PlayAnimiMonitor::create(_attackData));
 		setFinish(true);
+		BattleController::getInstance()->setMonitor(PlayAnimiMonitor::create(_attackData));
 	}
 }
 
@@ -85,8 +84,8 @@ void GameStartTask::doTask(MonitorType monitorType)
 {
 	if (_monitorType == monitorType)
 	{
-		BattleController::getInstance()->setMonitor(GameStartMonitor::create());
 		setFinish(true);
+		BattleController::getInstance()->setMonitor(GameStartMonitor::create());
 	}
 }
 
@@ -116,7 +115,7 @@ void NewRoundTask::doTask(MonitorType monitorType)
 {
 	if (_monitorType == monitorType)
 	{
-		BattleController::getInstance()->setMonitor(NewRoundMonitor::create(_roundInfo));
 		setFinish(true);
+		BattleController::getInstance()->setMonitor(NewRoundMonitor::create(_roundInfo));
 	}
 }

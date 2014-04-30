@@ -39,7 +39,11 @@ bool BattleRole::init(RoleData *data)
 	_roleData = data;
 	CC_SAFE_RETAIN(_roleData);
 
-	if (_roleData) _enemy = _roleData->_enemy;
+	if (_roleData)
+	{
+		_enemy = _roleData->_enemy;
+		setLeft(!_roleData->_enemy);
+	}
 
 	BattleController::getInstance()->addChild(_node, ZORDER_BATTLE_ROLE);
 

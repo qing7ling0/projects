@@ -22,10 +22,13 @@ bool SelfMonitor::init(void)
 
 void SelfMonitor::onEnter()
 {
+	Monitor::onEnter();
+	MessageServer::getInstance()->addMessage(MessageItem::create("ÂÖµ½Äã¹¥»÷À²£¡"));
 }
 
 void SelfMonitor::onExit()
 {
+	Monitor::onExit();
 }
 
 void SelfMonitor::update(float dt)
@@ -38,7 +41,7 @@ void SelfMonitor::update(float dt)
 	else if (_step == 1)
 	{
 		f_time += dt;
-		if (f_time > 2)
+		if (f_time > 1)
 		{
 			_step++;
 		}
@@ -46,9 +49,10 @@ void SelfMonitor::update(float dt)
 	else if (_step == 2)
 	{
 		setOver(true);
-		BattleController::getInstance()->setMonitor(WaitingNext::create());
-		GameServer::getInstance()->attack();
 		_step++;
+		GameServer::getInstance()->attack();
+		GameServer::getInstance()->nextRound();
+		BattleController::getInstance()->setMonitor(WaitingNext::create());
 	}
 }
 

@@ -38,12 +38,11 @@ Node* MessageItem::getNode()
 
 		nodeBg->setPosition(D_display.getCenterPoint());
 		nodeBg->runAction(Sequence::create(
-				DelayTime::create(1),
+				DelayTime::create(2),
 				Spawn::create(
 					MoveBy::create(1, Point(0, -30)),
 					FadeOut::create(1)
 				),
-				MoveBy::create(1, Point(0, -30)),
 				CallFunc::create(this, callfunc_selector(MessageItem::over)),
 				NULL
 			));

@@ -35,7 +35,7 @@ bool GameServer::init(void)
 void GameServer::gameStart(void)
 {
 	Tasks::getInstance()->addTask(GameStartTask::create(MonitorType::MonitorWaitNext));
-	nextRound();	
+	nextRound();
 }
 
 void GameServer::gameEnd(void)
@@ -62,7 +62,6 @@ void GameServer::attack(void)
 			if (skill) attackData->addSkill(skill);
 		}
 	}
-
 	Tasks::getInstance()->addTask(AttackTask::create(attackData, MonitorType::MonitorWaitNext));
 }
 

@@ -5,6 +5,7 @@
 #include "cocostudio/CocoStudio.h"
 #include "gui/CocosGUI.h"
 #include "AnimiPlayer.h"
+#include "MessageServer.h"
 
 using namespace cocostudio;
 using namespace cocos2d;

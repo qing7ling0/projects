@@ -13,7 +13,7 @@ AttackData::~AttackData(void)
 
 bool AttackData::init()
 {
-	_skills.reserve(2);
+	_skills.reserve(1);
 	return true;
 }
 

@@ -2,9 +2,8 @@
 #include "RPGHead.h"
 #include "RoleData.h"
 #include "BattleConfig.h"
+#include "AttackData.h"
 
-class AttackData;
-class RoundInfo;
 
 class Task : public Object
 {

@@ -19,12 +19,13 @@ public:
 
 	void update(float dt);
 
+	void nextRound();
+
 	CREATE_FUNC(GameServer);
 
 	EXTERN_CREATE_INSTANCE_FUNC(GameServer);
 
 protected:
-	void nextRound();
 
 protected:
 	SRoundInfo *_roundInfo;

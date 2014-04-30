@@ -26,7 +26,7 @@ bool PlayAnimiMonitor::init(AttackData *attackData)
 
 void PlayAnimiMonitor::onEnter()
 {
-	if (_attackData)
+	if (_attackData && _attackData->_skills.size() > 0)
 	{
 		for(auto skill : _attackData->_skills)
 		{
@@ -37,7 +37,7 @@ void PlayAnimiMonitor::onEnter()
 
 void PlayAnimiMonitor::onExit()
 {
-	if (_attackData)
+	if (_attackData && _attackData->_skills.size() > 0)
 	{
 		for(auto skill : _attackData->_skills)
 		{
@@ -48,10 +48,9 @@ void PlayAnimiMonitor::onExit()
 
 void PlayAnimiMonitor::update(float dt)
 {
-	if (_attackData)
+	bool over = true;
+	if (_attackData && _attackData->_skills.size() > 0)
 	{
-		bool over = true;
-
 		for(auto skill : _attackData->_skills)
 		{
 			if (!skill->isStart() && !skill->isOver()) skill->start();
@@ -61,7 +60,7 @@ void PlayAnimiMonitor::update(float dt)
 				over = false;
 			}
 		}
-
-		if (over) BattleController::getInstance()->setMonitor(WaitingNext::create());
 	}
+
+	if (over) BattleController::getInstance()->setMonitor(WaitingNext::create());
 }

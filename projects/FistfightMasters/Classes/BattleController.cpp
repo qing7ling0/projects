@@ -88,6 +88,8 @@ void BattleController::gameStart()
 
 void BattleController::setMonitor(Monitor *monitor)
 {
+	if (_monitor == monitor) return;
+
 	if (_monitor)
 	{
 		_monitor->setOver(true);
