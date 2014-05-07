@@ -22,6 +22,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
+
 #include "CCFileUtilsAndroid.h"
 #include "platform/CCCommon.h"
 #include "jni/Java_org_cocos2dx_lib_Cocos2dxHelper.h"
@@ -77,9 +81,9 @@ bool FileUtilsAndroid::init()
     return FileUtils::init();
 }
 
-bool FileUtilsAndroid::isFileExist(const std::string& strFilePath) const
+bool FileUtilsAndroid::isFileExistInternal(const std::string& strFilePath) const
 {
-    if (0 == strFilePath.length())
+    if (strFilePath.empty())
     {
         return false;
     }
@@ -239,6 +243,9 @@ Data FileUtilsAndroid::getData(const std::string& filename, bool forString)
 std::string FileUtilsAndroid::getStringFromFile(const std::string& filename)
 {
     Data data = getData(filename, true);
+    if (data.isNull())
+        return "";
+
     std::string ret((const char*)data.getBytes());
     return ret;
 }
@@ -353,3 +360,5 @@ string FileUtilsAndroid::getWritablePath() const
 }
 
 NS_CC_END
+
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID

@@ -76,7 +76,11 @@ ClippingNode::ClippingNode()
 
 ClippingNode::~ClippingNode()
 {
-    CC_SAFE_RELEASE(_stencil);
+    if (_stencil)
+    {
+        _stencil->stopAllActions();
+        _stencil->release();
+    }
 }
 
 ClippingNode* ClippingNode::create()
@@ -199,17 +203,24 @@ void ClippingNode::drawFullScreenQuadClearStencil()
     kmGLPopMatrix();
 }
 
-void ClippingNode::visit()
+void ClippingNode::visit(Renderer *renderer, const kmMat4 &parentTransform, bool parentTransformUpdated)
 {
     if(!_visible)
         return;
     
+    bool dirty = parentTransformUpdated || _transformUpdated;
+    if(dirty)
+        _modelViewTransform = transform(parentTransform);
+    _transformUpdated = false;
+
+    // IMPORTANT:
+    // To ease the migration to v3.0, we still support the kmGL stack,
+    // but it is deprecated and your code should not rely on it
     kmGLPushMatrix();
-    transform();
+    kmGLLoadMatrix(&_modelViewTransform);
+
     //Add group command
-    
-    Renderer* renderer = Director::getInstance()->getRenderer();
-    
+        
     _groupCommand.init(_globalZOrder);
     renderer->addCommand(&_groupCommand);
 
@@ -224,7 +235,7 @@ void ClippingNode::visit()
 #else
         // since glAlphaTest do not exists in OES, use a shader that writes
         // pixel only if greater than an alpha threshold
-        GLProgram *program = ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST);
+        GLProgram *program = ShaderCache::getInstance()->getProgram(GLProgram::SHADER_NAME_POSITION_TEXTURE_ALPHA_TEST_NO_MV);
         GLint alphaValueLocation = glGetUniformLocation(program->getProgram(), GLProgram::UNIFORM_NAME_ALPHA_TEST_VALUE);
         // set our alphaThreshold
         program->use();
@@ -236,7 +247,7 @@ void ClippingNode::visit()
 #endif
 
     }
-    _stencil->visit();
+    _stencil->visit(renderer, _modelViewTransform, dirty);
 
     _afterDrawStencilCmd.init(_globalZOrder);
     _afterDrawStencilCmd.func = CC_CALLBACK_0(ClippingNode::onAfterDrawStencil, this);
@@ -253,19 +264,19 @@ void ClippingNode::visit()
             auto node = _children.at(i);
             
             if ( node && node->getLocalZOrder() < 0 )
-                node->visit();
+                node->visit(renderer, _modelViewTransform, dirty);
             else
                 break;
         }
         // self draw
-        this->draw();
+        this->draw(renderer, _modelViewTransform, dirty);
         
         for(auto it=_children.cbegin()+i; it != _children.cend(); ++it)
-            (*it)->visit();
+            (*it)->visit(renderer, _modelViewTransform, dirty);
     }
     else
     {
-        this->draw();
+        this->draw(renderer, _modelViewTransform, dirty);
     }
 
     _afterVisitCmd.init(_globalZOrder);
@@ -284,9 +295,9 @@ Node* ClippingNode::getStencil() const
 
 void ClippingNode::setStencil(Node *stencil)
 {
+    CC_SAFE_RETAIN(stencil);
     CC_SAFE_RELEASE(_stencil);
     _stencil = stencil;
-    CC_SAFE_RETAIN(_stencil);
 }
 
 GLfloat ClippingNode::getAlphaThreshold() const

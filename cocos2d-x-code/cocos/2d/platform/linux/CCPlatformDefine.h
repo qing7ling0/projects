@@ -22,16 +22,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
 #ifndef __CCPLATFORMDEFINE_H__
 #define __CCPLATFORMDEFINE_H__
 
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
+
 #include <string.h>
 
-#if defined(_USRDLL)
-#define CC_DLL __attribute__ ((visibility ("default")))
-#else         /* use a DLL library */
-#define CC_DLL __attribute__ ((visibility ("default")))
-#endif
+#define CC_DLL 
 
 #include <assert.h>
 #define CC_ASSERT(cond)    assert(cond)
@@ -47,5 +47,6 @@ THE SOFTWARE.
 #endif
 
 
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
 
 #endif /* __CCPLATFORMDEFINE_H__*/

@@ -26,11 +26,13 @@
 #ifndef __SCRIPT_SUPPORT_H__
 #define __SCRIPT_SUPPORT_H__
 
+#include "ccConfig.h"
+#if CC_ENABLE_SCRIPT_BINDING
+
 #include "platform/CCCommon.h"
 #include "CCTouch.h"
 #include "CCEventTouch.h"
 #include "CCEventKeyboard.h"
-#include "CCSet.h"
 #include <map>
 #include <string>
 #include <list>
@@ -39,7 +41,7 @@ typedef struct lua_State lua_State;
 
 NS_CC_BEGIN
 
-class Timer;
+class TimerScriptHandler;
 class Layer;
 class MenuItem;
 class CallFunc;
@@ -51,7 +53,7 @@ enum ccScriptType {
     kScriptTypeJavascript
 };
 
-class ScriptHandlerEntry : public Object
+class ScriptHandlerEntry : public Ref
 {
 public:
     static ScriptHandlerEntry* create(int handler);
@@ -59,7 +61,7 @@ public:
      * @js NA
      * @lua NA
      */
-    ~ScriptHandlerEntry(void);
+    virtual ~ScriptHandlerEntry();
     
     int getHandler(void) {
         return _handler;
@@ -100,12 +102,12 @@ public:
      * @js NA
      * @lua NA
      */
-    ~SchedulerScriptHandlerEntry(void);
+    virtual ~SchedulerScriptHandlerEntry();
     /**
      * @js NA
      * @lua NA
      */
-    cocos2d::Timer* getTimer(void) {
+    TimerScriptHandler* getTimer(void) {
         return _timer;
     }
     /**
@@ -140,7 +142,7 @@ private:
     }
     bool init(float interval, bool paused);
     
-    cocos2d::Timer*   _timer;
+    TimerScriptHandler*   _timer;
     bool                _paused;
     bool                _markedForDeletion;
 };
@@ -159,7 +161,7 @@ public:
      * @js NA
      * @lua NA
      */
-    ~TouchScriptHandlerEntry(void);
+    virtual ~TouchScriptHandlerEntry();
     /**
      * @js NA
      * @lua NA
@@ -209,6 +211,7 @@ enum ScriptEventType
     kAccelerometerEvent,
     kControlEvent,
     kCommonEvent,
+    kComponentEvent
 };
 
 struct BasicScriptData
@@ -255,16 +258,18 @@ struct TouchesScriptData
     EventTouch::EventCode actionType;
     void* nativeObject;
     const std::vector<Touch*>& touches;
+    Event* event;
     
     // Constructor
     /**
      * @js NA
      * @lua NA
      */
-    TouchesScriptData(EventTouch::EventCode inActionType, void* inNativeObject, const std::vector<Touch*>& inTouches)
+    TouchesScriptData(EventTouch::EventCode inActionType, void* inNativeObject, const std::vector<Touch*>& inTouches, Event* evt)
     : actionType(inActionType),
       nativeObject(inNativeObject),
-      touches(inTouches)
+      touches(inTouches),
+      event(evt)
     {
     }
 };
@@ -274,16 +279,18 @@ struct TouchScriptData
     EventTouch::EventCode actionType;
     void* nativeObject;
     Touch* touch;
+    Event* event;
     
     // Constructor
     /**
      * @js NA
      * @lua NA
      */
-    TouchScriptData(EventTouch::EventCode inActionType, void* inNativeObject, Touch* inTouch)
+    TouchScriptData(EventTouch::EventCode inActionType, void* inNativeObject, Touch* inTouch, Event* evt)
     : actionType(inActionType),
       nativeObject(inNativeObject),
-      touch(inTouch)
+      touch(inTouch),
+      event(evt)
     {
     }
 };
@@ -309,7 +316,7 @@ struct CommonScriptData
     // Now this struct is only used in LuaBinding.
     int handler;
     char eventName[64];
-    Object* eventSource;
+    Ref* eventSource;
     char eventSourceClassName[64];
     
     // Constructor
@@ -317,7 +324,7 @@ struct CommonScriptData
      * @js NA
      * @lua NA
      */
-    CommonScriptData(int inHandler,const char* inName,Object* inSource = nullptr,const char* inClassName = nullptr)
+    CommonScriptData(int inHandler,const char* inName, Ref* inSource = nullptr,const char* inClassName = nullptr)
     : handler(inHandler),
       eventSource(inSource)
     {
@@ -357,6 +364,9 @@ struct ScriptEvent
 class CC_DLL ScriptEngineProtocol
 {
 public:
+    ScriptEngineProtocol()
+    {};
+    
     /**
      * @js NA
      * @lua NA
@@ -373,7 +383,7 @@ public:
      * @js NA
      * @lua NA
      */
-    virtual void removeScriptObjectByObject(Object* obj) = 0;
+    virtual void removeScriptObjectByObject(Ref* obj) = 0;
     
     /** Remove script function handler, only LuaEngine class need to implement this function. 
      * @js NA
@@ -427,6 +437,9 @@ public:
      * @lua NA
      */
     virtual bool handleAssert(const char *msg) = 0;
+    
+    virtual void setCalledFromScript(bool callFromScript) { CC_UNUSED_PARAM(callFromScript); };
+    virtual bool isCalledFromScript() { return false; };
     
     enum class ConfigType
     {
@@ -501,5 +514,7 @@ private:
 /// @}
 
 NS_CC_END
+
+#endif // #if CC_ENABLE_SCRIPT_BINDING
 
 #endif // __SCRIPT_SUPPORT_H__

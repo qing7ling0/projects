@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __CC_APPLICATION_IOS_H__
 #define __CC_APPLICATION_IOS_H__
 
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
 #include "platform/CCCommon.h"
 #include "platform/CCApplicationProtocol.h"
 
@@ -73,6 +76,12 @@ public:
     virtual LanguageType getCurrentLanguage();
     
     /**
+     @brief Get current language iso 639-1 code
+     @return Current language iso 639-1 code
+     */
+    virtual const char * getCurrentLanguageCode();
+    
+    /**
      @brief Get target platform
      */
     virtual Platform getTargetPlatform();
@@ -89,5 +98,7 @@ protected:
 };
 
 NS_CC_END
+
+#endif // CC_PLATFORM_IOS
 
 #endif    // end of __CC_APPLICATION_IOS_H__

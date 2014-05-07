@@ -51,6 +51,7 @@ THE SOFTWARE.
 #include "CCActionInstant.h"
 #include "CCActionTween.h"
 #include "CCActionCatmullRom.h"
+#include "CCTweenFunction.h"
 
 // base_nodes
 #include "CCNode.h"
@@ -58,19 +59,11 @@ THE SOFTWARE.
 
 // cocoa
 #include "CCAffineTransform.h"
-#include "CCDictionary.h"
-#include "CCObject.h"
-#include "CCArray.h"
+#include "CCRef.h"
 #include "CCVector.h"
 #include "CCMap.h"
 #include "CCGeometry.h"
-#include "CCSet.h"
 #include "CCAutoreleasePool.h"
-#include "CCInteger.h"
-#include "CCFloat.h"
-#include "CCDouble.h"
-#include "CCBool.h"
-#include "CCString.h"
 #include "CCNS.h"
 #include "CCData.h"
 #include "CCValue.h"
@@ -95,6 +88,7 @@ THE SOFTWARE.
 #include "CCLabelTTF.h"
 #include "CCLabelBMFont.h"
 #include "CCLabel.h"
+#include "CCFontFNT.h"
 
 // layers_scenes_transitions_nodes
 #include "CCLayer.h"
@@ -154,45 +148,61 @@ THE SOFTWARE.
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     #include "platform/ios/CCApplication.h"
-    #include "platform/ios/CCEGLView.h"
+    #include "platform/ios/CCGLView.h"
     #include "platform/ios/CCGL.h"
     #include "platform/ios/CCStdC.h"
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_IOS
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     #include "platform/android/CCApplication.h"
-    #include "platform/android/CCEGLView.h"
+    #include "platform/android/CCGLView.h"
     #include "platform/android/CCGL.h"
     #include "platform/android/CCStdC.h"
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY)
     #include "platform/blackberry/CCApplication.h"
-    #include "platform/blackberry/CCEGLView.h"
+    #include "platform/blackberry/CCGLView.h"
     #include "platform/blackberry/CCGL.h"
     #include "platform/blackberry/CCStdC.h"
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_BLACKBERRY
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
     #include "platform/win32/CCApplication.h"
-    #include "platform/desktop/CCEGLView.h"
+    #include "platform/desktop/CCGLView.h"
     #include "platform/win32/CCGL.h"
     #include "platform/win32/CCStdC.h"
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
     #include "platform/mac/CCApplication.h"
-    #include "platform/desktop/CCEGLView.h"
+    #include "platform/desktop/CCGLView.h"
     #include "platform/mac/CCGL.h"
     #include "platform/mac/CCStdC.h"
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_MAC
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
     #include "platform/linux/CCApplication.h"
-    #include "platform/desktop/CCEGLView.h"
+    #include "platform/desktop/CCGLView.h"
     #include "platform/linux/CCGL.h"
     #include "platform/linux/CCStdC.h"
 #endif // CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+	#include "platform/winrt/CCApplication.h"
+	#include "platform/winrt/CCGLView.h"
+	#include "platform/winrt/CCGL.h"
+	#include "platform/winrt/CCStdC.h"
+	#include "platform/winrt/CCPrecompiledShaders.h"
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_WINRT
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WP8)
+	#include "platform/winrt/CCApplication.h"
+	#include "platform/wp8/CCGLView.h"
+	#include "platform/winrt/CCGL.h"
+	#include "platform/winrt/CCStdC.h"
+	#include "platform/winrt/CCPrecompiledShaders.h"
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_WP8
 
 // script_support
 #include "CCScriptSupport.h"
@@ -213,7 +223,6 @@ THE SOFTWARE.
 
 // support
 #include "ccUTF8.h"
-#include "CCNotificationCenter.h"
 #include "CCProfiling.h"
 #include "CCConsole.h"
 #include "CCUserDefault.h"
@@ -260,7 +269,18 @@ THE SOFTWARE.
 #include "CCComponentContainer.h"
 
 // Deprecated include
-#include "CCDeprecated.h"
+#include "deprecated/CCDictionary.h"
+#include "deprecated/CCArray.h"
+#include "deprecated/CCSet.h"
+#include "deprecated/CCInteger.h"
+#include "deprecated/CCFloat.h"
+#include "deprecated/CCDouble.h"
+#include "deprecated/CCBool.h"
+#include "deprecated/CCString.h"
+#include "deprecated/CCNotificationCenter.h"
+// CCDeprecated.h must be included at the end
+#include "deprecated/CCDeprecated.h"
+
 
 NS_CC_BEGIN
 

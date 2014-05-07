@@ -22,6 +22,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+
 #include "CCFileUtilsWin32.h"
 #include "platform/CCCommon.h"
 #include <Shlobj.h>
@@ -92,7 +96,7 @@ bool FileUtilsWin32::init()
     return FileUtils::init();
 }
 
-bool FileUtilsWin32::isFileExist(const std::string& strFilePath) const
+bool FileUtilsWin32::isFileExistInternal(const std::string& strFilePath) const
 {
     if (0 == strFilePath.length())
     {
@@ -106,9 +110,12 @@ bool FileUtilsWin32::isFileExist(const std::string& strFilePath) const
     }
 
     WCHAR utf16Buf[CC_MAX_PATH] = {0};
-    MultiByteToWideChar(CP_UTF8, 0, strPath.c_str(), -1, utf16Buf, sizeof(utf16Buf));
+    MultiByteToWideChar(CP_UTF8, 0, strPath.c_str(), -1, utf16Buf, sizeof(utf16Buf)/sizeof(utf16Buf[0]));
 
-    return GetFileAttributesW(utf16Buf) != -1 ? true : false;
+    DWORD attr = GetFileAttributesW(utf16Buf);
+    if(attr == INVALID_FILE_ATTRIBUTES || (attr & FILE_ATTRIBUTE_DIRECTORY))
+        return false;   //  not a file
+    return true;
 }
 
 bool FileUtilsWin32::isAbsolutePath(const std::string& strPath) const
@@ -124,8 +131,13 @@ bool FileUtilsWin32::isAbsolutePath(const std::string& strPath) const
 
 static Data getData(const std::string& filename, bool forString)
 {
+    if (filename.empty())
+    {
+        return Data::Null;
+    }
+
     unsigned char *buffer = nullptr;
-    CCASSERT(!filename.empty(), "Invalid parameters.");
+
     size_t size = 0;
     do
     {
@@ -133,7 +145,7 @@ static Data getData(const std::string& filename, bool forString)
         std::string fullPath = FileUtils::getInstance()->fullPathForFilename(filename);
 
         WCHAR wszBuf[CC_MAX_PATH] = {0};
-        MultiByteToWideChar(CP_UTF8, 0, fullPath.c_str(), -1, wszBuf, sizeof(wszBuf));
+        MultiByteToWideChar(CP_UTF8, 0, fullPath.c_str(), -1, wszBuf, sizeof(wszBuf)/sizeof(wszBuf[0]));
 
         HANDLE fileHandle = ::CreateFileW(wszBuf, GENERIC_READ, 0, NULL, OPEN_EXISTING, NULL, NULL);
         CC_BREAK_IF(fileHandle == INVALID_HANDLE_VALUE);
@@ -184,6 +196,11 @@ static Data getData(const std::string& filename, bool forString)
 std::string FileUtilsWin32::getStringFromFile(const std::string& filename)
 {
     Data data = getData(filename, true);
+	if (data.isNull())
+	{
+		return "";
+	}
+
     std::string ret((const char*)data.getBytes());
     return ret;
 }
@@ -203,7 +220,7 @@ unsigned char* FileUtilsWin32::getFileData(const std::string& filename, const ch
         std::string fullPath = fullPathForFilename(filename);
 
         WCHAR wszBuf[CC_MAX_PATH] = {0};
-        MultiByteToWideChar(CP_UTF8, 0, fullPath.c_str(), -1, wszBuf, sizeof(wszBuf));
+        MultiByteToWideChar(CP_UTF8, 0, fullPath.c_str(), -1, wszBuf, sizeof(wszBuf)/sizeof(wszBuf[0]));
 
         HANDLE fileHandle = ::CreateFileW(wszBuf, GENERIC_READ, 0, NULL, OPEN_EXISTING, NULL, NULL);
         CC_BREAK_IF(fileHandle == INVALID_HANDLE_VALUE);
@@ -285,7 +302,7 @@ string FileUtilsWin32::getWritablePath() const
                 // Create directory
                 if (SUCCEEDED(SHCreateDirectoryExA(NULL, ret.c_str(), NULL)))
                 {
-                    return ret;
+                    return convertPathFormatToUnixStyle(ret);
                 }
             }
         }
@@ -303,3 +320,6 @@ string FileUtilsWin32::getWritablePath() const
 }
 
 NS_CC_END
+
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+

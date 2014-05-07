@@ -112,7 +112,7 @@ public:
     {
         CC_UNUSED_PARAM(ctx);
         CC_UNUSED_PARAM(atts);
-        std::string sName(name);
+        const std::string sName(name);
         if( sName == "dict" )
         {
 			if(_resultType == SAX_RESULT_DICT && _rootDict.empty())
@@ -203,7 +203,7 @@ public:
     {
         CC_UNUSED_PARAM(ctx);
         SAXState curState = _stateStack.empty() ? SAX_DICT : _stateStack.top();
-        std::string sName((char*)name);
+        const std::string sName((char*)name);
         if( sName == "dict" )
         {
             _stateStack.pop();
@@ -280,7 +280,7 @@ public:
         }
 
         SAXState curState = _stateStack.empty() ? SAX_DICT : _stateStack.top();
-        std::string text = std::string((char*)ch,0,len);
+        const std::string text = std::string((char*)ch,0,len);
 
         switch(_state)
         {
@@ -307,14 +307,14 @@ public:
 
 ValueMap FileUtils::getValueMapFromFile(const std::string& filename)
 {
-    std::string fullPath = fullPathForFilename(filename.c_str());
+    const std::string fullPath = fullPathForFilename(filename.c_str());
     DictMaker tMaker;
     return tMaker.dictionaryWithContentsOfFile(fullPath.c_str());
 }
 
 ValueVector FileUtils::getValueVectorFromFile(const std::string& filename)
 {
-    std::string fullPath = fullPathForFilename(filename.c_str());
+    const std::string fullPath = fullPathForFilename(filename.c_str());
     DictMaker tMaker;
     return tMaker.arrayWithContentsOfFile(fullPath.c_str());
 }
@@ -401,8 +401,13 @@ static tinyxml2::XMLElement* generateElementForObject(const Value& value, tinyxm
         node->LinkEndChild(content);
         return node;
     }
+    
+    //object is bool
+    if (value.getType() == Value::Type::BOOLEAN) {
+		tinyxml2::XMLElement* node = doc->NewElement(value.asString().c_str());
+		return node;
+    }
 
-    //FIXME:XXX How to deal with Boolean ??
 
     // object is Array
     if (value.getType() == Value::Type::VECTOR)
@@ -423,7 +428,7 @@ static tinyxml2::XMLElement* generateElementForDict(const ValueMap& dict, tinyxm
 {
     tinyxml2::XMLElement* rootNode = doc->NewElement("dict");
     
-    for (auto iter = dict.begin(); iter != dict.end(); ++iter)
+    for (auto iter = dict.cbegin(); iter != dict.cend(); ++iter)
     {
         tinyxml2::XMLElement* tmpNode = doc->NewElement("key");
         rootNode->LinkEndChild(tmpNode);
@@ -495,7 +500,10 @@ void FileUtils::purgeCachedEntries()
 
 static Data getData(const std::string& filename, bool forString)
 {
-    CCASSERT(!filename.empty(), "Invalid filename!");
+    if (filename.empty())
+    {
+        return Data::Null;
+    }
     
     Data ret;
     unsigned char* buffer = nullptr;
@@ -549,6 +557,7 @@ std::string FileUtils::getStringFromFile(const std::string& filename)
     Data data = getData(filename, true);
     if (data.isNull())
     	return "";
+    
     std::string ret((const char*)data.getBytes());
     return ret;
 }
@@ -566,7 +575,7 @@ unsigned char* FileUtils::getFileData(const std::string& filename, const char* m
     do
     {
         // read the file from hardware
-        std::string fullPath = fullPathForFilename(filename);
+        const std::string fullPath = fullPathForFilename(filename);
         FILE *fp = fopen(fullPath.c_str(), mode);
         CC_BREAK_IF(!fp);
         
@@ -628,7 +637,7 @@ unsigned char* FileUtils::getFileDataFromZip(const std::string& zipFilePath, con
     return buffer;
 }
 
-std::string FileUtils::getNewFilename(const std::string &filename)
+std::string FileUtils::getNewFilename(const std::string &filename) const
 {
     std::string newFileName;
     
@@ -684,19 +693,20 @@ std::string FileUtils::fullPathForFilename(const std::string &filename)
     }
     
     // Get the new file name.
-    std::string newFilename( getNewFilename(filename) );
+    const std::string newFilename( getNewFilename(filename) );
     
-    string fullpath = "";
+	std::string fullpath;
     
-    for (auto searchIt = _searchPathArray.begin(); searchIt != _searchPathArray.end(); ++searchIt) {
-        for (auto resolutionIt = _searchResolutionsOrderArray.begin(); resolutionIt != _searchResolutionsOrderArray.end(); ++resolutionIt) {
-            
+    for (auto searchIt = _searchPathArray.cbegin(); searchIt != _searchPathArray.cend(); ++searchIt)
+    {
+        for (auto resolutionIt = _searchResolutionsOrderArray.cbegin(); resolutionIt != _searchResolutionsOrderArray.cend(); ++resolutionIt)
+        {
             fullpath = this->getPathForFilename(newFilename, *resolutionIt, *searchIt);
             
             if (fullpath.length() > 0)
             {
                 // Using the filename passed in as key.
-                _fullPathCache.insert(std::pair<std::string, std::string>(filename, fullpath));
+                _fullPathCache.insert(std::make_pair(filename, fullpath));
                 return fullpath;
             }
         }
@@ -719,7 +729,7 @@ void FileUtils::setSearchResolutionsOrder(const std::vector<std::string>& search
     bool existDefault = false;
     _fullPathCache.clear();
     _searchResolutionsOrderArray.clear();
-    for(auto iter = searchResolutionsOrder.begin(); iter != searchResolutionsOrder.end(); ++iter)
+    for(auto iter = searchResolutionsOrder.cbegin(); iter != searchResolutionsOrder.cend(); ++iter)
     {
         std::string resolutionDirectory = *iter;
         if (!existDefault && resolutionDirectory == "")
@@ -742,7 +752,11 @@ void FileUtils::setSearchResolutionsOrder(const std::vector<std::string>& search
 
 void FileUtils::addSearchResolutionsOrder(const std::string &order)
 {
-    _searchResolutionsOrderArray.push_back(order);
+    std::string resOrder = order;
+    if (!resOrder.empty() && resOrder[resOrder.length()-1] != '/')
+        resOrder.append("/");
+        
+    _searchResolutionsOrderArray.push_back(resOrder);
 }
 
 const std::vector<std::string>& FileUtils::getSearchResolutionsOrder()
@@ -761,7 +775,7 @@ void FileUtils::setSearchPaths(const std::vector<std::string>& searchPaths)
     
     _fullPathCache.clear();
     _searchPathArray.clear();
-    for (auto iter = searchPaths.begin(); iter != searchPaths.end(); ++iter)
+    for (auto iter = searchPaths.cbegin(); iter != searchPaths.cend(); ++iter)
     {
         std::string prefix;
         std::string path;
@@ -811,7 +825,7 @@ void FileUtils::setFilenameLookupDictionary(const ValueMap& filenameLookupDict)
 
 void FileUtils::loadFilenameLookupDictionaryFromFile(const std::string &filename)
 {
-    std::string fullPath = fullPathForFilename(filename);
+    const std::string fullPath = fullPathForFilename(filename);
     if (fullPath.length() > 0)
     {
         ValueMap dict = FileUtils::getInstance()->getValueMapFromFile(fullPath);
@@ -839,10 +853,47 @@ std::string FileUtils::getFullPathForDirectoryAndFilename(const std::string& dir
     ret += filename;
     
     // if the file doesn't exist, return an empty string
-    if (!isFileExist(ret)) {
+    if (!isFileExistInternal(ret)) {
         ret = "";
     }
     return ret;
+}
+
+bool FileUtils::isFileExist(const std::string& filename) const
+{
+    // If filename is absolute path, we don't need to consider 'search paths' and 'resolution orders'.
+    if (isAbsolutePath(filename))
+    {
+        return isFileExistInternal(filename);
+    }
+    
+    // Already Cached ?
+    auto cacheIter = _fullPathCache.find(filename);
+    if( cacheIter != _fullPathCache.end() )
+    {
+        return true;
+    }
+    
+    // Get the new file name.
+    const std::string newFilename( getNewFilename(filename) );
+    
+	std::string fullpath;
+    
+    for (auto searchIt = _searchPathArray.cbegin(); searchIt != _searchPathArray.cend(); ++searchIt)
+    {
+        for (auto resolutionIt = _searchResolutionsOrderArray.cbegin(); resolutionIt != _searchResolutionsOrderArray.cend(); ++resolutionIt)
+        {
+            fullpath = const_cast<FileUtils*>(this)->getPathForFilename(newFilename, *resolutionIt, *searchIt);
+            
+            if (!fullpath.empty())
+            {
+                // Using the filename passed in as key.
+                const_cast<FileUtils*>(this)->_fullPathCache.insert(std::make_pair(filename, fullpath));
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 bool FileUtils::isAbsolutePath(const std::string& path) const

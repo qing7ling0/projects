@@ -25,6 +25,8 @@
 
 #import "CCApplication.h"
 
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+
 #import <UIKit/UIKit.h>
 
 #import "CCGeometry.h"
@@ -76,6 +78,21 @@ Application* Application::sharedApplication()
     return Application::getInstance();
 }
 
+const char * Application::getCurrentLanguageCode()
+{
+    static char code[3]={0};
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *languages = [defaults objectForKey:@"AppleLanguages"];
+    NSString *currentLanguage = [languages objectAtIndex:0];
+    
+    // get the current language code.(such as English is "en", Chinese is "zh" and so on)
+    NSDictionary* temp = [NSLocale componentsFromLocaleIdentifier:currentLanguage];
+    NSString * languageCode = [temp objectForKey:NSLocaleLanguageCode];
+    [languageCode getCString:code maxLength:2 encoding:NSASCIIStringEncoding];
+    code[2]='\0';
+    return code;
+}
+
 LanguageType Application::getCurrentLanguage()
 {
     // get the current language and country config
@@ -107,6 +124,9 @@ LanguageType Application::getCurrentLanguage()
     }
     else if ([languageCode isEqualToString:@"es"]){
         ret = LanguageType::SPANISH;
+    }
+    else if ([languageCode isEqualToString:@"nl"]){
+        ret = LanguageType::DUTCH;
     }
     else if ([languageCode isEqualToString:@"ru"]){
         ret = LanguageType::RUSSIAN;
@@ -152,3 +172,5 @@ void Application::applicationScreenSizeChanged(int newWidth, int newHeight) {
 }
 
 NS_CC_END
+
+#endif // CC_PLATFORM_IOS

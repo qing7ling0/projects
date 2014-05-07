@@ -35,9 +35,11 @@ THE SOFTWARE.
 #include "CCDirector.h"
 #include "CCGL.h"
 #include "CCConfiguration.h"
+#include "renderer/CCRenderer.h"
+
 // support
 #include "CCTexture2D.h"
-#include "CCString.h"
+#include "deprecated/CCString.h"
 #include <stdlib.h>
 #include "CCEventDispatcher.h"
 #include "CCEventListenerCustom.h"
@@ -238,14 +240,6 @@ void TextureAtlas::setupIndices()
 
     for( int i=0; i < _capacity; i++)
     {
-#if CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
-        _indices[i*6+0] = i*4+0;
-        _indices[i*6+1] = i*4+0;
-        _indices[i*6+2] = i*4+2;        
-        _indices[i*6+3] = i*4+1;
-        _indices[i*6+4] = i*4+3;
-        _indices[i*6+5] = i*4+3;
-#else
         _indices[i*6+0] = i*4+0;
         _indices[i*6+1] = i*4+1;
         _indices[i*6+2] = i*4+2;
@@ -254,7 +248,6 @@ void TextureAtlas::setupIndices()
         _indices[i*6+3] = i*4+3;
         _indices[i*6+4] = i*4+2;
         _indices[i*6+5] = i*4+1;        
-#endif    
     }
 }
 
@@ -490,6 +483,7 @@ bool TextureAtlas::resizeCapacity(ssize_t newCapacity)
         {
             memset(tmpQuads+oldCapactiy, 0, (_capacity - oldCapactiy)*sizeof(_quads[0]) );
         }
+        _quads = nullptr;
     }
 
     if (_indices == nullptr)
@@ -499,7 +493,6 @@ bool TextureAtlas::resizeCapacity(ssize_t newCapacity)
         {
             memset( tmpIndices, 0, _capacity * 6 * sizeof(_indices[0]) );
         }
-        
     }
     else
     {
@@ -508,6 +501,7 @@ bool TextureAtlas::resizeCapacity(ssize_t newCapacity)
         {
             memset( tmpIndices+oldCapactiy, 0, (_capacity-oldCapactiy) * 6 * sizeof(_indices[0]) );
         }
+        _indices = nullptr;
     }
 
     if( ! ( tmpQuads && tmpIndices) ) {
@@ -646,11 +640,7 @@ void TextureAtlas::drawNumberOfQuads(ssize_t numberOfQuads, ssize_t start)
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _buffersVBO[1]);
 #endif
 
-#if CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
-        glDrawElements(GL_TRIANGLE_STRIP, (GLsizei) numberOfQuads*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(_indices[0])) );
-#else
         glDrawElements(GL_TRIANGLES, (GLsizei) numberOfQuads*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(_indices[0])) );
-#endif // CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
 
 #if CC_REBIND_INDICES_BUFFER
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -687,17 +677,14 @@ void TextureAtlas::drawNumberOfQuads(ssize_t numberOfQuads, ssize_t start)
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _buffersVBO[1]);
 
-#if CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
-        glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)numberOfQuads*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(_indices[0])));
-#else
         glDrawElements(GL_TRIANGLES, (GLsizei)numberOfQuads*6, GL_UNSIGNED_SHORT, (GLvoid*) (start*6*sizeof(_indices[0])));
-#endif // CC_TEXTURE_ATLAS_USE_TRIANGLE_STRIP
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     }
 
-    CC_INCREMENT_GL_DRAWS(1);
+    CC_INCREMENT_GL_DRAWN_BATCHES_AND_VERTICES(1,numberOfQuads*6);
+
     CHECK_GL_ERROR_DEBUG();
 }
 

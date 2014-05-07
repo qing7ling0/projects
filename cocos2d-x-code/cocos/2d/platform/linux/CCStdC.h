@@ -26,6 +26,9 @@ THE SOFTWARE.
 #ifndef __CC_STD_C_H__
 #define __CC_STD_C_H__
 
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
+
 #include "CCPlatformMacros.h"
 
 #include <float.h>
@@ -37,6 +40,7 @@ THE SOFTWARE.
 #include <time.h>
 #include <sys/time.h>
 #include <stdint.h>
+#include <limits.h>
 
 #ifndef MIN
 #define MIN(x,y) (((x) > (y)) ? (y) : (x))
@@ -51,5 +55,7 @@ THE SOFTWARE.
 #define sqrtf sqrt
 #define cosf cos
 #define sinf sin
+
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
 
 #endif  // __CC_STD_C_H__

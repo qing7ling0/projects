@@ -80,7 +80,7 @@ bool TestIAPOnline::init()
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
 
-    EGLView* pEGLView = EGLView::getInstance();
+    auto pEGLView = Director::getInstance()->getOpenGLView();
     Point posBR = Point(pEGLView->getVisibleOrigin().x + pEGLView->getVisibleSize().width, pEGLView->getVisibleOrigin().y);
     Point posTL = Point(pEGLView->getVisibleOrigin().x, pEGLView->getVisibleOrigin().y + pEGLView->getVisibleSize().height);
 
@@ -118,7 +118,7 @@ bool TestIAPOnline::init()
     return true;
 }
 
-void TestIAPOnline::eventMenuCallback(Object* pSender)
+void TestIAPOnline::eventMenuCallback(Ref* pSender)
 {
     MenuItemLabel* pMenuItem = (MenuItemLabel*)pSender;
     MyIAPOLManager::MyPayMode mode = (MyIAPOLManager::MyPayMode) (pMenuItem->getTag() - TAG_PAY_BY_QH360 + 1);
@@ -156,7 +156,7 @@ void TestIAPOnline::eventMenuCallback(Object* pSender)
     MyIAPOLManager::getInstance()->payByMode(pInfo, mode);
 }
 
-void TestIAPOnline::menuBackCallback(Object* pSender)
+void TestIAPOnline::menuBackCallback(Ref* pSender)
 {
 	MyIAPOLManager::purge();
 

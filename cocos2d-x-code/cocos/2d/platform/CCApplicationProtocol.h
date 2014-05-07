@@ -26,6 +26,8 @@ THE SOFTWARE.
 #ifndef __CC_APPLICATION_PROTOCOL_H__
 #define __CC_APPLICATION_PROTOCOL_H__
 
+#include "CCPlatformMacros.h"
+
 NS_CC_BEGIN
 
 /**
@@ -50,7 +52,9 @@ public:
         OS_BLACKBERRY,
         OS_NACL,
         OS_EMSCRIPTEN,
-        OS_TIZEN
+        OS_TIZEN,
+        OS_WINRT,
+        OS_WP8
     };
 
     /**
@@ -97,6 +101,14 @@ public:
     * @lua NA
     */
     virtual LanguageType getCurrentLanguage() = 0;
+    
+    /**
+     @brief Get current language iso 639-1 code
+     @return Current language iso 639-1 code
+     * @js NA
+     * @lua NA
+     */
+    virtual const char * getCurrentLanguageCode() = 0;
     
     /**
      @brief Get target platform

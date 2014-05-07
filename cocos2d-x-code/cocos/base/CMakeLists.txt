@@ -1,13 +1,13 @@
 set(COCOS_BASE_SRC
+  ../deprecated/CCSet.cpp
+  ../deprecated/CCArray.cpp
+  ../deprecated/CCDictionary.cpp
+  ../deprecated/CCString.cpp
   CCAffineTransform.cpp
   CCAutoreleasePool.cpp
   CCGeometry.cpp
   CCNS.cpp
-  CCObject.cpp
-  CCSet.cpp
-  CCArray.cpp
-  CCDictionary.cpp
-  CCString.cpp
+  CCRef.cpp
   CCDataVisitor.cpp
   CCData.cpp
   CCValue.cpp

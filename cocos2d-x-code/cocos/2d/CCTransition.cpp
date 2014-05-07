@@ -42,12 +42,18 @@ NS_CC_BEGIN
 const unsigned int kSceneFade = 0xFADEFADE;
 
 TransitionScene::TransitionScene()
+: _inScene(nullptr)
+, _outScene(nullptr)
+, _duration(0.0f)
+, _isInSceneOnTop(false)
+, _isSendCleanupToScene(false)
 {
 }
+
 TransitionScene::~TransitionScene()
 {
-    _inScene->release();
-    _outScene->release();
+    CC_SAFE_RELEASE(_inScene);
+    CC_SAFE_RELEASE(_outScene);
 }
 
 TransitionScene * TransitionScene::create(float t, Scene *scene)
@@ -97,36 +103,33 @@ void TransitionScene::sceneOrder()
     _isInSceneOnTop = true;
 }
 
-void TransitionScene::draw()
+void TransitionScene::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
-    Scene::draw();
+    Scene::draw(renderer, transform, transformUpdated);
 
     if( _isInSceneOnTop ) {
-        _outScene->visit();
-        _inScene->visit();
+        _outScene->visit(renderer, transform, transformUpdated);
+        _inScene->visit(renderer, transform, transformUpdated);
     } else {
-        _inScene->visit();
-        _outScene->visit();
+        _inScene->visit(renderer, transform, transformUpdated);
+        _outScene->visit(renderer, transform, transformUpdated);
     }
 }
 
 void TransitionScene::finish()
 {
-    kmMat4 identity;
-    kmMat4Identity(&identity);
-
     // clean up
     _inScene->setVisible(true);
     _inScene->setPosition(Point(0,0));
     _inScene->setScale(1.0f);
     _inScene->setRotation(0.0f);
-    _inScene->setAdditionalTransform(identity);
+    _inScene->setAdditionalTransform(nullptr);
 
     _outScene->setVisible(false);
     _outScene->setPosition(Point(0,0));
     _outScene->setScale(1.0f);
     _outScene->setRotation(0.0f);
-    _outScene->setAdditionalTransform(identity);
+    _outScene->setAdditionalTransform(nullptr);
 
     //[self schedule:@selector(setNewScene:) interval:0];
     this->schedule(schedule_selector(TransitionScene::setNewScene), 0);
@@ -1258,7 +1261,7 @@ TransitionCrossFade* TransitionCrossFade::create(float t, Scene* scene)
     return nullptr;
 }
 
-void TransitionCrossFade::draw()
+void TransitionCrossFade::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
     // override draw since both scenes (textures) are rendered in 1 scene
 }
@@ -1407,19 +1410,19 @@ void TransitionTurnOffTiles::onExit()
     TransitionScene::onExit();
 }
 
-void TransitionTurnOffTiles::draw()
+void TransitionTurnOffTiles::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
-    Scene::draw();
+    Scene::draw(renderer, transform, transformUpdated);
     
     if( _isInSceneOnTop )
     {
-        _outSceneProxy->visit();
-        _inScene->visit();
+        _outSceneProxy->visit(renderer, transform, transformUpdated);
+        _inScene->visit(renderer, transform, transformUpdated);
     } 
     else
     {
-        _inScene->visit();
-        _outSceneProxy->visit();
+        _inScene->visit(renderer, transform, transformUpdated);
+        _outSceneProxy->visit(renderer, transform, transformUpdated);
     }
 }
 
@@ -1487,10 +1490,10 @@ void TransitionSplitCols::switchTargetToInscene()
     _gridProxy->setTarget(_inScene);
 }
 
-void TransitionSplitCols::draw()
+void TransitionSplitCols::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
-    Scene::draw();
-    _gridProxy->visit();
+    Scene::draw(renderer, transform, transformUpdated);
+    _gridProxy->visit(renderer, transform, transformUpdated);
 }
 
 void TransitionSplitCols::onExit()
@@ -1603,19 +1606,19 @@ void TransitionFadeTR::onExit()
     TransitionScene::onExit();
 }
 
-void TransitionFadeTR::draw()
+void TransitionFadeTR::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
 {
-    Scene::draw();
+    Scene::draw(renderer, transform, transformUpdated);
     
     if( _isInSceneOnTop )
     {
-        _outSceneProxy->visit();
-        _inScene->visit();
+        _outSceneProxy->visit(renderer, transform, transformUpdated);
+        _inScene->visit(renderer, transform, transformUpdated);
     } 
     else
     {
-        _inScene->visit();
-        _outSceneProxy->visit();
+        _inScene->visit(renderer, transform, transformUpdated);
+        _outSceneProxy->visit(renderer, transform, transformUpdated);
     }
 }
 

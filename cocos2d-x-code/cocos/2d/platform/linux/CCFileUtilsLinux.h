@@ -25,6 +25,9 @@ THE SOFTWARE.
 #ifndef __CC_FILEUTILS_LINUX_H__
 #define __CC_FILEUTILS_LINUX_H__
 
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
+
 #include "platform/CCFileUtils.h"
 #include "CCPlatformMacros.h"
 #include "ccTypes.h"
@@ -48,7 +51,8 @@ public:
     /* override funtions */
     bool init();
     virtual std::string getWritablePath() const;
-    virtual bool isFileExist(const std::string& strFilePath) const;
+private:
+    virtual bool isFileExistInternal(const std::string& strFilePath) const;
 };
 
 // end of platform group
@@ -56,5 +60,6 @@ public:
 
 NS_CC_END
 
-#endif    // __CC_FILEUTILS_LINUX_H__
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_LINUX
 
+#endif    // __CC_FILEUTILS_LINUX_H__

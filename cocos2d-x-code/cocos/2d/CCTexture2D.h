@@ -31,7 +31,7 @@ THE SOFTWARE.
 #include <map>
 #include <map>
 
-#include "CCObject.h"
+#include "CCRef.h"
 #include "CCGeometry.h"
 #include "ccTypes.h"
 #ifdef EMSCRIPTEN
@@ -60,7 +60,7 @@ class GLProgram;
 * Depending on how you create the Texture2D object, the actual image area of the texture might be smaller than the texture dimensions i.e. "contentSize" != (pixelsWide, pixelsHigh) and (maxS, maxT) != (1.0, 1.0).
 * Be aware that the content of the generated textures will be upside-down!
 */
-class CC_DLL Texture2D : public Object
+class CC_DLL Texture2D : public Ref
 #ifdef EMSCRIPTEN
 , public GLBufferedNode
 #endif // EMSCRIPTEN
@@ -223,6 +223,8 @@ public:
     /** Initializes with mipmaps */
     bool initWithMipmaps(MipmapInfo* mipmaps, int mipmapsNum, Texture2D::PixelFormat pixelFormat, int pixelsWide, int pixelsHigh);
 
+    /** Update with texture data*/
+    bool updateWithData(const void *data,int offsetX,int offsetY,int width,int height);
     /**
     Drawing extensions to make it easy to draw basic quads using a Texture2D object.
     These functions require GL_TEXTURE_2D and both GL_VERTEX_ARRAY and GL_TEXTURE_COORD_ARRAY client states to be enabled.
@@ -434,6 +436,8 @@ protected:
     GLProgram* _shaderProgram;
 
     static const PixelFormatInfoMap _pixelFormatInfoTables;
+
+    bool _antialiasEnabled;
 };
 
 

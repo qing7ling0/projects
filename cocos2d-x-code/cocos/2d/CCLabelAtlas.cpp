@@ -34,10 +34,15 @@ THE SOFTWARE.
 #include "ccGLStateCache.h"
 #include "CCDirector.h"
 #include "TransformUtils.h"
-#include "CCInteger.h"
 #include "platform/CCFileUtils.h"
 // external
 #include "kazmath/GL/matrix.h"
+#include "deprecated/CCString.h"
+
+#if CC_LABELATLAS_DEBUG_DRAW
+#include "renderer/CCRenderer.h"
+#include "CCDirector.h"
+#endif
 
 NS_CC_BEGIN
 
@@ -225,19 +230,53 @@ const std::string& LabelAtlas::getString(void) const
     return _string;
 }
 
-//CCLabelAtlas - draw
-
-#if CC_LABELATLAS_DEBUG_DRAW    
-void LabelAtlas::draw()
+void LabelAtlas::updateColor()
 {
-    AtlasNode::draw();
+    if (_textureAtlas)
+    {
+        Color4B color4( _displayedColor.r, _displayedColor.g, _displayedColor.b, _displayedOpacity );
+        auto quads = _textureAtlas->getQuads();
+        ssize_t length = _string.length();
+        for (int index = 0; index < length; index++)
+        {
+            quads[index].bl.colors = color4;
+            quads[index].br.colors = color4;
+            quads[index].tl.colors = color4;
+            quads[index].tr.colors = color4;
+            _textureAtlas->updateQuad(&quads[index], index);
+        }
+    }
+}
 
-    const Size& s = this->getContentSize();
-    Point vertices[4]={
-        Point(0,0),Point(s.width,0),
-        Point(s.width,s.height),Point(0,s.height),
+//CCLabelAtlas - draw
+#if CC_LABELATLAS_DEBUG_DRAW
+void LabelAtlas::draw(Renderer *renderer, const kmMat4 &transform, bool transformUpdated)
+{
+    AtlasNode::draw(renderer, transform, transformUpdated);
+
+    _customDebugDrawCommand.init(_globalZOrder);
+    _customDebugDrawCommand.func = CC_CALLBACK_0(LabelAtlas::drawDebugData, this,transform,transformUpdated);
+    renderer->addCommand(&_customDebugDrawCommand);
+}
+
+void LabelAtlas::drawDebugData(const kmMat4& transform, bool transformUpdated)
+{
+    kmGLPushMatrix();
+    kmGLLoadMatrix(&transform);
+
+    auto size = getContentSize();
+
+    Point vertices[4]=
+    {
+        Point::ZERO,
+        Point(size.width, 0),
+        Point(size.width, size.height),
+        Point(0, size.height)
     };
-    ccDrawPoly(vertices, 4, true);
+
+    DrawPrimitives::drawPoly(vertices, 4, true);
+
+    kmGLPopMatrix();
 }
 #endif
 

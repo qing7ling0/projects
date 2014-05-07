@@ -76,7 +76,7 @@ bool TestIAP::init()
     // 2. add a menu item with "X" image, which is clicked to quit the program
     //    you may modify it.
 
-    EGLView* pEGLView = EGLView::getInstance();
+    auto pEGLView = Director::getInstance()->getOpenGLView();
     Point posBR = Point(pEGLView->getVisibleOrigin().x + pEGLView->getVisibleSize().width, pEGLView->getVisibleOrigin().y);
     Point posTL = Point(pEGLView->getVisibleOrigin().x, pEGLView->getVisibleOrigin().y + pEGLView->getVisibleSize().height);
 
@@ -114,7 +114,7 @@ bool TestIAP::init()
     return true;
 }
 
-void TestIAP::eventMenuCallback(Object* pSender)
+void TestIAP::eventMenuCallback(Ref* pSender)
 {
     MenuItemLabel* pMenuItem = (MenuItemLabel*)pSender;
     TProductInfo pInfo;
@@ -126,7 +126,7 @@ void TestIAP::eventMenuCallback(Object* pSender)
     MyPurchase::getInstance()->payByMode(pInfo, mode);
 }
 
-void TestIAP::menuBackCallback(Object* pSender)
+void TestIAP::menuBackCallback(Ref* pSender)
 {
 	MyPurchase::purgePurchase();
 

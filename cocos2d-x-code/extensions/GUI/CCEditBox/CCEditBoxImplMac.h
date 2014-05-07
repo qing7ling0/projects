@@ -50,6 +50,7 @@
 }
 
 @property(nonatomic, retain) NSTextField* textField;
+@property(nonatomic, retain) NSMutableDictionary* placeholderAttributes;
 @property(nonatomic, readonly, getter = isEditState) BOOL editState;
 @property(nonatomic, assign) void* editBox;
 
@@ -107,6 +108,7 @@ public:
     virtual void doAnimationWhenKeyboardMove(float duration, float distance);
     virtual void openKeyboard();
     virtual void closeKeyboard();
+    virtual void updatePosition(float dt) override;
     /**
      * @js NA
      * @lua NA

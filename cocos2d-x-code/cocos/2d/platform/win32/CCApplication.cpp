@@ -22,8 +22,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
+
+#include "CCPlatformConfig.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_WIN32
+
 #include "CCApplication.h"
-#include "CCEGLView.h"
+#include "CCGLView.h"
 #include "CCDirector.h"
 #include <algorithm>
 #include "platform/CCFileUtils.h"
@@ -39,10 +43,10 @@ NS_CC_BEGIN
 Application * Application::sm_pSharedApplication = 0;
 
 Application::Application()
-: _instance(NULL)
-, _accelTable(NULL)
+: _instance(nullptr)
+, _accelTable(nullptr)
 {
-    _instance    = GetModuleHandle(NULL);
+    _instance    = GetModuleHandle(nullptr);
     _animationInterval.QuadPart = 0;
     CC_ASSERT(! sm_pSharedApplication);
     sm_pSharedApplication = this;
@@ -72,16 +76,21 @@ int Application::run()
         return 0;
     }
 
-    EGLView* pMainWnd = EGLView::getInstance();
+    auto director = Director::getInstance();
+    auto glview = director->getOpenGLView();
 
-    while(!pMainWnd->windowShouldClose())
+    // Retain glview to avoid glview being released in the while loop
+    glview->retain();
+
+    while(!glview->windowShouldClose())
     {
         QueryPerformanceCounter(&nNow);
         if (nNow.QuadPart - nLast.QuadPart > _animationInterval.QuadPart)
         {
             nLast.QuadPart = nNow.QuadPart;
-            Director::getInstance()->mainLoop();
-            pMainWnd->pollEvents();
+            
+            director->mainLoop();
+            glview->pollEvents();
         }
         else
         {
@@ -89,13 +98,14 @@ int Application::run()
         }
     }
 
-    /* Only work on Desktop
-    *  Director::mainLoop is really one frame logic
-    *  when we want to close the window, we should call Director::end();
-    *  then call Director::mainLoop to do release of internal resources
-    */
-    Director::getInstance()->end();
-    Director::getInstance()->mainLoop();
+    // Director should still do a cleanup if the window was closed manually.
+    if (glview->isOpenGLReady())
+    {
+        director->end();
+        director->mainLoop();
+        director = nullptr;
+    }
+    glview->release();
     return true;
 }
 
@@ -148,6 +158,9 @@ LanguageType Application::getCurrentLanguage()
         case LANG_SPANISH:
             ret = LanguageType::SPANISH;
             break;
+        case LANG_DUTCH:
+            ret = LanguageType::DUTCH;
+            break;
         case LANG_RUSSIAN:
             ret = LanguageType::RUSSIAN;
             break;
@@ -175,6 +188,16 @@ LanguageType Application::getCurrentLanguage()
     }
 
     return ret;
+}
+
+const char * Application::getCurrentLanguageCode()
+{
+	LANGID lid = GetUserDefaultUILanguage();
+	const LCID locale_id = MAKELCID(lid, SORT_DEFAULT);
+	static char code[3] = { 0 };
+	GetLocaleInfoA(locale_id, LOCALE_SISO639LANGNAME, code, sizeof(code));
+	code[2] = '\0';
+	return code;
 }
 
 Application::Platform Application::getTargetPlatform()
@@ -245,3 +268,5 @@ static void PVRFrameEnableControlWindow(bool bEnable)
 
     RegCloseKey(hKey);
 }
+
+#endif // CC_TARGET_PLATFORM == CC_PLATFORM_WIN32

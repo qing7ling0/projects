@@ -35,12 +35,14 @@ THE SOFTWARE.
 #define DECLARE_CLASS_INFO \
     public: \
         static cocostudio::ObjectFactory::TInfo Type; \
-        static cocos2d::Object* createInstance(void); \
+        static cocos2d::Ref* createInstance(void); \
         
 #define IMPLEMENT_CLASS_INFO(className) \
-        cocos2d::Object* className::createInstance(void) \
+        cocos2d::Ref* className::createInstance(void) \
         { \
-            return new className; \
+            auto ret = new className; \
+            ret->autorelease(); \
+            return ret; \
         } \
         cocostudio::ObjectFactory::TInfo className::Type(#className, &className::createInstance); \
 
