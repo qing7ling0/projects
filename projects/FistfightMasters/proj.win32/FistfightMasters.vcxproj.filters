@@ -70,11 +70,20 @@
     <Filter Include="Classes\battle\server\skill">
       <UniqueIdentifier>{7455e0cd-9a9a-4912-a064-aa6bb30abfde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\battle\client\ui">
+    <Filter Include="Classes\battle\client\effect">
+      <UniqueIdentifier>{f60b8706-5c4f-4a52-8d98-30bb8d312684}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\game">
+      <UniqueIdentifier>{5f6f5383-d325-49fe-9d00-cacf2074457b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\game\ui">
       <UniqueIdentifier>{df350d3e-e757-41c9-850d-93e3122ee753}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Classes\battle\client\ui\message">
+    <Filter Include="Classes\game\ui\message">
       <UniqueIdentifier>{d940bdc2-ac3b-4864-a725-232909e0e80f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\battle\client\view">
+      <UniqueIdentifier>{f954aad9-338d-48c8-8f72-a1aaa9961d96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +153,6 @@
     <ClCompile Include="..\Classes\BattleController.cpp">
       <Filter>Classes\battle\client</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\ServerConfig.cpp">
-      <Filter>Classes\battle\server</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\ServerData.cpp">
       <Filter>Classes\battle\server</Filter>
     </ClCompile>
@@ -157,7 +163,10 @@
       <Filter>Classes\battle\server\skill</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MessageServer.cpp">
-      <Filter>Classes\battle\client\ui\message</Filter>
+      <Filter>Classes\game\ui\message</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\DamageEffect.cpp">
+      <Filter>Classes\battle\client\effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,9 +242,6 @@
     <ClInclude Include="..\Classes\BattleController.h">
       <Filter>Classes\battle\client</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\ServerConfig.h">
-      <Filter>Classes\battle\server</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\ServerData.h">
       <Filter>Classes\battle\server</Filter>
     </ClInclude>
@@ -246,7 +252,10 @@
       <Filter>Classes\battle\server\skill</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MessageServer.h">
-      <Filter>Classes\battle\client\ui\message</Filter>
+      <Filter>Classes\game\ui\message</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DamageEffect.h">
+      <Filter>Classes\battle\client\effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -32,9 +32,13 @@ public:
 	/** 播放结束后是否是隐藏 */
 	CC_SYNTHESIZE(bool, overVisible, OverVisible);
 
+	/** 动画播放结束监听  */
+	CC_SYNTHESIZE(std::function<void(AnimiPlayer*)>, _stopEvent, StopEvent);
+
 protected:
 	Animation *_animi;
 
 	Sprite *_animiSprite;
+
 };
 

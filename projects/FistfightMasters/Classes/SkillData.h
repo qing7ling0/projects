@@ -41,6 +41,7 @@ public:
 	char *_animiName;
 	char *_animiPath;
 	int _animiIndexs[2];
+	int _hurtHP;
 };
 
 class SkillData : public Ref

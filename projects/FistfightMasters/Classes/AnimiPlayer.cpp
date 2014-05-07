@@ -3,6 +3,7 @@
 AnimiPlayer::AnimiPlayer(void)
 	: _animi (nullptr)
 	, _animiSprite (nullptr)
+	, _stopEvent (nullptr)
 {
 }
 
@@ -78,13 +79,16 @@ void AnimiPlayer::start(unsigned int loop, bool visible)
 		action = CCRepeatForever::create(CCAnimate::create(_animi));
 	else if (loop == 1)
 	{
+
 		action = Sequence::create(
 			CCAnimate::create(_animi),
 			CallFunc::create(
 				[&](){
+					
+
 					stop(visible);
 				}),
-			NULL);
+			nullptr);
 	}
 	else
 	{
@@ -108,6 +112,11 @@ void AnimiPlayer::stop(bool visible)
 {
 	_animiSprite->stopActionByTag(9999);
 	_animiSprite->setVisible(visible);
+
+	if (_stopEvent)
+	{
+		_stopEvent(this);
+	}
 }
 
 unsigned int AnimiPlayer::getLoops()

@@ -2,6 +2,7 @@
 #include "BattleRole.h"
 #include "BattleRoles.h"
 #include "BattleController.h"
+#include "DamageEffect.h"
 
 
 /*--------------  SkillStep BEGAN ----------------*/
@@ -307,10 +308,22 @@ void SkillNormalBombStep::update(float dt)
 	{
 		for(int i=0; i<_targetRoles.size(); i++)
 		{
+			auto role = _targetRoles.at(i);
 			auto player = AnimiPlayer::create(_frames, 0.2f);
 			player->setTag(1000+i);
 			player->start(1);
-			player->setPosition(GRID_CONVER_TO_PIXEL(_targetRoles.at(i)->getGridIndex().x, _targetRoles.at(i)->getGridIndex().y));
+			player->setUserObject(role);
+			player->setStopEvent([&](AnimiPlayer* player)
+			{
+				auto effect = DamageEffect::create(_stepData->_hurtHP);
+				effect->setPosition(Point(CCRANDOM_MINUS1_1()*10, CCRANDOM_MINUS1_1()*10+60));
+
+				auto role = static_cast<Role*>(player->getUserObject());
+				role->getNode()->addChild(effect, 10);
+
+				player->removeFromParent();
+			});
+			player->setPosition(GRID_CONVER_TO_PIXEL(role->getGridIndex().x, role->getGridIndex().y));
 			BattleController::getInstance()->addChild(player, ZORDER_BATTLE_EFFECT);
 		}
 		_step ++;
@@ -323,15 +336,7 @@ void SkillNormalBombStep::update(float dt)
 			auto node = BattleController::getInstance()->getChildByTag(1000+i);
 			if (node)
 			{
-				AnimiPlayer *player = static_cast<AnimiPlayer *>(node);
-				if (player->isOver())
-				{
-					player->removeFromParent();
-				}
-				else
-				{
-					over = false;
-				}
+				over = false;
 			}
 		}
 		if (over)

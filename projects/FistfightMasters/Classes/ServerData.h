@@ -1,6 +1,5 @@
 #pragma once
 #include "RPGHead.h"
-#include "ServerConfig.h"
 
 
 class SRoundInfo : public Ref

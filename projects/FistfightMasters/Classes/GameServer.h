@@ -1,6 +1,5 @@
 #pragma once
 #include "RPGHead.h"
-#include "ServerConfig.h"
 #include "ServerData.h"
 
 class GameServer : public Ref
