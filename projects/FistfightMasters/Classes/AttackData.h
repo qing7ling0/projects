@@ -3,7 +3,7 @@
 
 #include "Skill.h"
 
-class AttackData : public Object
+class AttackData : public Ref
 {
 public:
 	AttackData(void);

@@ -2,7 +2,7 @@
 #include "RPGHead.h"
 #include "HeroRole.h"
 
-class Command : public Object
+class Command : public Ref
 {
 public:
 	Command(void);

@@ -1,4 +1,4 @@
-#include "Monitor.h"
+﻿#include "Monitor.h"
 #include "BattleController.h"
 #include "MessageServer.h"
 #include "SelfMonitor.h"

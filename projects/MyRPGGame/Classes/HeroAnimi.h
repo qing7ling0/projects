@@ -1,7 +1,7 @@
 #pragma once
 #include "RPGHead.h"
 
-class HeroAnimi : public Object
+class HeroAnimi : public Ref
 {
 public:
 	HeroAnimi(void);

@@ -6,7 +6,7 @@
 class BattleRole;
 class Skill;
 
-class SSkill : public Object
+class SSkill : public Ref
 {
 public:
 	SSkill(void);

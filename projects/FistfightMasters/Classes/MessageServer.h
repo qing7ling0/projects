@@ -2,7 +2,7 @@
 #include "RPGHead.h"
 
 
-class MessageItem : public Object
+class MessageItem : public Ref
 {
 public:
 	MessageItem(void);

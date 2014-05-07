@@ -13,8 +13,8 @@ public:
     virtual bool init();  
     
     // a selector callback
-    void menuCloseCallback(Object* pSender);
-    void menuBattleCallback(Object* pSender);
+    void menuCloseCallback(Ref* pSender);
+    void menuBattleCallback(Ref* pSender);
     
     // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);

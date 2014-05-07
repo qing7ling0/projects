@@ -2,7 +2,7 @@
 #include "RoleData.h"
 #include "SkillData.h"
 
-class TestData : public Object
+class TestData : public Ref
 {
 public:
 	TestData(void);

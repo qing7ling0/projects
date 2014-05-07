@@ -22,9 +22,11 @@ void FLauncher::onLoad()
 	GameLauncher::onLoad();
 
     auto director = Director::getInstance();
-    auto eglView = EGLView::getInstance();
-
-    director->setOpenGLView(eglView);
+	auto glview = director->getOpenGLView();
+    if(!glview) {
+        glview = GLView::create("FistfightMasters");
+        director->setOpenGLView(glview);
+    }
 	
     // turn on display FPS
 	director->setDisplayStats(true);
@@ -32,7 +34,7 @@ void FLauncher::onLoad()
     // set FPS. the default value is 1.0/60 if you don't call this
 	director->setAnimationInterval(1.0 / 60);
 
-	eglView->setDesignResolutionSize(SCREEN_WIDTH, SCREEN_HEIGHT, ResolutionPolicy::SHOW_ALL);
+	glview->setDesignResolutionSize(SCREEN_WIDTH, SCREEN_HEIGHT, ResolutionPolicy::SHOW_ALL);
 
 	
     Size visibleSize = Director::getInstance()->getVisibleSize();

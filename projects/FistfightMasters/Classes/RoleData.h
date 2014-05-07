@@ -55,7 +55,7 @@ struct AnimiAction
 	int _actionIndexs[2];
 };
 
-class RoleData : public Object
+class RoleData : public Ref
 {
 public:
 	RoleData(void);
@@ -85,7 +85,7 @@ public:
 };
 
 
-class RoundInfo : public Object
+class RoundInfo : public Ref
 {
 public:
 	RoundInfo(void);

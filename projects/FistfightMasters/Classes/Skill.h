@@ -5,7 +5,7 @@
 #include "BattleRole.h"
 #include "SkillStep.h"
 
-class Skill : public Object
+class Skill : public Ref
 {
 public:
 	Skill(void);

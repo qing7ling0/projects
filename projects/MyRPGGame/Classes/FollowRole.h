@@ -3,7 +3,7 @@
 #include "Role.h"
 
 
-class FollowRole : public Object
+class FollowRole : public Ref
 {
 public:
 	FollowRole(void);

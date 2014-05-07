@@ -57,13 +57,13 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::menuBattleCallback(Object* pSender)
+void HelloWorld::menuBattleCallback(Ref* pSender)
 {
 	auto *sc = BattleController::createScene();
     Director::getInstance()->replaceScene(TransitionFade::create(0.5f, sc));
 }
 
-void HelloWorld::menuCloseCallback(Object* pSender)
+void HelloWorld::menuCloseCallback(Ref* pSender)
 {
     Director::getInstance()->end();
 

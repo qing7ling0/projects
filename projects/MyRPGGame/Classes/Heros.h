@@ -5,7 +5,7 @@ class RoleScript;
 class HeroRole;
 class BattleController;
 
-class Heros : public Object
+class Heros : public Ref
 {
 public:
 	Heros(void);

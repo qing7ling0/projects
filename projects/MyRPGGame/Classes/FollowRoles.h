@@ -2,7 +2,7 @@
 #include "RPGHead.h"
 #include "FollowRole.h"
 
-class FollowRoles : public Object
+class FollowRoles : public Ref
 {
 public:
 	FollowRoles(void);

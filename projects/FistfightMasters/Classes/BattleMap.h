@@ -1,7 +1,7 @@
 #pragma once
 #include "BattleController.h"
 
-class BattleMap : public Object
+class BattleMap : public Ref
 {
 public:
 	BattleMap(void);

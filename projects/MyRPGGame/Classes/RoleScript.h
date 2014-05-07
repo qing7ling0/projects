@@ -6,7 +6,7 @@
 #include "HeroControl.h"
 #include "HeroAnimi.h"
 
-class RoleScript : public Object
+class RoleScript : public Ref
 {
 public:
 	RoleScript(void);
@@ -15,6 +15,8 @@ public:
 	virtual void init(HeroRole *role){}
 
 	virtual void doScript(float dt){}
+
+	virtual void update(float dt){}
 	
 	/**
 	* 执行一些动作，这些动作通过虚拟摇杆获得

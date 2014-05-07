@@ -45,11 +45,11 @@ bool MainMenu::init(void)
 	return true;
 }
 
-void MainMenu::touchEvent(Object *pSender, TouchEventType type)
+void MainMenu::touchEvent(Ref *pSender, TouchEventType type)
 {
     switch (type)
     {
-        case gui::TOUCH_EVENT_ENDED:
+        case TOUCH_EVENT_ENDED:
 
 			if (pSender)
 			{

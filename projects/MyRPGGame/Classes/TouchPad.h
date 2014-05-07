@@ -32,7 +32,7 @@ public:
 
     CREATE_FUNC(TouchPad);
 
-	void setTouchOverCall(const std::function<void(Object*)> &func)
+	void setTouchOverCall(const std::function<void(Ref*)> &func)
 	{
 		_TouchOverCall = func;
 	}
@@ -58,7 +58,7 @@ private:
 
 	__LayerRGBA *_padLayer;
 
-	std::function<void(Object*)> _TouchOverCall;
+	std::function<void(Ref*)> _TouchOverCall;
 };
 
 

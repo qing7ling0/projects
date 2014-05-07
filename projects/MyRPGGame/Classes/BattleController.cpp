@@ -108,7 +108,7 @@ int BattleController::getHeroAnimiIndexByActionFlag(DirectionFlag flag)
 	return 0;
 }
 
-void BattleController::touchPadCallback(Object *touchPad)
+void BattleController::touchPadCallback(Ref *touchPad)
 {
 	TouchPad *pad = static_cast<TouchPad*>(touchPad);
 

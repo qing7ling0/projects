@@ -5,11 +5,10 @@
 #include "QCommon.h"
 #include "Encoder.h"
 #include "cocos2d.h"
-#include "CCObject.h"
 
 USING_NS_CC;
 
-class CC_DLL StreamIO : public Object
+class CC_DLL StreamIO : public Ref
 {
 public:
 

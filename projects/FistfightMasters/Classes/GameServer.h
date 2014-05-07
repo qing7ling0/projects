@@ -3,7 +3,7 @@
 #include "ServerConfig.h"
 #include "ServerData.h"
 
-class GameServer : public Object
+class GameServer : public Ref
 {
 public:
 	GameServer(void);

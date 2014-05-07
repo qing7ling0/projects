@@ -2,7 +2,7 @@
 
 #include "RPGHead.h"
 
-class TouchAction : public Object
+class TouchAction : public Ref
 {
 public:
 	DirectionFlag actionFlag;

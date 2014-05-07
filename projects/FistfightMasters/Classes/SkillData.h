@@ -12,7 +12,7 @@ typedef enum
 
 } SkillStepType;
 
-class SkillStepData : public Object
+class SkillStepData : public Ref
 {
 public:
 	SkillStepData(void);
@@ -43,7 +43,7 @@ public:
 	int _animiIndexs[2];
 };
 
-class SkillData : public Object
+class SkillData : public Ref
 {
 public:
 	SkillData(void);

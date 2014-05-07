@@ -19,7 +19,7 @@ public: virtual void setSkillStepData(varType var)   \
     } \
 }
 
-class SkillStep : public Object
+class SkillStep : public Ref
 {
 public:
 	SkillStep(void);

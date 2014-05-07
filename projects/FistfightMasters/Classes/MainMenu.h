@@ -2,8 +2,6 @@
 
 #include "RPGHead.h"
 
-using namespace gui;
-
 class MainMenu : public Layer
 {
 public:
@@ -16,7 +14,7 @@ public:
 
 	void endGame();
 
-    void touchEvent(Object *pSender, TouchEventType type);    
+    void touchEvent(Ref *pSender, TouchEventType type);    
 
 	CREATE_SECNE_FUNC(MainMenu);
 

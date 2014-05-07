@@ -2,11 +2,9 @@
 
 #include "cocos2d.h"
 #include "FConfig.h"
-#include "cocostudio/CocoStudio.h"
-#include "gui/CocosGUI.h"
+#include "ui/CocosGUI.h"
 #include "AnimiPlayer.h"
 #include "MessageServer.h"
 
-using namespace cocostudio;
 using namespace cocos2d;
-using namespace gui;
+using namespace ui;

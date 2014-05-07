@@ -3,7 +3,7 @@
 #include "BattleConfig.h"
 #include "RoleData.h"
 
-class Monitor : public Object
+class Monitor : public Ref
 {
 public:
 	Monitor(void);

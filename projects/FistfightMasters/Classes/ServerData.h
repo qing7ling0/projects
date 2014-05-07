@@ -3,7 +3,7 @@
 #include "ServerConfig.h"
 
 
-class SRoundInfo : public Object
+class SRoundInfo : public Ref
 {
 public:
 	SRoundInfo(void);
@@ -14,7 +14,7 @@ public:
 	bool _selfRound;
 };
 
-class ServerData : public Object
+class ServerData : public Ref
 {
 public:
 	ServerData(void);

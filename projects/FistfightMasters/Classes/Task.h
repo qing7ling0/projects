@@ -5,7 +5,7 @@
 #include "AttackData.h"
 
 
-class Task : public Object
+class Task : public Ref
 {
 public:
 	Task(void);
@@ -25,7 +25,7 @@ protected:
 };
 
 
-class Tasks : public Object
+class Tasks : public Ref
 {
 public:
 	Tasks(void);

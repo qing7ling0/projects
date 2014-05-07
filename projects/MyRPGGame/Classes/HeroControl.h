@@ -2,7 +2,7 @@
 #include "RPGHead.h"
 #include "HeroRole.h"
 
-class HeroControl : public Object
+class HeroControl : public Ref
 {
 public:
 	HeroControl(void);

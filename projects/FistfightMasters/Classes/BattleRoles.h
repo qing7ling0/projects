@@ -3,7 +3,7 @@
 
 #include "BattleRole.h"
 
-class BattleRoles : public Object
+class BattleRoles : public Ref
 {
 public:
 	BattleRoles(void);

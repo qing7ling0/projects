@@ -32,7 +32,7 @@ public:
 
 private:
 	int getHeroAnimiIndexByActionFlag(DirectionFlag flag);
-	void touchPadCallback(Object *touchPad);
+	void touchPadCallback(Ref *touchPad);
 
 private:
 	Heros* _heros;
