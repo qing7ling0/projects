@@ -2,6 +2,7 @@
 #include "BattleController.h"
 #include "GameServer.h"
 #include "BattleRoles.h"
+#include "TopLayer.h"
 
 
 SelfMonitor::SelfMonitor(void)
@@ -23,7 +24,8 @@ bool SelfMonitor::init(void)
 void SelfMonitor::onEnter()
 {
 	Monitor::onEnter();
-	MessageServer::getInstance()->addMessage(MessageItem::create("ÂÖµ½Äã¹¥»÷À²£¡"));
+	//MessageServer::getInstance()->addMessage(MessageItem::create("ÂÖµ½Äã¹¥»÷À²£¡"));
+	BattleController::getInstance()->getTopLayer()->yourTurn();
 }
 
 void SelfMonitor::onExit()

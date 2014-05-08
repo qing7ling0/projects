@@ -85,6 +85,12 @@
     <Filter Include="Classes\battle\client\view">
       <UniqueIdentifier>{f954aad9-338d-48c8-8f72-a1aaa9961d96}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Classes\game\NewFilter1">
+      <UniqueIdentifier>{f8dcd141-b133-49d5-a32e-6e8f3696dc4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Classes\game\ui\numberlabel">
+      <UniqueIdentifier>{884df470-2ceb-4c28-a11e-5483717d2d51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -167,6 +173,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\DamageEffect.cpp">
       <Filter>Classes\battle\client\effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\NumberLabel.cpp">
+      <Filter>Classes\game\ui\numberlabel</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TopLayer.cpp">
+      <Filter>Classes\battle\client\view</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -256,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\DamageEffect.h">
       <Filter>Classes\battle\client\effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\NumberLabel.h">
+      <Filter>Classes\game\ui\numberlabel</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TopLayer.h">
+      <Filter>Classes\battle\client\view</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

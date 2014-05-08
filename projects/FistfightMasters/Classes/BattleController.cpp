@@ -6,6 +6,7 @@
 #include "MessageServer.h"
 #include "Task.h"
 #include "GameServer.h"
+#include "TopLayer.h"
 
 static BattleController *_instance = nullptr;
 
@@ -16,6 +17,8 @@ BattleController::BattleController(void)
 	, _roundInfo(nullptr)
 	, _gameServer(nullptr)
 	, _tasks(nullptr)
+	, _loadRes(false)
+	, _topLayer(nullptr)
 {
 }
 
@@ -27,6 +30,7 @@ BattleController::~BattleController(void)
 	CC_SAFE_RELEASE(_roundInfo);
 	CC_SAFE_RELEASE(_gameServer);
 	CC_SAFE_RELEASE(_tasks);
+	CC_SAFE_RELEASE(_topLayer);
 }
 
 BattleController* BattleController::getInstance()
@@ -60,17 +64,44 @@ bool BattleController::init(void)
 	CC_SAFE_RETAIN(_gameServer);
 
 	MessageServer::create();
-
 	addChild(MessageServer::getInstance());
+
+	_topLayer = TopLayer::create();
+	addChild(_topLayer);
 
 	setMonitor(WaitingNext::create());
 
 	return true;
 }
 
+void BattleController::loadRes(void)
+{
+	TextureCache::getInstance()->addImage("images/battle_hurt_boji_num.png");
+	TextureCache::getInstance()->addImage("images/battle_hurt_add_num.png");
+	TextureCache::getInstance()->addImage("images/battle_hurt_add.png");
+	TextureCache::getInstance()->addImage("images/battle_hurt_boji_reduce.png");
+	TextureCache::getInstance()->addImage("images/battle_blood_01.png");
+	TextureCache::getInstance()->addImage("images/battle_blood_bg.png");
+	TextureCache::getInstance()->addImage("images/battle_your_turn.png");
+	TextureCache::getInstance()->addImage("images/img_battle_start.png");
+}
+
+void BattleController::unloadRes(void)
+{
+	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_boji_num.png");
+	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_add_num.png");
+	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_add.png");
+	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_boji_reduce.png");
+	TextureCache::getInstance()->removeTextureForKey("images/battle_blood_01.png");
+	TextureCache::getInstance()->removeTextureForKey("images/battle_blood_bg.png");
+	TextureCache::getInstance()->removeTextureForKey("images/battle_your_turn.png");
+	TextureCache::getInstance()->removeTextureForKey("images/img_battle_start.png");
+}
+
 void BattleController::onEnter(void)
 {
 	Layer::onEnter();
+	loadRes();
 	scheduleUpdate();
 	gameStart();
 }
@@ -78,6 +109,7 @@ void BattleController::onEnter(void)
 void BattleController::onExit(void)
 {
 	Layer::onExit();
+	unloadRes();
 	unscheduleUpdate();
 }
 

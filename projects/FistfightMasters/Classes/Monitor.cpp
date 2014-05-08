@@ -2,6 +2,7 @@
 #include "BattleController.h"
 #include "MessageServer.h"
 #include "SelfMonitor.h"
+#include "TopLayer.h"
 
 
 Monitor::Monitor(void)
@@ -72,7 +73,8 @@ void NewRoundMonitor::update(float dt)
 
 void GameStartMonitor::onEnter()
 {
-	MessageServer::getInstance()->addMessage(MessageItem::create("Game Start"));
+	//MessageServer::getInstance()->addMessage(MessageItem::create("Game Start"));
+	BattleController::getInstance()->getTopLayer()->gameStart();
 }
 
 void GameStartMonitor::update(float dt)

@@ -8,6 +8,7 @@ class BattleRoles;
 class Monitor;
 class GameServer;
 class Tasks;
+class TopLayer;
 
 class BattleController : public Layer
 {
@@ -25,6 +26,10 @@ public:
 
 	void gameStart();
 
+	void loadRes();
+
+	void unloadRes();
+
 	BattleMap* getMap() { return _map; }
 
 	void setMonitor(Monitor *monitor);
@@ -32,6 +37,8 @@ public:
 	Monitor* getMonitor() { return _monitor; }
 
 	void initNewRound() {}
+
+	TopLayer* getTopLayer() { return _topLayer; }
 
 	CC_SYNTHESIZE_RETAIN(RoundInfo*, _roundInfo, RoundInfo);
 
@@ -49,5 +56,9 @@ private:
 	GameServer *_gameServer;
 
 	Tasks *_tasks;
+
+	TopLayer *_topLayer;
+
+	bool _loadRes;
 };
 
