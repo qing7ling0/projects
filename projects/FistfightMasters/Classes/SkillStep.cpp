@@ -273,11 +273,8 @@ void SkillNormalBombStep::loadRes()
 {
 	if (_stepData)
 	{
-
 		ADD_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(_stepData->_animiPath, _stepData->_animiName, "%s%s.plist");
-
-		CREATE_ANIMIPLAYER_FRAMES(_stepData->_animiName, "%s_%03d.png", _frames, _stepData->_animiIndexs[0], _stepData->_animiIndexs[1]);
-
+		CREATE_ANIMIPLAYER_FRAMES(_stepData->_animiName, "%s_%003d.png", _frames, 1, _frames.size());
 	}
 }
 
@@ -309,7 +306,7 @@ void SkillNormalBombStep::update(float dt)
 		for(int i=0; i<_targetRoles.size(); i++)
 		{
 			auto role = _targetRoles.at(i);
-			auto player = AnimiPlayer::create(_frames, 0.2f);
+			auto player = AnimiPlayer::create(_frames, _stepData->frameDt);
 			player->setTag(1000+i);
 			player->start(1);
 			player->setUserObject(role);

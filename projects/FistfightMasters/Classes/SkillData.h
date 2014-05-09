@@ -38,9 +38,9 @@ public:
 	SkillStepNormalBombData(void);
 	~SkillStepNormalBombData(void);
 public:
-	char *_animiName;
-	char *_animiPath;
-	int _animiIndexs[2];
+	const char *_animiName;
+	const char *_animiPath;
+	float frameDt;
 	int _hurtHP;
 };
 

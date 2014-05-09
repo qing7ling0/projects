@@ -32,6 +32,8 @@ bool NumberLabel::init(Texture2D *texture, const int number)
 	
 
 	setNum(number);
+
+	return true;
 }
 
 void NumberLabel::setNum(const int number)

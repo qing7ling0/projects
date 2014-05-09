@@ -114,7 +114,7 @@ __TYPE__* __TYPE__::getInstance() \
 /**
 * Ìí¼ÓÖ¡¶¯»­Ö¡»º´æ
 */
-#define ADD_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(path, name, frames, formatStr) \
+#define ADD_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(path, name, formatStr) \
 const char* animiPath = String::createWithFormat("%s%s.plist", path, name)->getCString(); \
 SpriteFrameCache::getInstance()->addSpriteFramesWithFile(animiPath);
 

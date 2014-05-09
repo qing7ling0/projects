@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>living094_sjA0001.png</key>
+            <key>e_bomb_03_001.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{469,122},{39,40}}</string>
@@ -17,7 +17,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0002.png</key>
+            <key>e_bomb_03_002.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{428,398},{83,82}}</string>
@@ -30,7 +30,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0003.png</key>
+            <key>e_bomb_03_003.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{324,264},{139,132}}</string>
@@ -43,7 +43,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0004.png</key>
+            <key>e_bomb_03_004.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{287,525},{131,130}}</string>
@@ -56,7 +56,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0005.png</key>
+            <key>e_bomb_03_005.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{153,406},{125,132}}</string>
@@ -69,7 +69,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0006.png</key>
+            <key>e_bomb_03_006.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{292,398},{125,134}}</string>
@@ -82,7 +82,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0007.png</key>
+            <key>e_bomb_03_007.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{153,268},{137,136}}</string>
@@ -95,7 +95,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0008.png</key>
+            <key>e_bomb_03_008.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{324,122},{143,140}}</string>
@@ -108,7 +108,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA0009.png</key>
+            <key>e_bomb_03_009.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,120},{145,150}}</string>
@@ -121,7 +121,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA010.png</key>
+            <key>e_bomb_03_10.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{169,118},{153,148}}</string>
@@ -134,7 +134,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA011.png</key>
+            <key>e_bomb_03_11.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,267},{149,146}}</string>
@@ -147,7 +147,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA012.png</key>
+            <key>e_bomb_03_12.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{336,2},{155,118}}</string>
@@ -160,7 +160,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA013.png</key>
+            <key>e_bomb_03_13.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,2},{165,116}}</string>
@@ -173,7 +173,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA014.png</key>
+            <key>e_bomb_03_14.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{169,2},{165,114}}</string>
@@ -186,7 +186,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA015.png</key>
+            <key>e_bomb_03_15.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,415},{109,94}}</string>
@@ -199,7 +199,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA016.png</key>
+            <key>e_bomb_03_16.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,511},{87,94}}</string>
@@ -212,7 +212,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA017.png</key>
+            <key>e_bomb_03_17.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{420,573},{83,90}}</string>
@@ -225,7 +225,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>living094_sjA018.png</key>
+            <key>e_bomb_03_18.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{428,483},{65,88}}</string>

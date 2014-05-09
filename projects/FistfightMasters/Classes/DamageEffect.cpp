@@ -26,12 +26,12 @@ bool DamageEffect::init(int damageNum)
 
 		if (damageNum>0)
 		{
-			texture = TextureCache::getInstance()->getTextureForKey("images/battle_hurt_add_num.png");
+			texture = Director::getInstance()->getTextureCache()->getTextureForKey("images/battle_hurt_add_num.png");
 			sp = Sprite::create("images/battle_hurt_add.png");
 		}
 		else
 		{
-			TextureCache::getInstance()->getTextureForKey("images/battle_hurt_boji_num.png");
+			Director::getInstance()->getTextureCache()->getTextureForKey("images/battle_hurt_boji_num.png");
 			sp = Sprite::create("images/battle_hurt_boji_reduce.png");
 			damageNum = -damageNum;
 		}

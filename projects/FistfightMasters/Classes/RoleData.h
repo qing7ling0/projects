@@ -69,8 +69,8 @@ public:
 	CREATE_FUNC(RoleData);
 
 public:
-	char *_roleAnimiName;
-	char *_roleAnimiPath;
+	const char *_roleAnimiName;
+	const char *_roleAnimiPath;
 
 	Vector<SkillData*> _skillDatas;
 

@@ -20,6 +20,8 @@ public:
 
 	void yourTurn();
 
+	void showImageEffect(const std::string &imageName);
+
 	CREATE_FUNC(TopLayer);
 };
 

@@ -76,26 +76,26 @@ bool BattleController::init(void)
 
 void BattleController::loadRes(void)
 {
-	TextureCache::getInstance()->addImage("images/battle_hurt_boji_num.png");
-	TextureCache::getInstance()->addImage("images/battle_hurt_add_num.png");
-	TextureCache::getInstance()->addImage("images/battle_hurt_add.png");
-	TextureCache::getInstance()->addImage("images/battle_hurt_boji_reduce.png");
-	TextureCache::getInstance()->addImage("images/battle_blood_01.png");
-	TextureCache::getInstance()->addImage("images/battle_blood_bg.png");
-	TextureCache::getInstance()->addImage("images/battle_your_turn.png");
-	TextureCache::getInstance()->addImage("images/img_battle_start.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_hurt_boji_num.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_hurt_add_num.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_hurt_add.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_hurt_boji_reduce.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_blood_01.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_blood_bg.png");
+	Director::getInstance()->getTextureCache()->addImage("images/battle_your_turn.png");
+	Director::getInstance()->getTextureCache()->addImage("images/img_battle_start.png");
 }
 
 void BattleController::unloadRes(void)
 {
-	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_boji_num.png");
-	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_add_num.png");
-	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_add.png");
-	TextureCache::getInstance()->removeTextureForKey("images/battle_hurt_boji_reduce.png");
-	TextureCache::getInstance()->removeTextureForKey("images/battle_blood_01.png");
-	TextureCache::getInstance()->removeTextureForKey("images/battle_blood_bg.png");
-	TextureCache::getInstance()->removeTextureForKey("images/battle_your_turn.png");
-	TextureCache::getInstance()->removeTextureForKey("images/img_battle_start.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_hurt_boji_num.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_hurt_add_num.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_hurt_add.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_hurt_boji_reduce.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_blood_01.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_blood_bg.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/battle_your_turn.png");
+	Director::getInstance()->getTextureCache()->removeTextureForKey("images/img_battle_start.png");
 }
 
 void BattleController::onEnter(void)
