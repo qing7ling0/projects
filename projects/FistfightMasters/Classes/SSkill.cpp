@@ -135,7 +135,7 @@ Skill* SRemoteSkill::doSkill(void)
 	auto step1 = SkillHeroStep::create(stepData, _attackRole);
 
 	SkillStepNormalBombData* stepData2 = static_cast<SkillStepNormalBombData*> (_stepDatas->at(1));
-	stepData2->_hurtHP = 20;
+	stepData2->_hurtHP = -20;
 
 	auto step2 = SkillNormalBombStep::create(stepData2);
 	for(auto role : targetRoles)

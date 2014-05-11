@@ -43,7 +43,7 @@ void SelfMonitor::update(float dt)
 	else if (_step == 1)
 	{
 		f_time += dt;
-		if (f_time > 1)
+		if (f_time > 3)
 		{
 			_step++;
 		}

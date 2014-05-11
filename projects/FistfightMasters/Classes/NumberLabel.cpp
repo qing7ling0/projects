@@ -58,7 +58,7 @@ void NumberLabel::setNum(const int number)
 			temp = digitNumbers[i];
 			auto sp = Sprite::createWithSpriteFrame(SpriteFrame::createWithTexture(_texture, Rect(temp*_numWidth,0, _numWidth, _texture->getContentSize().height)));
 			sp->ignoreAnchorPointForPosition(true);
-			sp->setPositionX(i*_numWidth);
+			sp->setPositionX((dsize-i-1)*_numWidth);
 			_node->addChild(sp);
 		}
 	}
