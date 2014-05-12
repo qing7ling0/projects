@@ -53,7 +53,6 @@ void SelfMonitor::update(float dt)
 		setOver(true);
 		_step++;
 		GameServer::getInstance()->attack();
-		GameServer::getInstance()->nextRound();
 		BattleController::getInstance()->setMonitor(WaitingNext::create());
 	}
 }

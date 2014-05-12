@@ -26,6 +26,8 @@ public:
 
 	void gameStart();
 
+	void gameEnd();
+
 	void loadRes();
 
 	void unloadRes();
@@ -40,11 +42,28 @@ public:
 
 	TopLayer* getTopLayer() { return _topLayer; }
 
+	//static Scene* BattleController::createScene()
+	//{
+	//	// 'scene' is an autorelease object
+	//	auto scene = Scene::create();
+ //   
+	//	// 'layer' is an autorelease object
+	//	auto layer = BattleController::create();
+
+	//	// add layer as a child to scene
+	//	scene->addChild(layer);
+
+	//	// return the scene
+	//	return scene;
+	//}
+
 	CC_SYNTHESIZE_RETAIN(RoundInfo*, _roundInfo, RoundInfo);
 
 	CREATE_SECNE_FUNC(BattleController);
 
 	static BattleController* getInstance();
+
+	CC_SYNTHESIZE(bool, _gameWin, GameWin);
 
 private:
 	BattleMap *_map;

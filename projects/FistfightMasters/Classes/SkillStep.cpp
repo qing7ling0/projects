@@ -274,7 +274,13 @@ void SkillNormalBombStep::loadRes()
 	if (_stepData)
 	{
 		ADD_ANIMIPLAYER_SPRITE_FRAME_CACHE_PLIST(_stepData->_animiPath, _stepData->_animiName, "%s%s.plist");
-		CREATE_ANIMIPLAYER_FRAMES(_stepData->_animiName, "%s_%003d.png", _frames, 1, _frames.size());
+		CREATE_ANIMIPLAYER_FRAMES(_stepData->_animiName, "%s_%03d.png", _frames, 1, _stepData->animiCount);
+	
+		/*for(int index=1; index<=_stepData->animiCount; index++) 
+		{ 
+			const char* imgName = String::createWithFormat("%s_%03d.png", _stepData->_animiName, index)->getCString();
+			_frames.pushBack(SpriteFrameCache::getInstance()->getSpriteFrameByName(imgName)); 
+		}*/
 	}
 }
 
@@ -315,8 +321,11 @@ void SkillNormalBombStep::update(float dt)
 				auto effect = DamageEffect::create(_stepData->_hurtHP);
 				effect->setPosition(Point(CCRANDOM_MINUS1_1()*10, CCRANDOM_MINUS1_1()*10+60));
 
-				auto role = static_cast<Role*>(player->getUserObject());
+				auto role = static_cast<BattleRole*>(player->getUserObject());
 				role->getNode()->addChild(effect, 10);
+
+				int hp = role->getHP() + _stepData->_hurtHP;
+				role->setHP(hp);
 
 				player->removeFromParent();
 			});

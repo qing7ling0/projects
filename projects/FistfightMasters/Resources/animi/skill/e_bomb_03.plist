@@ -121,7 +121,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_10.png</key>
+            <key>e_bomb_03_010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{169,118},{153,148}}</string>
@@ -134,7 +134,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_11.png</key>
+            <key>e_bomb_03_011.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,267},{149,146}}</string>
@@ -147,7 +147,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_12.png</key>
+            <key>e_bomb_03_012.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{336,2},{155,118}}</string>
@@ -160,7 +160,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_13.png</key>
+            <key>e_bomb_03_013.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,2},{165,116}}</string>
@@ -173,7 +173,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_14.png</key>
+            <key>e_bomb_03_014.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{169,2},{165,114}}</string>
@@ -186,7 +186,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_15.png</key>
+            <key>e_bomb_03_015.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,415},{109,94}}</string>
@@ -199,7 +199,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_16.png</key>
+            <key>e_bomb_03_016.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{2,511},{87,94}}</string>
@@ -212,7 +212,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_17.png</key>
+            <key>e_bomb_03_017.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{420,573},{83,90}}</string>
@@ -225,7 +225,7 @@
                 <key>sourceSize</key>
                 <string>{183,160}</string>
             </dict>
-            <key>e_bomb_03_18.png</key>
+            <key>e_bomb_03_018.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{428,483},{65,88}}</string>

@@ -19,6 +19,7 @@ BattleController::BattleController(void)
 	, _tasks(nullptr)
 	, _loadRes(false)
 	, _topLayer(nullptr)
+	, _gameWin(false)
 {
 }
 
@@ -30,7 +31,8 @@ BattleController::~BattleController(void)
 	CC_SAFE_RELEASE(_roundInfo);
 	CC_SAFE_RELEASE(_gameServer);
 	CC_SAFE_RELEASE(_tasks);
-	CC_SAFE_RELEASE(_topLayer);
+	_instance = nullptr;
+
 }
 
 BattleController* BattleController::getInstance()
@@ -117,6 +119,12 @@ void BattleController::gameStart()
 {
 	GameServer::getInstance()->gameStart();
 }
+
+void BattleController::gameEnd()
+{
+	Director::getInstance()->popScene();
+}
+
 
 void BattleController::setMonitor(Monitor *monitor)
 {

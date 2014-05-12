@@ -13,6 +13,7 @@ MessageItem::MessageItem(void)
 MessageItem::~MessageItem(void)
 {
 	CC_SAFE_RELEASE(_node);
+	_instance = nullptr;
 }
 
 bool MessageItem::init(const std::string msg)

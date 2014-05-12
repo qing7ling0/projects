@@ -20,6 +20,10 @@ public:
 
 	void nextRound();
 
+	bool checkGameOver();
+
+	void move();
+
 	CREATE_FUNC(GameServer);
 
 	EXTERN_CREATE_INSTANCE_FUNC(GameServer);
@@ -28,5 +32,7 @@ protected:
 
 protected:
 	SRoundInfo *_roundInfo;
+
+	bool _gameOver;
 };
 

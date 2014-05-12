@@ -73,3 +73,27 @@ public:
 
 	CREATE_FUNC(GameStartMonitor);
 };
+
+class GameOverMonitor : public Monitor
+{
+public:
+	virtual void onEnter(void);
+
+	virtual void update(float dt);
+
+	MonitorType getMonitorType() { return MonitorType::MonitorGameOver; }
+
+	CREATE_FUNC(GameOverMonitor);
+};
+
+class OtherMonitor : public Monitor
+{
+public:
+
+	void update(float dt);
+
+	CREATE_FUNC(OtherMonitor);
+
+protected:
+
+};

@@ -10,6 +10,10 @@ public:
 
 	bool init(void);
 
+	/*void onEnter(void);
+
+	void onExit(void);*/
+
     void gotoBattleScene();
 
 	void endGame();

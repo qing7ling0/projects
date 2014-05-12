@@ -3,6 +3,7 @@
 #include "MessageServer.h"
 #include "SelfMonitor.h"
 #include "TopLayer.h"
+#include "GameServer.h"
 
 
 Monitor::Monitor(void)
@@ -67,13 +68,12 @@ void NewRoundMonitor::update(float dt)
 		if (_roundInfo->_selfRound)
 			BattleController::getInstance()->setMonitor(SelfMonitor::create());
 		else
-			BattleController::getInstance()->setMonitor(WaitingNext::create());
+			BattleController::getInstance()->setMonitor(OtherMonitor::create());
 	}
 }
 
 void GameStartMonitor::onEnter()
 {
-	//MessageServer::getInstance()->addMessage(MessageItem::create("Game Start"));
 	BattleController::getInstance()->getTopLayer()->gameStart();
 }
 
@@ -82,10 +82,56 @@ void GameStartMonitor::update(float dt)
 	if (_step == 0)
 	{
 		f_time += dt;
-		if (f_time > 3)
+		if (f_time > 2)
 		{
 			_step++;
 			BattleController::getInstance()->setMonitor(WaitingNext::create());
 		}
+	}
+}
+
+void GameOverMonitor::onEnter()
+{
+	bool win = BattleController::getInstance()->getGameWin();
+	if (win)
+		MessageServer::getInstance()->addMessage(MessageItem::create("You Win!"));
+	else
+		MessageServer::getInstance()->addMessage(MessageItem::create("You Lose!"));
+}
+
+void GameOverMonitor::update(float dt)
+{
+	if (_step == 0)
+	{
+		f_time += dt;
+		if (f_time > 3)
+		{
+			_step++;
+			BattleController::getInstance()->gameEnd();
+		}
+	}
+}
+
+void OtherMonitor::update(float dt)
+{
+	if (_step == 0)
+	{
+		f_time = 0;
+		_step++;
+	}
+	else if (_step == 1)
+	{
+		f_time += dt;
+		if (f_time > 3)
+		{
+			_step++;
+		}
+	}
+	else if (_step == 2)
+	{
+		setOver(true);
+		_step++;
+		GameServer::getInstance()->attack();
+		BattleController::getInstance()->setMonitor(WaitingNext::create());
 	}
 }

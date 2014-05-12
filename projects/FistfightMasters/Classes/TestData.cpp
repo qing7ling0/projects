@@ -1,11 +1,11 @@
 #include "TestData.h"
 
 
-static const char skill_bomb_03[] = "e_bomb_03";
-static const char skill_bomb_04[] = "e_bomb_04";
-static const char skill_bomb_06[] = "e_bomb_06";
-static const char skill_longjuan[] = "e_longjuan";
-static const char skill_tabomb[] = "e_tabomb";
+static const char skill_bomb_03[] = "e_bomb_03"; //18
+static const char skill_bomb_04[] = "e_bomb_04"; // 22
+static const char skill_bomb_06[] = "e_bomb_06"; // 27
+static const char skill_longjuan[] = "e_longjuan"; // 5
+static const char skill_tabomb[] = "e_tabomb"; // 10
 
 static const char role_tie_shan[] = "tie_shan";
 static const char role_mm_01[] = "mm_01";
@@ -31,7 +31,8 @@ TestData::TestData(void)
 	skill->_stepDatas->pushBack(skillStep);
 
 	auto skillStep2 = new SkillStepNormalBombData();
-	skillStep2->frameDt=0.01f;
+	skillStep2->frameDt = 0.05f;
+	skillStep2->animiCount = 22;
 	skillStep2->_animiName = skill_bomb_04;
 	skillStep2->_animiPath = skill_path;
 	skill->_stepDatas->pushBack(skillStep2);
@@ -41,7 +42,9 @@ TestData::TestData(void)
 	roleData->_skillDatas.pushBack(skill);
 
 	roleData->_enemy = true;
-	roleData->_grid = Point(2, 2);
+	roleData->_grid = Point(0, 2);
+	roleData->_HP = 200;
+	roleData->_maxHP = 200;
 	_roleDatas.pushBack(roleData);
 
 
@@ -58,8 +61,9 @@ TestData::TestData(void)
 	skill->_stepDatas->pushBack(skillStep);
 
 	skillStep2 = new SkillStepNormalBombData();
-	skillStep2->frameDt=0.01f;
-	skillStep2->_animiName = skill_bomb_06;
+	skillStep2->frameDt=0.05f;
+	skillStep2->animiCount = 18;
+	skillStep2->_animiName = skill_bomb_03;
 	skillStep2->_animiPath = skill_path;
 	skill->_stepDatas->pushBack(skillStep2);
 
@@ -68,7 +72,9 @@ TestData::TestData(void)
 	roleData->_skillDatas.pushBack(skill);
 
 	roleData->_enemy = false;
-	roleData->_grid = Point(7, 2);
+	roleData->_grid = Point(8, 2);
+	roleData->_HP = 200;
+	roleData->_maxHP = 200;
 	_roleDatas.pushBack(roleData);
 	//-------------------------------------------------
 }

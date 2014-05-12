@@ -89,6 +89,15 @@ void GameStartTask::doTask(MonitorType monitorType)
 	}
 }
 
+void GameOverTask::doTask(MonitorType monitorType)
+{
+	if (_monitorType == monitorType)
+	{
+		setFinish(true);
+		BattleController::getInstance()->setMonitor(GameOverMonitor::create());
+	}
+}
+
 NewRoundTask::NewRoundTask(void)
 	: _roundInfo(nullptr)
 {
@@ -117,5 +126,50 @@ void NewRoundTask::doTask(MonitorType monitorType)
 	{
 		setFinish(true);
 		BattleController::getInstance()->setMonitor(NewRoundMonitor::create(_roundInfo));
+	}
+}
+
+MoveTask::MoveTask(void)
+	: _finishCount(-1)
+{
+	_roles.reserve(5);
+}
+
+MoveTask::~MoveTask(void)
+{
+}
+
+bool MoveTask::init( MonitorType monitorType)
+{
+	if (!Task::init(monitorType)) return false;
+
+	return true;
+}
+
+
+
+void MoveTask::doTask(MonitorType monitorType)
+{
+	if (_monitorType == monitorType || _monitorType==MonitorType::MonitorAll)
+	{
+		if (_finishCount < 0)
+		{
+			_finishCount = 0;
+			for(auto role : _roles)
+			{
+				role->getNode()->runAction(
+				Sequence::create(
+				JumpTo::create(0.7f, GRID_CONVER_TO_PIXEL(role->getGridIndex().x, role->getGridIndex().y), 45, 1),
+					CallFunc::create([&](){
+						_finishCount++;
+						if (_finishCount >= _roles.size())
+						{
+							this->setFinish(true);
+						}
+					}),
+					nullptr
+				));
+			}
+		}
 	}
 }

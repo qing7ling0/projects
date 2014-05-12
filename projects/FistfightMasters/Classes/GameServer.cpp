@@ -8,6 +8,7 @@
 #include "Task.h"
 #include "RoleData.h"
 #include "SelfMonitor.h"
+#include "BattleController.h"
 
 DEFINE_CREATE_INSTANCE_FUNC(GameServer);
 
@@ -29,6 +30,8 @@ bool GameServer::init(void)
 	_roundInfo = new SRoundInfo();
 	_roundInfo->_currentRound = 0;
 	_roundInfo->_selfRound = true;
+	_roundInfo->autorelease();
+	CC_SAFE_RETAIN(_roundInfo);
 	return true;
 }
 
@@ -46,20 +49,52 @@ void GameServer::update(float dt)
 {
 }
 
+void GameServer::move(void)
+{
+	if (!_roundInfo->_selfRound)
+	{
+		Vector<BattleRole*> roles = BattleRoles::getInstance()->getEnemyRoles();
+		MoveTask *task = nullptr;
+
+		for(auto role : roles)
+		{
+			Point grid = role->getGridIndex();
+			grid.x += 1;
+			if (!BattleRoles::getInstance()->getRoleByGrid(grid))
+			{
+				if (!task)
+				{
+					task = MoveTask::create(MonitorType::MonitorAll);
+					CC_SAFE_RETAIN(task);
+				}
+				role->setGirdIndex(grid, false);
+				task->addRole(role);
+			}
+		}
+		if (task) Tasks::getInstance()->addTask(task);
+		CC_SAFE_RELEASE(task);
+	}
+}
+
 void GameServer::attack(void)
 {
+	move();
+
 	AttackData *attackData = AttackData::create();
 
 	Vector<BattleRole*> roles = _roundInfo->_selfRound ? BattleRoles::getInstance()->getSelfRoles():BattleRoles::getInstance()->getEnemyRoles();
 	
 	for(BattleRole *role : roles)
 	{
-		auto skillData = role->getCurrentSelectSkill();
-		if (skillData)
+		if (!role->isDeadth())
 		{
-			auto sskill = SSkill::createSSKill(skillData->_skillType, skillData->_skillAttackType, role, *skillData->_stepDatas);
-			auto skill = sskill->doSkill();
-			if (skill) attackData->addSkill(skill);
+			auto skillData = role->getCurrentSelectSkill();
+			if (skillData)
+			{
+				auto sskill = SSkill::createSSKill(skillData->_skillType, skillData->_skillAttackType, role, *skillData->_stepDatas);
+				auto skill = sskill->doSkill();
+				if (skill) attackData->addSkill(skill);
+			}
 		}
 	}
 	Tasks::getInstance()->addTask(AttackTask::create(attackData, MonitorType::MonitorWaitNext));
@@ -67,18 +102,59 @@ void GameServer::attack(void)
 
 void GameServer::nextRound(void)
 {
-	_roundInfo->_currentRound++;
-	_roundInfo->_selfRound = !_roundInfo->_selfRound;
-
-	RoundInfo* round = RoundInfo::create();
-	round->_currentRound = _roundInfo->_currentRound;
-	round->_selfRound = _roundInfo->_selfRound;
-
-	Tasks::getInstance()->addTask(NewRoundTask::create(MonitorType::MonitorWaitNext, round));
-
-	if (!round->_selfRound)
+	bool over = checkGameOver();
+	if (over)
 	{
-		attack();
-		nextRound();
+		Tasks::getInstance()->addTask(GameOverTask::create(MonitorType::MonitorWaitNext));
 	}
+	else
+	{
+		_roundInfo->_currentRound++;
+		_roundInfo->_selfRound = !_roundInfo->_selfRound;
+
+		RoundInfo* round = RoundInfo::create();
+		round->_currentRound = _roundInfo->_currentRound;
+		round->_selfRound = _roundInfo->_selfRound;
+
+		Tasks::getInstance()->addTask(NewRoundTask::create(MonitorType::MonitorWaitNext, round));
+	}
+}
+
+bool GameServer::checkGameOver()
+{
+
+	Vector<BattleRole*> roles = BattleRoles::getInstance()->getSelfRoles();
+
+	bool over = true;
+	for (auto &role : roles)
+	{
+		if(!role->isDeadth())
+		{
+			over = false;
+			break;
+		}
+	}
+	if (over)
+	{
+		BattleController::getInstance()->setGameWin(false);
+		return true;
+	}
+
+	over = true;
+	roles = BattleRoles::getInstance()->getEnemyRoles();
+	for (auto &role : roles)
+	{
+		if(!role->isDeadth())
+		{
+			over = false;
+			break;
+		}
+	}
+	if (over)
+	{
+		BattleController::getInstance()->setGameWin(true);
+		return true;
+	}
+
+	return over;
 }

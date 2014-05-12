@@ -1,6 +1,7 @@
 #include "PlayAnimiMonitor.h"
 #include "BattleController.h"
 #include "Skill.h"
+#include "GameServer.h"
 
 
 PlayAnimiMonitor::PlayAnimiMonitor(void)
@@ -62,5 +63,9 @@ void PlayAnimiMonitor::update(float dt)
 		}
 	}
 
-	if (over) BattleController::getInstance()->setMonitor(WaitingNext::create());
+	if (over)
+	{
+		GameServer::getInstance()->nextRound();
+		BattleController::getInstance()->setMonitor(WaitingNext::create());
+	}
 }

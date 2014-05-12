@@ -72,6 +72,15 @@ public:
 
 };
 
+class GameOverTask : public Task
+{
+public:
+	virtual void doTask(MonitorType monitorType);
+
+	F_CREATE_FUNC_ARGS_1(GameOverTask, MonitorType, monitorType);
+
+};
+
 class NewRoundTask : public Task
 {
 public:
@@ -86,4 +95,24 @@ public:
 
 protected:
 	RoundInfo* _roundInfo;
+};
+
+
+class MoveTask : public Task
+{
+public:
+	MoveTask(void);
+	~MoveTask(void);
+
+	bool init(MonitorType monitorType);
+
+	void addRole(BattleRole *role) { _roles.pushBack(role); };
+
+	virtual void doTask(MonitorType monitorType);
+
+	F_CREATE_FUNC_ARGS_1(MoveTask, MonitorType, monitorType);
+	
+protected:
+	Vector<BattleRole*> _roles;
+	int _finishCount;
 };

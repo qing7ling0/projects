@@ -80,8 +80,8 @@ void MainMenu::touchEvent(Ref *pSender, TouchEventType type)
 
 void MainMenu::gotoBattleScene()
 {
-	auto *sc = BattleController::createScene();
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, sc));
+	auto sc = BattleController::createScene();
+    Director::getInstance()->pushScene(TransitionFade::create(0.5f, sc));
 }
 
 void MainMenu::endGame()

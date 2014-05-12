@@ -20,6 +20,7 @@ typedef enum{
 	MonitorAttack,
 	MonitorPlayAnimi,
 	MonitorNewRound,
+	MonitorGameOver,
 	MonitorWaitNext
 } MonitorType;
 
@@ -80,6 +81,9 @@ public:
 	int _animiCount;
 
 	bool _enemy;
+
+	int _HP;
+	int _maxHP;
 
 	Point _grid;
 };

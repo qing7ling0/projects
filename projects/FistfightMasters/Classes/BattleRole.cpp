@@ -10,6 +10,8 @@ BattleRole::BattleRole(void)
 	, _currentAnimiActionIndex(0)
 	, _currentPlayer(nullptr)
 	, _currenSelectSkill(nullptr)
+	, _hpBar(nullptr)
+	, _death(false)
 {
 }
 
@@ -23,6 +25,7 @@ BattleRole::~BattleRole(void)
 	}
 
 	CC_SAFE_RELEASE(_roleData);
+	CC_SAFE_RELEASE(_hpBar);
 
 	_animiPlayers.clear();
 }
@@ -43,9 +46,25 @@ bool BattleRole::init(RoleData *data)
 	{
 		_enemy = _roleData->_enemy;
 		setLeft(!_roleData->_enemy);
+		_roleHP = _roleData->_HP;
 	}
 
+
+	auto sp = Sprite::create("images/battle_blood_bg.png");
+	//sp->setAnchorPoint(Point(0, 0.5f));
+	sp->setPosition(Point(0,-28));
+	sp->setScale(0.6f);
+
+	_hpBar = Sprite::create("images/battle_blood_01.png");
+	_hpBar->ignoreAnchorPointForPosition(true);
+	sp->addChild(_hpBar);
+	CC_SAFE_RETAIN(_hpBar);
+
+	_node->addChild(sp, 20);
+	_node->setCascadeOpacityEnabled(true);
+
 	BattleController::getInstance()->addChild(_node, ZORDER_BATTLE_ROLE);
+
 
 	initRoleAnimiPlayers();
 
@@ -84,6 +103,7 @@ void BattleRole::initRoleAnimiPlayers()
 			if (!_roleData->_enemy) player->setPositionY(35);
 			else player->setPositionY(-15);
 			_node->addChild(player);
+			player->setCascadeOpacityEnabled(true);
 
 			_animiPlayers.insert(actionData->_actionType, player);
 		}
@@ -109,6 +129,32 @@ void BattleRole::setLeft(bool left)
 	_left = left;
 }
 
+void BattleRole::setHP(int hp)
+{
+	_roleHP = hp;
+
+	if (_hpBar)
+	{
+		float per = MAX (0, MIN(1, (hp*1.0f) / MAX(getMaxHP(), FLT_EPSILON)));
+		Size size = _hpBar->getTexture()->getContentSize();
+		_hpBar->setTextureRect(Rect(0, 0, size.width*per, size.height));
+	}
+
+	if (!_death)
+	{
+		_death = _roleHP<=0;
+		if (_death)
+		{
+			if (_node) _node->runAction(FadeOut::create(2));
+		}
+	}
+}
+
+int BattleRole::getMaxHP()
+{
+	return _roleData->_maxHP;
+}
+
 void BattleRole::setCurrentAnimiActionIndex(int index, int loop, bool resume)
 {
 	if (index != _currentAnimiActionIndex)
@@ -129,5 +175,18 @@ void BattleRole::setCurrentAnimiActionIndex(int index, int loop, bool resume)
 			_currentPlayer->stop();
 			_currentPlayer->start(_currentPlayer->getLoops(), _currentPlayer->getOverVisible());
 		}
+	}
+}
+
+void BattleRole::moveTo(const Point &grid)
+{
+	int sx = MAX(abs(_gridIndex.x - grid.x), abs(_gridIndex.y - grid.y));
+
+
+	setGirdIndex(grid, false);
+	if (sx > 0)
+	{
+		auto action = MoveTo::create(0.5f, GRID_CONVER_TO_PIXEL(_gridIndex.x, _gridIndex.y));
+		_node->runAction(action);
 	}
 }

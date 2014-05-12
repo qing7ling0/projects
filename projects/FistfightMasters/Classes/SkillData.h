@@ -42,6 +42,7 @@ public:
 	const char *_animiPath;
 	float frameDt;
 	int _hurtHP;
+	int animiCount;
 };
 
 class SkillData : public Ref

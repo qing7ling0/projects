@@ -121,7 +121,7 @@
                 <key>sourceSize</key>
                 <string>{169,154}</string>
             </dict>
-            <key>living005_sjCe_bomb_04_.png</key>
+            <key>e_bomb_04_010.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{135,389},{119,130}}</string>
@@ -264,7 +264,7 @@
                 <key>sourceSize</key>
                 <string>{169,154}</string>
             </dict>
-            <key>0010021.png</key>
+            <key>e_bomb_04_021.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{425,214},{59,122}}</string>

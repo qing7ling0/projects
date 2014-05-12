@@ -5,6 +5,7 @@
 #include "AnimiPlayer.h"
 #include "SkillData.h"
 
+static const int ROLE_HP_TAG = 100;
 
 class BattleRole : public Role
 {
@@ -38,6 +39,16 @@ public:
 
 	virtual SkillData* getCurrentSelectSkill() { return _currenSelectSkill; }
 
+	virtual void setHP(int hp);
+
+	virtual int getHP() { return _roleHP; }
+
+	virtual int getMaxHP();
+
+	virtual void moveTo(const Point &grid);
+
+	virtual bool isDeadth() { return _death; }
+
 	static BattleRole* create(RoleData *roleData)
 	{
 		auto role = new BattleRole();
@@ -64,6 +75,10 @@ protected:
 
 	bool _enemy;
 
+	int _roleHP;
+
+	bool _death;
+
 	RoleData *_roleData;
 
 	bool _left;
@@ -75,5 +90,7 @@ protected:
 	AnimiPlayer* _currentPlayer;
 
 	SkillData *_currenSelectSkill;
+
+	Sprite *_hpBar;
 };
 
